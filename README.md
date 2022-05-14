@@ -1,7 +1,7 @@
 # Halal_Guerrilla_War
 
 ## Link to the github page:
-
+https://github.com/softdrawss/Halal_Guerrilla_War/wiki
 
 ## List of team members and their respective github links:
 
