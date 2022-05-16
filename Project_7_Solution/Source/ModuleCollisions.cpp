@@ -9,6 +9,7 @@
 ModuleCollisions::ModuleCollisions()
 {
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
+	
 		colliders[i] = nullptr;
 
 	matrix[Collider::Type::WALL][Collider::Type::WALL] = false;
