@@ -11,7 +11,7 @@ class ModuleWindow : public Module
 {
 public:
 	//Constructor
-	ModuleWindow();
+	ModuleWindow(bool startEnabled);
 
 	// Destructor
 	~ModuleWindow();
@@ -33,4 +33,5 @@ public:
 };
 
 #endif // !__MODULE_WINDOW_H__
+
 

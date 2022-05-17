@@ -39,7 +39,7 @@ public:
 	}
 
 	// Math ------------------------------------------------
-	p2Point operator -(const p2Point &v) const
+	p2Point operator -(const p2Point& v) const
 	{
 		p2Point r;
 
@@ -49,7 +49,7 @@ public:
 		return(r);
 	}
 
-	p2Point operator + (const p2Point &v) const
+	p2Point operator + (const p2Point& v) const
 	{
 		p2Point r;
 
@@ -59,7 +59,7 @@ public:
 		return(r);
 	}
 
-	const p2Point& operator -=(const p2Point &v)
+	const p2Point& operator -=(const p2Point& v)
 	{
 		x -= v.x;
 		y -= v.y;
@@ -67,7 +67,7 @@ public:
 		return(*this);
 	}
 
-	const p2Point& operator +=(const p2Point &v)
+	const p2Point& operator +=(const p2Point& v)
 	{
 		x += v.x;
 		y += v.y;
@@ -111,7 +111,7 @@ public:
 		TYPE fx = x - v.x;
 		TYPE fy = y - v.y;
 
-		return (TYPE)sqrtf(float(fx*fx) + float(fy*fy));
+		return (TYPE)sqrtf(float(fx * fx) + float(fy * fy));
 	}
 
 	TYPE DistanceNoSqrt(const p2Point& v) const
@@ -119,7 +119,7 @@ public:
 		TYPE fx = x - v.x;
 		TYPE fy = y - v.y;
 
-		return (fx*fx) + (fy*fy);
+		return (fx * fx) + (fy * fy);
 	}
 
 	TYPE DistanceManhattan(const p2Point& v) const

@@ -8,9 +8,8 @@
 #include "ModulePlayer.h"
 
 #include "SDL/include/SDL_render.h"
-#include "SDL/include/SDL_scancode.h"
 
-ModuleRender::ModuleRender() : Module()
+ModuleRender::ModuleRender(bool startEnabled) : Module(startEnabled)
 {
 
 }
@@ -43,7 +42,7 @@ bool ModuleRender::Init()
 }
 
 // Called every draw update
-update_status ModuleRender::PreUpdate()
+Update_Status ModuleRender::PreUpdate()
 {
 	//Set the color used for drawing operations
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
@@ -51,10 +50,10 @@ update_status ModuleRender::PreUpdate()
 	//Clear rendering target
 	SDL_RenderClear(renderer);
 
-	return update_status::UPDATE_CONTINUE;
+	return Update_Status::UPDATE_CONTINUE;
 }
 
-update_status ModuleRender::Update()
+Update_Status ModuleRender::Update()
 {
 	//up
 
@@ -197,28 +196,28 @@ update_status ModuleRender::Update()
 
 	//free movement with jikl
 
-	if (App->input->keys[SDL_SCANCODE_L] == KEY_REPEAT)
+	if (App->input->keys[SDL_SCANCODE_L] == KEY_REPEAT) {
 		camera.x -= cameraSpeed;
-
-	if (App->input->keys[SDL_SCANCODE_J] == KEY_REPEAT)
+	}
+	if (App->input->keys[SDL_SCANCODE_J] == KEY_REPEAT) {
 		camera.x += cameraSpeed;
-
-	if (App->input->keys[SDL_SCANCODE_K] == KEY_REPEAT)
+	}
+	if (App->input->keys[SDL_SCANCODE_K] == KEY_REPEAT){ 
 		camera.y -= cameraSpeed;
-
-	if (App->input->keys[SDL_SCANCODE_I] == KEY_REPEAT)
+	}
+	if (App->input->keys[SDL_SCANCODE_I] == KEY_REPEAT) {
 		camera.y += cameraSpeed;
+	}
 
-
-	return update_status::UPDATE_CONTINUE;
+	return Update_Status::UPDATE_CONTINUE;
 }
 
-update_status ModuleRender::PostUpdate()
+Update_Status ModuleRender::PostUpdate()
 {
 	//Update the screen
 	SDL_RenderPresent(renderer);
 
-	return update_status::UPDATE_CONTINUE;
+	return Update_Status::UPDATE_CONTINUE;
 }
 
 bool ModuleRender::CleanUp()

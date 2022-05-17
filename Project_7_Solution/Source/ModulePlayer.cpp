@@ -11,7 +11,7 @@
 #include "SDL/include/SDL_scancode.h"
 
 
-ModulePlayer::ModulePlayer()
+ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 {
 	position.x = 250;
 	position.y = 300;
@@ -302,7 +302,7 @@ bool ModulePlayer::Start()
 	return ret;
 }
 
-update_status ModulePlayer::Update()
+Update_Status ModulePlayer::Update()
 {
 	//Reset the currentAnimation back to idle before updating the logic
 
@@ -1060,13 +1060,13 @@ update_status ModulePlayer::Update()
 	{
 		destroyedCountdown--;
 		if (destroyedCountdown <= 0)
-			return update_status::UPDATE_STOP;
+			return Update_Status::UPDATE_STOP;
 	}
 
-	return update_status::UPDATE_CONTINUE;
+	return Update_Status::UPDATE_CONTINUE;
 }
 
-update_status ModulePlayer::PostUpdate()
+Update_Status ModulePlayer::PostUpdate()
 {
 	if (!dead)
 	{
@@ -1107,7 +1107,7 @@ update_status ModulePlayer::PostUpdate()
 
 	}
 
-	return update_status::UPDATE_CONTINUE;
+	return Update_Status::UPDATE_CONTINUE;
 }
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2)

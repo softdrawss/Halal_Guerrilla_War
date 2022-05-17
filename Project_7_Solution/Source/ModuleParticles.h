@@ -17,7 +17,7 @@ class ModuleParticles : public Module
 public:
 	// Constructor
 	// Initializes all the particles in the array to nullptr
-	ModuleParticles();
+	ModuleParticles(bool startEnabled);
 
 	//Destructor
 	~ModuleParticles();
@@ -26,14 +26,18 @@ public:
 	// Loads the necessary textures for the particles
 	bool Start() override;
 
+	// Called at the beginning of the application loop
+	// Removes all particles pending to delete
+	Update_Status PreUpdate() override;
+
 	// Called at the middle of the application loop
 	// Iterates all the particles and calls its Update()
 	// Removes any "dead" particles
-	update_status Update() override;
+	Update_Status Update() override;
 
 	// Called at the end of the application loop
 	// Iterates all the particles and draws them
-	update_status PostUpdate() override;
+	Update_Status PostUpdate() override;
 
 	// Called on application exit
 	// Destroys all active particles left in the array
@@ -46,7 +50,7 @@ public:
 	// Param particle	- A template particle from which the new particle will be created
 	// Param x, y		- Position x,y in the screen (upper left axis)
 	// Param delay		- Delay time from the moment the function is called until the particle is displayed in screen
-	void AddParticle(const Particle& particle, int x, int y, Collider::Type colliderType = Collider::Type::NONE, uint delay = 0);
+	Particle* AddParticle(const Particle& particle, int x, int y, Collider::Type colliderType = Collider::Type::NONE, uint delay = 0);
 
 private:
 	// Particles spritesheet loaded into an SDL Texture
@@ -64,8 +68,8 @@ public:
 	Particle normal_hr_shot, normal_hl_shot, normal_up_shot, normal_down_shot, normal_dr_shot, normal_dl_shot, normal_ul_shot, normal_ur_shot;
 	Particle grenade_up, grenade_down, grenade_right, grenade_left, grenade_ur, grenade_ul, grenade_dr, grenade_dl;
 	Particle upgraded_shot;
-	
-	
+
+
 	Particle green_up, green_down, green_left, green_right, green_ul, green_ur, green_dl, green_dr;
 	Particle red_up, red_down, red_left, red_right, red_ul, red_ur, red_dl, red_dr;
 	Particle bomb_up, bomb_down, bomb_left, bomb_right, bomb_ul, bomb_ur, bomb_dl, bomb_dr;
@@ -73,5 +77,4 @@ public:
 };
 
 #endif // !__MODULEPARTICLES_H__
-
 
