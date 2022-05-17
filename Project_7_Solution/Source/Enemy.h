@@ -28,6 +28,10 @@ public:
 	virtual void Draw();
 
 	//virtual void Attack();
+	virtual void Attack();
+
+	//angle
+	virtual void getPlayerPosition();
 
 	// Collision response
 	// Triggers an animation and a sound fx

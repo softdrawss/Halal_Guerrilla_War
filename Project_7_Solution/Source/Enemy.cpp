@@ -31,6 +31,14 @@ void Enemy::Update()
 		collider->SetPos(position.x, position.y);
 }
 
+void Enemy::Attack() {
+
+}
+
+void Enemy::getPlayerPosition() {
+
+}
+
 void Enemy::Draw()
 {
 	if (currentAnim != nullptr)
