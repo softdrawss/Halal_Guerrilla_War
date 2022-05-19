@@ -109,10 +109,6 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	torsoright.PushBack({ 34,123,32,32 });
 	torsoright.speed = 0.1f;
 
-
-
-	torsoright.speed = 0.1f;
-
 	//walk upright animation
 	torsoupright.PushBack({ 2,62,32,32 });
 	torsoupright.PushBack({ 34,62,32,32 });
@@ -298,9 +294,15 @@ bool ModulePlayer::Start()
 	currentAnimationtorso = &torsoup;
 	weapon = &normalweapon_up;
 	faceu = true;
+	faced = false;
+	facer = false;
+	facel = false;
+	faceur = false;
+	faceul = false;
+	facedr = false;
+	facedl = false;
 
-
-
+	//add collider player
 	collider = App->collisions->AddCollider({ position.x, position.y, 32, 64 }, Collider::Type::PLAYER, this);
 
 	return ret;
@@ -366,8 +368,6 @@ Update_Status ModulePlayer::Update()
 		currentAnimationtorso = &torsoup;
 		position.x -= speed;
 	}
-
-
 	//down
 	else if (faced == true && App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
 	{
@@ -861,30 +861,38 @@ Update_Status ModulePlayer::Update()
 
 		if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_DOWN)
 		{
+			uint shoot = App->audio->LoadFx("Assets/gwar-137.wav");
 			if (faceu == true) {
 				App->particles->AddParticle(App->particles->normal_up_shot, position.x + 22, position.y + 4, Collider::Type::PLAYER_SHOT);
-				//weapon = &weapon_up_shot;
+				App->audio->PlayFx(shoot, 0);
 			}
 			else if (faced == true) {
 				App->particles->AddParticle(App->particles->normal_down_shot, position.x + 8, position.y + 35, Collider::Type::PLAYER_SHOT);
+				App->audio->PlayFx(shoot, 0);
 			}
 			else if (facer == true) {
 				App->particles->AddParticle(App->particles->normal_hr_shot, position.x + 20, position.y + 24, Collider::Type::PLAYER_SHOT);
+				App->audio->PlayFx(shoot, 0);
 			}
 			else if (facel == true) {
 				App->particles->AddParticle(App->particles->normal_hl_shot, position.x - 4, position.y + 21, Collider::Type::PLAYER_SHOT);
+				App->audio->PlayFx(shoot, 0);
 			}
 			else if (faceur == true) {
 				App->particles->AddParticle(App->particles->normal_ur_shot, position.x + 20, position.y + 20, Collider::Type::PLAYER_SHOT);
+				App->audio->PlayFx(shoot, 0);
 			}
 			else if (faceul == true) {
 				App->particles->AddParticle(App->particles->normal_ul_shot, position.x + 6, position.y + 10, Collider::Type::PLAYER_SHOT);
+				App->audio->PlayFx(shoot, 0);
 			}
 			else if (facedr == true) {
 				App->particles->AddParticle(App->particles->normal_dr_shot, position.x + 18, position.y + 35, Collider::Type::PLAYER_SHOT);
+				App->audio->PlayFx(shoot, 0);
 			}
 			else if (facedl == true) {
 				App->particles->AddParticle(App->particles->normal_dl_shot, position.x + 2, position.y + 26, Collider::Type::PLAYER_SHOT);
+				App->audio->PlayFx(shoot, 0);
 			}
 		}
 	}
@@ -1005,78 +1013,69 @@ Update_Status ModulePlayer::Update()
 			facedr = false;
 			facedl = true;
 		}
-		//shots
 
+		//shots
 		if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_DOWN)
 		{
-			uint shoot = App->audio->LoadFx("Assets/gwar-137.wav");
+			uint shootheavy = App->audio->LoadFx("Assets/gwar-137.wav");
 			if (faceu == true) {
 				App->particles->AddParticle(App->particles->normal_up_shot, position.x + 22, position.y + 4, Collider::Type::PLAYER_SHOT);
-				//weapon = &weapon_up_shot;
-				App->audio->PlayFx(shoot, 0);
+				App->audio->PlayFx(shootheavy, 0);
 			}
 			else if (faced == true) {
-				App->audio->PlayFx(shoot, 0);
+				App->audio->PlayFx(shootheavy, 0);
 				App->particles->AddParticle(App->particles->normal_down_shot, position.x + 8, position.y + 35, Collider::Type::PLAYER_SHOT);
 			}
 			else if (facer == true) {
-				App->audio->PlayFx(shoot, 0);
+				App->audio->PlayFx(shootheavy, 0);
 				App->particles->AddParticle(App->particles->normal_hr_shot, position.x + 20, position.y + 24, Collider::Type::PLAYER_SHOT);
 			}
 			else if (facel == true) {
-				App->audio->PlayFx(shoot, 0);
+				App->audio->PlayFx(shootheavy, 0);
 				App->particles->AddParticle(App->particles->normal_hl_shot, position.x - 4, position.y + 21, Collider::Type::PLAYER_SHOT);
 			}
 			else if (faceur == true) {
-				App->audio->PlayFx(shoot, 0);
+				App->audio->PlayFx(shootheavy, 0);
 				App->particles->AddParticle(App->particles->normal_ur_shot, position.x + 20, position.y + 20, Collider::Type::PLAYER_SHOT);
 			}
 			else if (faceul == true) {
-				App->audio->PlayFx(shoot, 0);
+				App->audio->PlayFx(shootheavy, 0);
 				App->particles->AddParticle(App->particles->normal_ul_shot, position.x + 6, position.y + 10, Collider::Type::PLAYER_SHOT);
 			}
 			else if (facedr == true) {
-				App->audio->PlayFx(shoot, 0);
+				App->audio->PlayFx(shootheavy, 0);
 				App->particles->AddParticle(App->particles->normal_dr_shot, position.x + 18, position.y + 35, Collider::Type::PLAYER_SHOT);
 			}
 			else if (facedl == true) {
-				App->audio->PlayFx(shoot, 0);
+				App->audio->PlayFx(shootheavy, 0);
 				App->particles->AddParticle(App->particles->normal_dl_shot, position.x + 2, position.y + 26, Collider::Type::PLAYER_SHOT);
 			}
 		}
 	}
 
+	//instakill
 	if (App->input->keys[SDL_SCANCODE_F2] == KEY_DOWN) {
 		dead = true;
 	}
 
-	if (dead == true) {
-		App->fade->FadeToBlack((Module*)App->scene, (Module*)App->sceneIntro, 60);
-		/*App->enemies->Disable();
-		Disable();*/
+	//exit the game with esc
+	if (App->input->keys[SDL_SCANCODE_ESCAPE] == KEY_DOWN) {
+
+		return Update_Status::UPDATE_STOP;
 	}
 
+	//if dead
+	if (dead == true) {
+		App->fade->FadeToBlack((Module*)App->scene, (Module*)App->sceneIntro, 60);
+	}
 
-	////grenade
-	//if (App->input->keys[SDL_SCANCODE_LALT] == KEY_DOWN )
-	//{
-	//	App->particles->AddParticle(App->particles->grenade_up, position.x + 20, position.y + 20, Collider::Type::PLAYER_SHOT);
-	//	
-	//}
-
+	//set collider position
 	collider->SetPos(position.x, position.y);
 
+	//update the animations of the weapon, torso and legs
 	currentAnimationlegs->Update();
 	currentAnimationtorso->Update();
 	weapon->Update();
-
-
-	/*if (dead)
-	{
-		destroyedCountdown--;
-		if (destroyedCountdown <= 0)
-			return Update_Status::UPDATE_STOP;
-	}*/
 
 	return Update_Status::UPDATE_CONTINUE;
 }

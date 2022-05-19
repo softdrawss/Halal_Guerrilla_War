@@ -53,63 +53,67 @@ Update_Status ModuleRender::PreUpdate()
 	return Update_Status::UPDATE_CONTINUE;
 }
 
-Update_Status ModuleRender::Update()
-{
+Update_Status ModuleRender::Update() {
+
+	if (App->player->IsEnabled() == true) {
+		//camera movement
+
 	//up
 
-	if (App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT) {
+		if (App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT) {
 
-		if (App->player->position.y <= cameralimits.y) {
-			camera.y += cameraSpeed;
-			cameralimits.y = App->player->position.y;
+			if (App->player->position.y <= cameralimits.y) {
+				camera.y += cameraSpeed;
+				cameralimits.y = App->player->position.y;
+			}
+		}
+
+		//down
+
+		if (App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT) {
+			if (App->player->position.y + 30 >= cameralimits.y + 50) {
+				camera.y -= cameraSpeed;
+				cameralimits.y = App->player->position.y + 30 - 50;
+			}
+		}
+
+
+		// right
+
+		if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT) {
+
+			if (App->player->position.x + 25 >= cameralimits.x + 50) {
+				camera.x -= cameraSpeed;
+				cameralimits.x = App->player->position.x + 25 - 50;
+			}
+		}
+
+		//left
+
+		if (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT) {
+
+			if (App->player->position.x <= cameralimits.x) {
+				camera.x += cameraSpeed;
+				cameralimits.x = App->player->position.x;
+			}
 		}
 	}
-
-	//down
-
-	if (App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT) {
-		if (App->player->position.y + 30 >= cameralimits.y + 50) {
-			camera.y -= cameraSpeed;
-			cameralimits.y = App->player->position.y + 30 - 50;
-		}
-	}
-
-
-	// right
-
-	if (App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT) {
-
-		if (App->player->position.x + 25 >= cameralimits.x + 50) {
-			camera.x -= cameraSpeed;
-			cameralimits.x = App->player->position.x + 25 - 50;
-		}
-	}
-
-	//left
-
-	if (App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT) {
-
-		if (App->player->position.x <= cameralimits.x) {
-			camera.x += cameraSpeed;
-			cameralimits.x = App->player->position.x;
-		}
-	}
-
 	//cameral limits
 
 	if (camera.y <= 910) {
 		if (camera.x >= 48) {
 			camera.x = 48;
 		}
+
 		if (camera.x <= -64) {
 			camera.x = -64;
 		}
-		if (camera.y <= -30) {
-			camera.y = -30;
+		if (camera.y <= 50) {
+			camera.y = 50;
 		}
 
+		
 	}
-
 	if (camera.y <= 1710 && camera.y > 910) {
 		if (camera.y > 1705 && camera.x <= 48 && camera.x >= 10) {
 			camera.y = 1705;
@@ -139,7 +143,6 @@ Update_Status ModuleRender::Update()
 			camera.x = -616;
 		}
 	}
-
 	if (camera.y <= 2380 && camera.y > 2250) {
 		if (camera.x >= -232) {
 			camera.x = -232;
@@ -202,7 +205,7 @@ Update_Status ModuleRender::Update()
 	if (App->input->keys[SDL_SCANCODE_J] == KEY_REPEAT) {
 		camera.x += cameraSpeed;
 	}
-	if (App->input->keys[SDL_SCANCODE_K] == KEY_REPEAT){ 
+	if (App->input->keys[SDL_SCANCODE_K] == KEY_REPEAT) {
 		camera.y -= cameraSpeed;
 	}
 	if (App->input->keys[SDL_SCANCODE_I] == KEY_REPEAT) {
@@ -211,6 +214,7 @@ Update_Status ModuleRender::Update()
 
 	return Update_Status::UPDATE_CONTINUE;
 }
+
 
 Update_Status ModuleRender::PostUpdate()
 {
