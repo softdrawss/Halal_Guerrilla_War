@@ -7,14 +7,14 @@
 #include "ModuleParticles.h"
 #include "ModuleAudio.h"
 #include "ModuleCollisions.h"
+#include "ModuleFadeToBlack.h"
+#include "ModuleEnemies.h"
 
 #include "SDL/include/SDL_scancode.h"
 
 
 ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 {
-	position.x = 250;
-	position.y = 300;
 
 	//iddle animation
 	torsoiddleAnim.PushBack({ 4,4,26,31 });
@@ -283,10 +283,14 @@ bool ModulePlayer::Start()
 {
 	LOG("Loading player textures");
 
+	position.x = 250;
+	position.y = 300;
+
 	bool ret = true;
 	normalweapon = true;
 	heavyweapon = false;
-	dead == false;
+	dead = false;
+	lives = 3;
 
 	texture = App->textures->Load("Assets/Guerrilla War Player 1 Spritesheet OK.png");
 	weapon_texture = App->textures->Load("Assets/Guerrilla War Weapon Spritesheet1.png");
@@ -1042,6 +1046,16 @@ Update_Status ModulePlayer::Update()
 		}
 	}
 
+	if (App->input->keys[SDL_SCANCODE_F2] == KEY_DOWN) {
+		dead = true;
+	}
+
+	if (dead == true) {
+		App->fade->FadeToBlack((Module*)App->scene, (Module*)App->sceneIntro, 60);
+		/*App->enemies->Disable();
+		Disable();*/
+	}
+
 
 	////grenade
 	//if (App->input->keys[SDL_SCANCODE_LALT] == KEY_DOWN )
@@ -1056,12 +1070,13 @@ Update_Status ModulePlayer::Update()
 	currentAnimationtorso->Update();
 	weapon->Update();
 
-	if (dead)
+
+	/*if (dead)
 	{
 		destroyedCountdown--;
 		if (destroyedCountdown <= 0)
 			return Update_Status::UPDATE_STOP;
-	}
+	}*/
 
 	return Update_Status::UPDATE_CONTINUE;
 }
@@ -1216,9 +1231,14 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			break;
 		case(Collider::Type::ENEMY_SHOT):
 			if (collider->Intersects(c2->rect)) {
-				//currentAnimation = &death;
-				//currentAnimation->Update();
-				dead = true;
+				if (collider->Intersects(c2->rect)) {
+					if (lives == 1) {
+						dead = true;
+					}
+					else {
+						--lives;
+					}
+				}
 			}
 			break;
 		case (Collider::Type::POWERUP):
@@ -1226,6 +1246,16 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 				heavyweapon = true;
 				normalweapon = false;
 			}
+		case(Collider::Type::ENEMY):
+			if (collider->Intersects(c2->rect)) {
+				if (lives == 1) {
+					dead = true;
+				}
+				else {
+					--lives;
+				}
+			}
+			break;
 		}
 
 	}

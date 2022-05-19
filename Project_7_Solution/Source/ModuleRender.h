@@ -56,7 +56,7 @@ public:
 	SDL_Rect cameralimits = { 225, 325, 50, 0 };
 
 	// The speed at which the camera will be moving
-	int cameraSpeed = 3;
+	int cameraSpeed = 2;
 
 };
 

@@ -32,7 +32,7 @@ Application::Application()
 	modules[7] = particles = new ModuleParticles(true);
 	modules[8] = enemies = new ModuleEnemies(false);	//Enemies start disabled
 
-	modules[9] = collisions = new ModuleCollisions(true);
+	modules[9] = collisions = new ModuleCollisions(false);
 	modules[10] = fade = new ModuleFadeToBlack(true);
 	modules[11] = fonts = new ModuleFonts(true);
 	modules[12] = render = new ModuleRender(true);

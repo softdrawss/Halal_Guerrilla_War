@@ -145,6 +145,10 @@ bool ModuleScene::Start()
 
 	//App->enemies->AddEnemy(ENEMY_TYPE::MECH, 900, 195);
 
+	App->player->Enable();
+	App->enemies->Enable();
+	App->collisions->Enable();
+
 
 	return ret;
 }
@@ -169,5 +173,17 @@ Update_Status ModuleScene::PostUpdate()
 {
 	// Draw everything --------------------------------------
 	App->render->Blit(bgTexture, -30, -4050, &background, 1);
+
 	return Update_Status::UPDATE_CONTINUE;
 }
+
+bool ModuleScene::CleanUp()
+{
+	App->player->Disable();
+	App->enemies->Disable();
+	App->collisions->Disable();
+
+
+	return true;
+}
+

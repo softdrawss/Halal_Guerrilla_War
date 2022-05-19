@@ -69,9 +69,14 @@ public:
 
 	// A flag to detect when the player has been destroyed
 	bool dead = false;
+
+	//booleans to know the direction the player is facing
 	bool facer, facel, faceu, faced, faceur, faceul, facedr, facedl;
 	bool normalweapon;
 	bool heavyweapon;
+
+	// lives of the player
+	int lives;
 
 
 
