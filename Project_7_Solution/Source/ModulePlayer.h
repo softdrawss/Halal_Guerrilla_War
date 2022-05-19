@@ -66,6 +66,7 @@ public:
 
 	// The player's collider
 	Collider* collider = nullptr;
+	Collider* collider1 = nullptr;
 
 	// A flag to detect when the player has been destroyed
 	bool dead = false;

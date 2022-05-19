@@ -286,11 +286,51 @@ bool ModuleRender::DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uin
 	return ret;
 }
 
-bool ModuleRender::DrawLine(Uint8 r, Uint8 g, Uint8 b, Uint8 a) {
+bool ModuleRender::DrawLine(Uint8 r, Uint8 g, Uint8 b, Uint8 a, int cx, int cy, int fx, int fy, float speed) {
 	bool line = true;
 
 	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 	SDL_SetRenderDrawColor(renderer, r, g, b, a);
 
+	SDL_RenderDrawLine(renderer, cx, cy, fx, fy);
 	//SDL_RenderDrawLine(renderer, cx, cy, cx + cy * cos(alpha), cy - cy * sin(alpha));
+	return line;
+}
+
+void ModuleRender::DrawCircle(int centreX, int centreY, int radius, SDL_Renderer* renderer,  Uint8 r, Uint8 g, Uint8 b, Uint8 a, float speed)
+{
+	const int diameter = (radius * 2);
+
+	int x = (radius - 1);
+	int y = 0;
+	int tx = 1;
+	int ty = 1;
+	int error = (tx - diameter);
+
+	while (x >= y)
+	{
+		//  Each of the following renders an octant of the circle
+		SDL_RenderDrawPoint(renderer, centreX + x, centreY - y);
+		SDL_RenderDrawPoint(renderer, centreX + x, centreY + y);
+		SDL_RenderDrawPoint(renderer, centreX - x, centreY - y);
+		SDL_RenderDrawPoint(renderer, centreX - x, centreY + y);
+		SDL_RenderDrawPoint(renderer, centreX + y, centreY - x);
+		SDL_RenderDrawPoint(renderer, centreX + y, centreY + x);
+		SDL_RenderDrawPoint(renderer, centreX - y, centreY - x);
+		SDL_RenderDrawPoint(renderer, centreX - y, centreY + x);
+
+		if (error <= 0)
+		{
+			++y;
+			error += ty;
+			ty += 2;
+		}
+
+		if (error > 0)
+		{
+			--x;
+			tx += 2;
+			error += (tx - diameter);
+		}
+	}
 }

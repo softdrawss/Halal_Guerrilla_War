@@ -1,7 +1,9 @@
 #include "ModuleCollisions.h"
 
 #include "Application.h"
-
+#include "Enemy.h"
+#include "ModuleEnemies.h"
+#include "ModulePlayer.h"
 #include "ModuleRender.h"
 #include "ModuleInput.h"
 #include "SDL/include/SDL_Scancode.h"
@@ -25,13 +27,15 @@ ModuleCollisions::ModuleCollisions()
 	matrix[Collider::Type::PLAYER][Collider::Type::PLAYER_SHOT] = false;
 	matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_SHOT] = true;
 	matrix[Collider::Type::PLAYER][Collider::Type::POWERUP] = true;
+	matrix[Collider::Type::PLAYER][Collider::Type::ATTACK] = false;
 
 	matrix[Collider::Type::ENEMY][Collider::Type::WALL] = true;
-	matrix[Collider::Type::ENEMY][Collider::Type::PLAYER] = false;
+	matrix[Collider::Type::ENEMY][Collider::Type::PLAYER] = true;
 	matrix[Collider::Type::ENEMY][Collider::Type::ENEMY] = false;
 	matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
 	matrix[Collider::Type::ENEMY][Collider::Type::ENEMY_SHOT] = false;
 	matrix[Collider::Type::ENEMY][Collider::Type::POWERUP] = false;
+	matrix[Collider::Type::ENEMY][Collider::Type::ATTACK] = false;
 
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::WALL] = true;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::PLAYER] = false;
@@ -39,6 +43,7 @@ ModuleCollisions::ModuleCollisions()
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::PLAYER_SHOT] = false;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::ENEMY_SHOT] = false;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::POWERUP] = false;
+	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::ATTACK] = false;
 
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::WALL] = true;
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::PLAYER] = true;
@@ -46,6 +51,7 @@ ModuleCollisions::ModuleCollisions()
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::PLAYER_SHOT] = false;
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::ENEMY_SHOT] = false;
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::POWERUP] = false;
+	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::ATTACK] = false;
 
 	matrix[Collider::Type::POWERUP][Collider::Type::WALL] = false;
 	matrix[Collider::Type::POWERUP][Collider::Type::PLAYER] = true;
@@ -53,6 +59,15 @@ ModuleCollisions::ModuleCollisions()
 	matrix[Collider::Type::POWERUP][Collider::Type::PLAYER_SHOT] = false;
 	matrix[Collider::Type::POWERUP][Collider::Type::ENEMY_SHOT] = false;
 	matrix[Collider::Type::POWERUP][Collider::Type::POWERUP] = false;
+	matrix[Collider::Type::POWERUP][Collider::Type::ATTACK] = false;
+
+	matrix[Collider::Type::ATTACK][Collider::Type::WALL] = false;
+	matrix[Collider::Type::ATTACK][Collider::Type::ATTACK] = false;
+	matrix[Collider::Type::ATTACK][Collider::Type::PLAYER] = false;
+	matrix[Collider::Type::ATTACK][Collider::Type::ENEMY] = false;
+	matrix[Collider::Type::ATTACK][Collider::Type::PLAYER_SHOT] = false;
+	matrix[Collider::Type::ATTACK][Collider::Type::ENEMY_SHOT] = false;
+	matrix[Collider::Type::ATTACK][Collider::Type::POWERUP] = false;
 }
 
 // Destructor
@@ -109,7 +124,7 @@ update_status ModuleCollisions::PreUpdate()
 
 update_status ModuleCollisions::Update()
 {
-	if (App->input->keys[SDL_SCANCODE_F1] == KEY_DOWN)
+	if (App->input->keys[SDL_SCANCODE_X] == KEY_DOWN)
 		debug = !debug;
 
 	return update_status::UPDATE_CONTINUE;
@@ -154,6 +169,10 @@ void ModuleCollisions::DebugDraw()
 		case Collider::Type::ENEMY_SHOT: // magenta
 			App->render->DrawQuad(colliders[i]->rect, 0, 255, 255, alpha);
 			break;
+		case Collider::Type::ATTACK:
+			//App->render->DrawQuad(colliders[i]->rect, 106, 90, 205, alpha);
+			//App->render->DrawCircle(App->player->position.x, App->player->position.y, 200, App->render->renderer, 0, 0, 0, alpha);
+			break;
 		}
 	}
 }
@@ -191,4 +210,18 @@ Collider* ModuleCollisions::AddCollider(SDL_Rect rect, Collider::Type type, Modu
 	return ret;
 }
 
-//
+Collider* ModuleCollisions::AddSpecialCollider(int centreX, int centreY, int radius, Collider::Type type, Module* listener) {
+	Collider* circle = nullptr;
+	for (uint i = 0; i < MAX_COLLIDERS; ++i)
+	{
+		if (enemyColliders[i] == nullptr)
+		{
+			circle = enemyColliders[i] = new Collider(centreX, centreY, radius, type, listener);
+			break;
+		}
+	}
+
+	return circle;
+}
+
+

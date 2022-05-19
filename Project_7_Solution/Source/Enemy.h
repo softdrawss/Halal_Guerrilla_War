@@ -30,6 +30,9 @@ public:
 	//virtual void Attack();
 	virtual void Attack();
 
+	//virtual void Flee();
+	virtual void Flee();
+
 	//angle
 	virtual void getPlayerPosition();
 
@@ -53,6 +56,7 @@ protected:
 
 	// The enemy's collider
 	Collider* collider = nullptr;
+	Collider* attack = nullptr;
 
 	// Original spawn position. Stored for movement calculations
 	iPoint spawnPos;

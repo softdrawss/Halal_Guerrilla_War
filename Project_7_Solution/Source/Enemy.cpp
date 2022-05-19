@@ -1,5 +1,6 @@
-#include "Enemy.h"
 
+#include "Enemy.h"
+#include "ModulePlayer.h"
 #include "Application.h"
 #include "ModuleCollisions.h"
 #include "ModuleParticles.h"
@@ -32,6 +33,15 @@ void Enemy::Update()
 }
 
 void Enemy::Attack() {
+	if ((App->player->position.y - position.y) == 200) {
+
+	}
+	else {
+		position.y += 5;
+	}
+}
+
+void Enemy::Flee() {
 
 }
 
