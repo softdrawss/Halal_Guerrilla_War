@@ -304,6 +304,7 @@ bool ModulePlayer::Start()
 
 	//add collider player
 	collider = App->collisions->AddCollider({ position.x, position.y, 32, 64 }, Collider::Type::PLAYER, this);
+	//collider1 = App->collisions->AddSpecialCollider(250, 300, 250, Collider::Type::ATTACK, this);
 
 	return ret;
 }
