@@ -7,8 +7,6 @@ https://github.com/softdrawss/Halal_Guerrilla_War/wiki
 
 Héctor Gárcia: https://github.com/Neidragon
 
-Ivette Sanjurjo: https://github.com/ivetetetete
-
 Júlia Serra: https://github.com/softdrawss
 
 Adrián Ponce: https://github.com/AdrianGPJ
