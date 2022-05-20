@@ -109,14 +109,18 @@ bool ModuleScene::Start()
 	App->collisions->AddCollider({ 920, -3595, 40,35 }, Collider::Type::WALL);
 	App->collisions->AddCollider({ 960, -3845, 135,110 }, Collider::Type::WALL);
 
-
 	//destroyable wall, warsacks, tanktraps and etc
-
 	App->collisions->AddCollider({ 110, -205, 36,25 }, Collider::Type::DESTROYABLE_WALL);
 	App->collisions->AddCollider({ 146, -205, 36,25 }, Collider::Type::DESTROYABLE_WALL);
-
 	App->collisions->AddCollider({ 250, -205, 36,25 }, Collider::Type::DESTROYABLE_WALL);
 	App->collisions->AddCollider({ 286, -205, 36,25 }, Collider::Type::DESTROYABLE_WALL);
+
+	// Water
+	App->collisions->AddCollider({ 200, 305, 100,105 }, Collider::Type::WATER);
+	App->collisions->AddCollider({ 175, 375, 25,105 }, Collider::Type::WATER);
+	App->collisions->AddCollider({ 500, -3354, 500, 442 }, Collider::Type::WATER);
+	App->collisions->AddCollider({ 300, 375, 30, 25 }, Collider::Type::WATER);
+	App->collisions->AddCollider({ 300, 340, 30, 35 }, Collider::Type::WATER);
 
 	////First two columns colliders
 	//App->collisions->AddCollider({ 1375, 0, 111, 96 }, Collider::Type::WALL);
@@ -124,28 +128,14 @@ bool ModuleScene::Start()
 
 	//// Enemies ---
 	App->enemies->AddEnemy(ENEMY_TYPE::BOMB, 398, -2290);
-	//App->enemies->AddEnemy(ENEMY_TYPE::BOMB, 500, -2290); //A partir de 500 capamunt desapareix not sure why
+	//App->enemies->AddEnemy(ENEMY_TYPE::BOMB, 500, -2290); A partir de 500 capamunt desapareix not sure why
 	App->enemies->AddEnemy(ENEMY_TYPE::RED, 250, 200);
 	App->enemies->AddEnemy(ENEMY_TYPE::RED, 200, 200);
 	App->enemies->AddEnemy(ENEMY_TYPE::RED, 225, -400);
 	//App->enemies->AddEnemy(ENEMY_TYPE::TRUCK, 250, 200);
 	//App->enemies->AddEnemy(ENEMY_TYPE::REDBIRD, 665, 80);
 
-	//// TODO 1: Add a new wave of red birds
-	//App->enemies->AddEnemy(ENEMY_TYPE::REDBIRD, 735, 120);
-	//App->enemies->AddEnemy(ENEMY_TYPE::REDBIRD, 750, 120);
-	//App->enemies->AddEnemy(ENEMY_TYPE::REDBIRD, 775, 120);
-	//App->enemies->AddEnemy(ENEMY_TYPE::REDBIRD, 790, 120);
-
-	//// TODO 2: Add a new wave of brown cookies
-	//App->enemies->AddEnemy(ENEMY_TYPE::BROWNSHIP, 830, 100);
-	//App->enemies->AddEnemy(ENEMY_TYPE::BROWNSHIP, 850, 100);
-	//App->enemies->AddEnemy(ENEMY_TYPE::BROWNSHIP, 870, 100);
-	//App->enemies->AddEnemy(ENEMY_TYPE::BROWNSHIP, 890, 100);
-
-	//App->enemies->AddEnemy(ENEMY_TYPE::MECH, 900, 195);
-
-
+	
 	return ret;
 }
 

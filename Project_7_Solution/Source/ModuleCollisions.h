@@ -34,9 +34,6 @@ public:
 
 	// Adds a new collider to the list
 	Collider* AddCollider(SDL_Rect rect, Collider::Type type, Module* listener = nullptr);
-	//Collider* AddSpecialCollider(int32_t centreX, int32_t centreY, int32_t radius, Collider::Type type, Module* listener = nullptr);
-	
-	Collider* AddSpecialCollider(int centreX, int centreY, int radius, Collider::Type type, Module* listener = nullptr);
 
 	// Draws all existing colliders with some transparency
 	void DebugDraw();

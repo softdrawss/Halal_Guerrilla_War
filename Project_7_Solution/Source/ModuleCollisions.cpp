@@ -27,7 +27,7 @@ ModuleCollisions::ModuleCollisions()
 	matrix[Collider::Type::PLAYER][Collider::Type::PLAYER_SHOT] = false;
 	matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_SHOT] = true;
 	matrix[Collider::Type::PLAYER][Collider::Type::POWERUP] = true;
-	matrix[Collider::Type::PLAYER][Collider::Type::ATTACK] = false;
+	matrix[Collider::Type::PLAYER][Collider::Type::WATER] = true;
 
 	matrix[Collider::Type::ENEMY][Collider::Type::WALL] = true;
 	matrix[Collider::Type::ENEMY][Collider::Type::PLAYER] = true;
@@ -35,7 +35,7 @@ ModuleCollisions::ModuleCollisions()
 	matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
 	matrix[Collider::Type::ENEMY][Collider::Type::ENEMY_SHOT] = false;
 	matrix[Collider::Type::ENEMY][Collider::Type::POWERUP] = false;
-	matrix[Collider::Type::ENEMY][Collider::Type::ATTACK] = false;
+	matrix[Collider::Type::ENEMY][Collider::Type::WATER] = true;
 
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::WALL] = true;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::PLAYER] = false;
@@ -43,7 +43,7 @@ ModuleCollisions::ModuleCollisions()
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::PLAYER_SHOT] = false;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::ENEMY_SHOT] = false;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::POWERUP] = false;
-	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::ATTACK] = false;
+	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::WATER] = false;
 
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::WALL] = true;
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::PLAYER] = true;
@@ -51,7 +51,7 @@ ModuleCollisions::ModuleCollisions()
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::PLAYER_SHOT] = false;
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::ENEMY_SHOT] = false;
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::POWERUP] = false;
-	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::ATTACK] = false;
+	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::WATER] = false;
 
 	matrix[Collider::Type::POWERUP][Collider::Type::WALL] = false;
 	matrix[Collider::Type::POWERUP][Collider::Type::PLAYER] = true;
@@ -59,15 +59,15 @@ ModuleCollisions::ModuleCollisions()
 	matrix[Collider::Type::POWERUP][Collider::Type::PLAYER_SHOT] = false;
 	matrix[Collider::Type::POWERUP][Collider::Type::ENEMY_SHOT] = false;
 	matrix[Collider::Type::POWERUP][Collider::Type::POWERUP] = false;
-	matrix[Collider::Type::POWERUP][Collider::Type::ATTACK] = false;
+	matrix[Collider::Type::POWERUP][Collider::Type::WATER] = false;
 
-	matrix[Collider::Type::ATTACK][Collider::Type::WALL] = false;
-	matrix[Collider::Type::ATTACK][Collider::Type::ATTACK] = false;
-	matrix[Collider::Type::ATTACK][Collider::Type::PLAYER] = false;
-	matrix[Collider::Type::ATTACK][Collider::Type::ENEMY] = false;
-	matrix[Collider::Type::ATTACK][Collider::Type::PLAYER_SHOT] = false;
-	matrix[Collider::Type::ATTACK][Collider::Type::ENEMY_SHOT] = false;
-	matrix[Collider::Type::ATTACK][Collider::Type::POWERUP] = false;
+	matrix[Collider::Type::WATER][Collider::Type::WALL] = false;
+	matrix[Collider::Type::WATER][Collider::Type::WATER] = false;
+	matrix[Collider::Type::WATER][Collider::Type::PLAYER] = false;
+	matrix[Collider::Type::WATER][Collider::Type::ENEMY] = false;
+	matrix[Collider::Type::WATER][Collider::Type::PLAYER_SHOT] = false;
+	matrix[Collider::Type::WATER][Collider::Type::ENEMY_SHOT] = false;
+	matrix[Collider::Type::WATER][Collider::Type::POWERUP] = false;
 }
 
 // Destructor
@@ -169,10 +169,8 @@ void ModuleCollisions::DebugDraw()
 		case Collider::Type::ENEMY_SHOT: // magenta
 			App->render->DrawQuad(colliders[i]->rect, 0, 255, 255, alpha);
 			break;
-		case Collider::Type::ATTACK:
-			//App->render->DrawQuad(colliders[i]->rect, 106, 90, 205, alpha);
-			//App->render->DrawCircle(App->player->position.x, App->player->position.y, 200, App->render->renderer, 0, 0, 0, alpha);
-			break;
+		case Collider::Type::WATER: //orange?
+			App->render->DrawQuad(colliders[i]->rect, 255, 255, 0, alpha);
 		}
 	}
 }
@@ -210,18 +208,5 @@ Collider* ModuleCollisions::AddCollider(SDL_Rect rect, Collider::Type type, Modu
 	return ret;
 }
 
-Collider* ModuleCollisions::AddSpecialCollider(int centreX, int centreY, int radius, Collider::Type type, Module* listener) {
-	Collider* circle = nullptr;
-	for (uint i = 0; i < MAX_COLLIDERS; ++i)
-	{
-		if (enemyColliders[i] == nullptr)
-		{
-			circle = enemyColliders[i] = new Collider(centreX, centreY, radius, type, listener);
-			break;
-		}
-	}
-
-	return circle;
-}
 
 

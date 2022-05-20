@@ -16,18 +16,17 @@ struct Collider
 		NONE = -1,
 		WALL,
 		DESTROYABLE_WALL,
+		WATER,
 		PLAYER,
 		ENEMY,
 		PLAYER_SHOT,
 		ENEMY_SHOT,
 		POWERUP,
-		ATTACK,
 		MAX
 	};
 
 	//Methods
 	Collider(SDL_Rect rectangle, Type type, Module* listener = nullptr);
-	Collider(int centreX, int centreY, int radius, Type type, Module* listener = nullptr);
 	void SetPos(int x, int y);
 
 	bool Intersects(const SDL_Rect& r) const;
