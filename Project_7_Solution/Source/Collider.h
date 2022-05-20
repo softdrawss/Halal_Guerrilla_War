@@ -3,6 +3,9 @@
 
 #include "SDL/include/SDL_Rect.h"
 
+#define MAX_LISTENERS 5
+
+
 class Module;
 
 class Circle {
@@ -31,6 +34,8 @@ struct Collider
 
 	bool Intersects(const SDL_Rect& r) const;
 
+	void AddListener(Module* listener);
+
 	//Variables
 	SDL_Rect rect;
 
@@ -38,7 +43,7 @@ struct Collider
 	//SDL_Renderer renderer;
 	bool pendingToDelete = false;
 	Type type;
-	Module* listener = nullptr;
+	Module* listeners[MAX_LISTENERS] = { nullptr };
 };
 
 

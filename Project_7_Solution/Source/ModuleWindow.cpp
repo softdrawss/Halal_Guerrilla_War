@@ -6,7 +6,7 @@
 #include "SDL/include/SDL.h"
 
 
-ModuleWindow::ModuleWindow() : Module()
+ModuleWindow::ModuleWindow(bool startEnabled) : Module(startEnabled)
 {}
 
 ModuleWindow::~ModuleWindow()
@@ -68,7 +68,3 @@ bool ModuleWindow::CleanUp()
 
 	return true;
 }
-
-
-
-

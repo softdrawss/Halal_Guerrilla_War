@@ -7,7 +7,7 @@
 #include "ModuleCollisions.h"
 #include "ModuleEnemies.h"
 
-ModuleScene::ModuleScene()
+ModuleScene::ModuleScene(bool startEnabled) : Module(startEnabled)
 {
 	background.x = 0;
 	background.y = 0;
@@ -115,6 +115,7 @@ bool ModuleScene::Start()
 	App->collisions->AddCollider({ 250, -205, 36,25 }, Collider::Type::DESTROYABLE_WALL);
 	App->collisions->AddCollider({ 286, -205, 36,25 }, Collider::Type::DESTROYABLE_WALL);
 
+
 	// Water
 	App->collisions->AddCollider({ 200, 305, 100,105 }, Collider::Type::WATER);
 	App->collisions->AddCollider({ 175, 375, 25,105 }, Collider::Type::WATER);
@@ -132,14 +133,30 @@ bool ModuleScene::Start()
 	App->enemies->AddEnemy(ENEMY_TYPE::RED, 250, 200);
 	App->enemies->AddEnemy(ENEMY_TYPE::RED, 200, 200);
 	App->enemies->AddEnemy(ENEMY_TYPE::RED, 225, -400);
-	//App->enemies->AddEnemy(ENEMY_TYPE::TRUCK, 250, 200);
-	//App->enemies->AddEnemy(ENEMY_TYPE::REDBIRD, 665, 80);
 
 	
+
+	//// Enemies ---
+	App->enemies->AddEnemy(Enemy_Type::BOMB, 398, -2290);
+	//App->enemies->AddEnemy(ENEMY_TYPE::BOMB, 500, -2290); //A partir de 500 capamunt desapareix not sure why
+	App->enemies->AddEnemy(Enemy_Type::RED, 250, 200);
+	App->enemies->AddEnemy(Enemy_Type::RED, 200, 200);
+	App->enemies->AddEnemy(Enemy_Type::RED, 225, -400);
+
+	//App->enemies->AddEnemy(ENEMY_TYPE::TRUCK, 250, 200);
+
+
+	//Enable the necessary modules
+	App->player->Enable();
+	App->enemies->Enable();
+	App->collisions->Enable();
+
+
+
 	return ret;
 }
 
-update_status ModuleScene::Update()
+Update_Status ModuleScene::Update()
 {
 	if (App->player->position.y <= 290) {
 		//App->audio->PlayMusic("Assets/gwar-107.wav", 1.0f);
@@ -151,13 +168,25 @@ update_status ModuleScene::Update()
 		//App->audio->PlayFx(boss, -1);
 		//App->audio->PlayFx(boss, -1);
 	}
-	return update_status::UPDATE_CONTINUE;
+	return Update_Status::UPDATE_CONTINUE;
 }
 
 // Update: draw background
-update_status ModuleScene::PostUpdate()
+Update_Status ModuleScene::PostUpdate()
 {
 	// Draw everything --------------------------------------
 	App->render->Blit(bgTexture, -30, -4050, &background, 1);
-	return update_status::UPDATE_CONTINUE;
+
+	return Update_Status::UPDATE_CONTINUE;
 }
+
+bool ModuleScene::CleanUp()
+{
+	App->player->Disable();
+	App->enemies->Disable();
+	App->collisions->Disable();
+
+
+	return true;
+}
+

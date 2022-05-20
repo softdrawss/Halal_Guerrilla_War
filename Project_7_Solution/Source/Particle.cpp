@@ -9,7 +9,7 @@ Particle::Particle()
 }
 
 Particle::Particle(const Particle& p) : anim(p.anim), position(p.position), speed(p.speed),
-										frameCount(p.frameCount), lifetime(p.lifetime)
+frameCount(p.frameCount), lifetime(p.lifetime)
 {
 
 }
@@ -52,4 +52,11 @@ bool Particle::Update()
 	}
 
 	return ret;
+}
+
+void Particle::SetToDelete()
+{
+	pendingToDelete = true;
+	if (collider != nullptr)
+		collider->pendingToDelete = true;
 }
