@@ -25,3 +25,5 @@ To change the direction of the player, use the four arrows in order to look at t
 To start the game and shoot press space.
 
 To move the camera freely you can use IJKL and to see the colliders you can press F1.
+
+Die instantly: F2
