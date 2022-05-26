@@ -6,7 +6,7 @@
 Enemy_Boss::Enemy_Boss(int x, int y) : Enemy(x, y)
 {
 	fly.PushBack({ 5,72,21,22 });
-	currentAnim = &fly;
+	redcurrentAnim = &fly;
 
 	// TODO 3: Have the Brown Cookies describe a path in the screen
 	path.PushBack({ -1.0f, -0.5f }, 100);

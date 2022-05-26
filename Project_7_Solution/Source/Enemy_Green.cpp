@@ -6,7 +6,7 @@
 Enemy_Green::Enemy_Green(int x, int y) : Enemy(x, y)
 {
 	UPup.PushBack({ 5,72,21,22 });
-	currentAnim = &UPup;
+	redcurrentAnim = &UPup;
 
 	// TODO 3: Have the Brown Cookies describe a path in the screen
 	path.PushBack({ -1.0f, -0.5f }, 100);

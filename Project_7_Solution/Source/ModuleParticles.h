@@ -64,14 +64,13 @@ public:
 	//Template particle for an explosion
 	Particle explosion;
 
-	//Template particle for a laser
+	//Template particle for player shots
 	Particle normal_hr_shot, normal_hl_shot, normal_up_shot, normal_down_shot, normal_dr_shot, normal_dl_shot, normal_ul_shot, normal_ur_shot;
 	Particle grenade_up, grenade_down, grenade_right, grenade_left, grenade_ur, grenade_ul, grenade_dr, grenade_dl;
 	Particle upgraded_shot;
 
+	Particle enemybullet;
 
-	Particle green_up, green_down, green_left, green_right, green_ul, green_ur, green_dl, green_dr;
-	Particle red_up, red_down, red_left, red_right, red_ul, red_ur, red_dl, red_dr;
 	Particle bomb_up, bomb_down, bomb_left, bomb_right, bomb_ul, bomb_ur, bomb_dl, bomb_dr;
 	Particle boss_up, boss_down, boss_left, boss_right, boss_ul, boss_ur, boss_dl, boss_dr;
 };

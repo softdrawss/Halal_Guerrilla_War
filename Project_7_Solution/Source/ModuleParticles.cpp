@@ -42,7 +42,6 @@ ModuleParticles::ModuleParticles(bool startEnabled) : Module(startEnabled)
 		normal_hr_shot.anim.PushBack({ 67, 183, 9, 3 });
 		normal_hr_shot.anim.PushBack({ 84, 183, 9, 3 });
 		normal_hr_shot.speed.x = 8;
-		normal_hr_shot.lifetime = 180;
 		normal_hr_shot.anim.speed = 0.2f;
 		normal_hr_shot.lifetime = 18;
 
@@ -50,7 +49,6 @@ ModuleParticles::ModuleParticles(bool startEnabled) : Module(startEnabled)
 		normal_hl_shot.anim.PushBack({ 196, 182,9,3 });
 		normal_hl_shot.anim.PushBack({ 196, 182,9,3 });
 		normal_hl_shot.speed.x = -8;
-		normal_hl_shot.lifetime = 180;
 		normal_hl_shot.anim.speed = 0.2f;
 		normal_hl_shot.lifetime = 18;
 
@@ -58,7 +56,6 @@ ModuleParticles::ModuleParticles(bool startEnabled) : Module(startEnabled)
 		normal_up_shot.anim.PushBack({ 7, 180,3,9 });
 		normal_up_shot.anim.PushBack({ 23, 180,3,9 });
 		normal_up_shot.speed.y = -8;
-		normal_up_shot.lifetime = 180;
 		normal_up_shot.anim.speed = 0.2f;
 		normal_up_shot.lifetime = 18;
 
@@ -66,7 +63,6 @@ ModuleParticles::ModuleParticles(bool startEnabled) : Module(startEnabled)
 		normal_down_shot.anim.PushBack({ 134,179,3,9 });
 		normal_down_shot.anim.PushBack({ 150,180,3,9 });
 		normal_down_shot.speed.y = 8;
-		normal_down_shot.lifetime = 180;
 		normal_down_shot.anim.speed = 0.2f;
 		normal_down_shot.lifetime = 18;
 
@@ -75,7 +71,6 @@ ModuleParticles::ModuleParticles(bool startEnabled) : Module(startEnabled)
 		normal_ur_shot.anim.PushBack({ 52,181,7,7 });
 		normal_ur_shot.speed.y = -8;
 		normal_ur_shot.speed.x = 8;
-		normal_ur_shot.lifetime = 180;
 		normal_ur_shot.anim.speed = 0.2f;
 		normal_ur_shot.lifetime = 18;
 
@@ -84,7 +79,6 @@ ModuleParticles::ModuleParticles(bool startEnabled) : Module(startEnabled)
 		normal_ul_shot.anim.PushBack({ 245,181,7,7 });
 		normal_ul_shot.speed.y = -8;
 		normal_ul_shot.speed.x = -8;
-		normal_ul_shot.lifetime = 180;
 		normal_ul_shot.anim.speed = 0.2f;
 		normal_ul_shot.lifetime = 18;
 
@@ -93,7 +87,6 @@ ModuleParticles::ModuleParticles(bool startEnabled) : Module(startEnabled)
 		normal_dr_shot.anim.PushBack({ 115,180,7,7 });
 		normal_dr_shot.speed.y = 8;
 		normal_dr_shot.speed.x = 8;
-		normal_dr_shot.lifetime = 180;
 		normal_dr_shot.anim.speed = 0.2f;
 		normal_dr_shot.lifetime = 18;
 
@@ -102,7 +95,6 @@ ModuleParticles::ModuleParticles(bool startEnabled) : Module(startEnabled)
 		normal_dl_shot.anim.PushBack({ 165,180,7,7 });
 		normal_dl_shot.speed.y = 8;
 		normal_dl_shot.speed.x = -8;
-		normal_dl_shot.lifetime = 180;
 		normal_dl_shot.anim.speed = 0.2f;
 		normal_dl_shot.lifetime = 18;
 
@@ -122,6 +114,14 @@ ModuleParticles::ModuleParticles(bool startEnabled) : Module(startEnabled)
 		grenade_up.speed.y = -2;
 		grenade_up.lifetime = 60;
 		grenade_up.anim.speed = 0.2f;
+
+		//sprites for the enemy bullets
+
+		enemybullet.anim.PushBack({ 198,66,4,5 });
+		enemybullet.anim.PushBack({ 214,66,4,5 });
+		enemybullet.anim.loop = true;
+		enemybullet.lifetime = 180;
+		enemybullet.anim.speed = 0.2f;
 
 
 		return true;

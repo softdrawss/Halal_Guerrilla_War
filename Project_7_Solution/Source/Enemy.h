@@ -33,8 +33,14 @@ public:
 	//virtual void Flee();
 	virtual void Flee();
 
-	//angle
-	virtual void getPlayerPosition();
+	// functions to make the enemies walk
+	virtual void Walkdown();
+	virtual void Walkdiagonalrightdown();
+	virtual void Walkdiagonalleftdown();
+
+	//function to know ehre is the player so it can face it
+	void facingtoplayer();
+	void direction();
 
 	// Collision response
 	// Triggers an animation and a sound fx
@@ -56,9 +62,22 @@ public:
 	// A flag for the enemy removal. Important! We do not delete objects instantly
 	bool pendingToDelete = false;
 
+	//speed of the enemies
+	int speed;
+
+	iPoint distance;
+	//center of the line to aim to the player
+	int cx, cy;
+	// position of the player as the end of the line
+	int rx, ry;
+	//degress respect to the player
+	float angle, degrees;
+	// direction
+	bool up, down, left, right, upright, upleft, downright, downleft;
+
 protected:
 	// A ptr to the current animation
-	Animation* currentAnim = nullptr;
+	Animation* redcurrentAnim = nullptr;
 
 	// The enemy's collider
 	Collider* collider = nullptr;

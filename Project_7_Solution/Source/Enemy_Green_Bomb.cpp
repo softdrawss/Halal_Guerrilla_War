@@ -10,7 +10,7 @@ Enemy_Green_Bomb::Enemy_Green_Bomb(int x, int y) : Enemy(x, y)
 	attack.PushBack({ 69,397,24, 49 });
 	attack.PushBack({ 69,397,24, 49 });
 	attack.speed = 0.1f;
-	currentAnim = &attack;
+	redcurrentAnim = &attack;
 
 	// TODO 3: Have the Brown Cookies describe a path in the screen
 	//path.PushBack({ -1.0f, -0.5f }, 100);

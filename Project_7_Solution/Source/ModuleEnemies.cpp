@@ -29,7 +29,7 @@ ModuleEnemies::~ModuleEnemies()
 
 bool ModuleEnemies::Start()
 {
-	textureRED = App->textures->Load("Assets/Guerrilla War Red Sprites.png");
+	textureRED = App->textures->Load("Assets/EnemySpriteRec.png");
 	textureGREEN = App->textures->Load("Assets/Guerrilla War Enemy Spritesheet.png");
 	textureBOMB = App->textures->Load("Assets/Guerrilla War Enemy Spritesheet.png");
 	textureBOSS = App->textures->Load("Assets/Guerrilla War Boss Spritesheet.png");
@@ -97,7 +97,7 @@ bool ModuleEnemies::CleanUp()
 	return true;
 }
 
-bool ModuleEnemies::AddEnemy(Enemy_Type type, int x, int y)
+bool ModuleEnemies::AddEnemy(Enemy_Type type, int x, int y/*, iPoint direction*/)
 {
 	bool ret = false;
 
