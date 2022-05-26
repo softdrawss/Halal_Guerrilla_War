@@ -11,7 +11,7 @@ class ModuleRender : public Module
 {
 public:
 	//Constructor
-	ModuleRender();
+	ModuleRender(bool startEnabled);
 
 	//Destructor
 	~ModuleRender();
@@ -22,16 +22,16 @@ public:
 
 	// Called at the beginning of the application loop
 	// Clears the rendering context to a background color
-	update_status PreUpdate() override;
+	Update_Status PreUpdate() override;
 
 	// Called at the middle of the application loop
 	// Handles camera movement
-	update_status Update() override;
+	Update_Status Update() override;
 
 	// Called at the end of the application loop
 	// Displays a rectangle in the rendering context
 	// Updates the screen with the rendered content
-	update_status PostUpdate() override;
+	Update_Status PostUpdate() override;
 
 	// Called on application exit
 	// Destroys the rendering context
@@ -45,7 +45,6 @@ public:
 	bool Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section = nullptr, float speed = 1.0f);
 
 	bool DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a, float speed = 1.0f);
-
 public:
 	// Rendering context used for any rendering action
 	SDL_Renderer* renderer = nullptr;

@@ -7,7 +7,7 @@
 #include "SDL_image/include/SDL_image.h"
 #pragma comment( lib, "SDL_image/libx86/SDL2_image.lib" )
 
-ModuleTextures::ModuleTextures() : Module()
+ModuleTextures::ModuleTextures(bool startEnabled) : Module(startEnabled)
 {
 	for (uint i = 0; i < MAX_TEXTURES; ++i)
 		textures[i] = nullptr;
@@ -26,7 +26,7 @@ bool ModuleTextures::Init()
 	int init = IMG_Init(flags);
 
 	// Check if all flags were initialized correctly
-	if((init & flags) != flags)
+	if ((init & flags) != flags)
 	{
 		LOG("Could not initialize Image lib. IMG_Init: %s", IMG_GetError());
 		ret = false;

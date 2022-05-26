@@ -1,10 +1,12 @@
 #include "Enemy_Red.h"
-
+#include "SDL/include/SDL_render.h"
+#include "ModulePlayer.h"
 #include "Application.h"
 #include "ModuleCollisions.h"
 #include "ModuleParticles.h"
 #include "ModuleRender.h"
 #include "Application.h"
+#include "Enemy.h"
 Enemy_Red::Enemy_Red(int x, int y) : Enemy(x, y)
 {
 	down.PushBack({ 11,8,24,54 });
@@ -16,6 +18,7 @@ Enemy_Red::Enemy_Red(int x, int y) : Enemy(x, y)
 	//path.PushBack({ -1.0f, 1.0f }, 80);
 
 	collider = App->collisions->AddCollider({ 0, 0, 24, 24 }, Collider::Type::ENEMY, (Module*)App->enemies);
+
 }
 
 void Enemy_Red::Attack(Collider* c1, Collider* c2) {
@@ -53,6 +56,7 @@ void Enemy_Red::Attack(Collider* c1, Collider* c2) {
 void Enemy_Red::Update()
 {
 	path.Update();
+	Enemy::Attack();
 	position = spawnPos; //+path.GetRelativePosition();
 
 	// Call to the base class. It must be called at the end

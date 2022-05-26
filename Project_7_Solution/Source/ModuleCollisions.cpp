@@ -1,21 +1,25 @@
 #include "ModuleCollisions.h"
 
 #include "Application.h"
-
+#include "Enemy.h"
+#include "ModuleEnemies.h"
+#include "ModulePlayer.h"
 #include "ModuleRender.h"
 #include "ModuleInput.h"
 #include "SDL/include/SDL_Scancode.h"
 
-ModuleCollisions::ModuleCollisions()
+ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 {
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
-		colliders[i] = nullptr;
+	
+	colliders[i] = nullptr;
 
 	matrix[Collider::Type::WALL][Collider::Type::WALL] = false;
 	matrix[Collider::Type::WALL][Collider::Type::PLAYER] = true;
 	matrix[Collider::Type::WALL][Collider::Type::ENEMY] = true;
 	matrix[Collider::Type::WALL][Collider::Type::PLAYER_SHOT] = true;
 	matrix[Collider::Type::WALL][Collider::Type::ENEMY_SHOT] = true;
+	matrix[Collider::Type::WALL][Collider::Type::POWERUP] = false;
 
 	matrix[Collider::Type::PLAYER][Collider::Type::WALL] = true;
 	matrix[Collider::Type::PLAYER][Collider::Type::PLAYER] = false;
@@ -23,24 +27,47 @@ ModuleCollisions::ModuleCollisions()
 	matrix[Collider::Type::PLAYER][Collider::Type::PLAYER_SHOT] = false;
 	matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_SHOT] = true;
 	matrix[Collider::Type::PLAYER][Collider::Type::POWERUP] = true;
+	matrix[Collider::Type::PLAYER][Collider::Type::WATER] = true;
 
 	matrix[Collider::Type::ENEMY][Collider::Type::WALL] = true;
 	matrix[Collider::Type::ENEMY][Collider::Type::PLAYER] = true;
 	matrix[Collider::Type::ENEMY][Collider::Type::ENEMY] = false;
 	matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
 	matrix[Collider::Type::ENEMY][Collider::Type::ENEMY_SHOT] = false;
+	matrix[Collider::Type::ENEMY][Collider::Type::POWERUP] = false;
+	matrix[Collider::Type::ENEMY][Collider::Type::WATER] = true;
 
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::WALL] = true;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::PLAYER] = false;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::ENEMY] = true;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::PLAYER_SHOT] = false;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::ENEMY_SHOT] = false;
+	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::POWERUP] = false;
+	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::WATER] = false;
 
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::WALL] = true;
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::PLAYER] = true;
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::ENEMY] = false;
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::PLAYER_SHOT] = false;
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::ENEMY_SHOT] = false;
+	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::POWERUP] = false;
+	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::WATER] = false;
+
+	matrix[Collider::Type::POWERUP][Collider::Type::WALL] = false;
+	matrix[Collider::Type::POWERUP][Collider::Type::PLAYER] = true;
+	matrix[Collider::Type::POWERUP][Collider::Type::ENEMY] = false;
+	matrix[Collider::Type::POWERUP][Collider::Type::PLAYER_SHOT] = false;
+	matrix[Collider::Type::POWERUP][Collider::Type::ENEMY_SHOT] = false;
+	matrix[Collider::Type::POWERUP][Collider::Type::POWERUP] = false;
+	matrix[Collider::Type::POWERUP][Collider::Type::WATER] = false;
+
+	matrix[Collider::Type::WATER][Collider::Type::WALL] = false;
+	matrix[Collider::Type::WATER][Collider::Type::WATER] = false;
+	matrix[Collider::Type::WATER][Collider::Type::PLAYER] = false;
+	matrix[Collider::Type::WATER][Collider::Type::ENEMY] = false;
+	matrix[Collider::Type::WATER][Collider::Type::PLAYER_SHOT] = false;
+	matrix[Collider::Type::WATER][Collider::Type::ENEMY_SHOT] = false;
+	matrix[Collider::Type::WATER][Collider::Type::POWERUP] = false;
 }
 
 // Destructor
@@ -49,7 +76,7 @@ ModuleCollisions::~ModuleCollisions()
 
 }
 
-update_status ModuleCollisions::PreUpdate()
+Update_Status ModuleCollisions::PreUpdate()
 {
 	// Remove all colliders scheduled for deletion
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
@@ -81,34 +108,34 @@ update_status ModuleCollisions::PreUpdate()
 
 			c2 = colliders[k];
 
-			if (c1->Intersects(c2->rect))
+			if (matrix[c1->type][c2->type] && c1->Intersects(c2->rect))
 			{
-				if (matrix[c1->type][c2->type] && c1->listener)
-					c1->listener->OnCollision(c1, c2);
+				for (uint i = 0; i < MAX_LISTENERS; ++i)
+					if (c1->listeners[i] != nullptr) c1->listeners[i]->OnCollision(c1, c2);
 
-				if (matrix[c2->type][c1->type] && c2->listener)
-					c2->listener->OnCollision(c2, c1);
+				for (uint i = 0; i < MAX_LISTENERS; ++i)
+					if (c2->listeners[i] != nullptr) c2->listeners[i]->OnCollision(c2, c1);
 			}
 		}
 	}
 
-	return update_status::UPDATE_CONTINUE;
+	return Update_Status::UPDATE_CONTINUE;
 }
 
-update_status ModuleCollisions::Update()
+Update_Status ModuleCollisions::Update()
 {
-	if (App->input->keys[SDL_SCANCODE_F1] == KEY_DOWN)
+	if (App->input->keys[SDL_SCANCODE_X] == KEY_DOWN)
 		debug = !debug;
 
-	return update_status::UPDATE_CONTINUE;
+	return Update_Status::UPDATE_CONTINUE;
 }
 
-update_status ModuleCollisions::PostUpdate()
+Update_Status ModuleCollisions::PostUpdate()
 {
 	if (debug)
 		DebugDraw();
 
-	return update_status::UPDATE_CONTINUE;
+	return Update_Status::UPDATE_CONTINUE;
 }
 
 void ModuleCollisions::DebugDraw()
@@ -142,6 +169,8 @@ void ModuleCollisions::DebugDraw()
 		case Collider::Type::ENEMY_SHOT: // magenta
 			App->render->DrawQuad(colliders[i]->rect, 0, 255, 255, alpha);
 			break;
+		case Collider::Type::WATER: //orange?
+			App->render->DrawQuad(colliders[i]->rect, 255, 255, 0, alpha);
 		}
 	}
 }
@@ -178,3 +207,17 @@ Collider* ModuleCollisions::AddCollider(SDL_Rect rect, Collider::Type type, Modu
 
 	return ret;
 }
+
+
+void ModuleCollisions::RemoveCollider(Collider* collider)
+{
+	for (uint i = 0; i < MAX_COLLIDERS; ++i)
+	{
+		if (colliders[i] == collider)
+		{
+			delete colliders[i];
+			colliders[i] = nullptr;
+		}
+	}
+}
+

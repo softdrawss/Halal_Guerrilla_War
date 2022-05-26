@@ -1,5 +1,6 @@
-#include "Enemy.h"
 
+#include "Enemy.h"
+#include "ModulePlayer.h"
 #include "Application.h"
 #include "ModuleCollisions.h"
 #include "ModuleParticles.h"
@@ -31,6 +32,23 @@ void Enemy::Update()
 		collider->SetPos(position.x, position.y);
 }
 
+void Enemy::Attack() {
+	if ((App->player->position.y - position.y) == 200) {
+
+	}
+	else {
+		position.y += 5;
+	}
+}
+
+void Enemy::Flee() {
+
+}
+
+void Enemy::getPlayerPosition() {
+
+}
+
 void Enemy::Draw()
 {
 	if (currentAnim != nullptr)
@@ -41,4 +59,13 @@ void Enemy::OnCollision(Collider* collider)
 {
 	App->particles->AddParticle(App->particles->explosion, position.x, position.y);
 	App->audio->PlayFx(destroyedFx);
+
+	SetToDelete();
+}
+
+void Enemy::SetToDelete()
+{
+	pendingToDelete = true;
+	if (collider != nullptr)
+		collider->pendingToDelete = true;
 }
