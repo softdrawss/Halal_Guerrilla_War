@@ -29,7 +29,7 @@ public:
 
 	// Constructor
 
-	ModuleFonts();
+	ModuleFonts(bool startEnabled);
 
 
 	// Destructor

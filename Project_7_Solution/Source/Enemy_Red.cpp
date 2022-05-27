@@ -31,32 +31,6 @@ Enemy_Red::Enemy_Red(int x, int y) : Enemy(x, y)
 }
 
 void Enemy_Red::Attack() {
-	//while (alive == true) {
-	//	if (c1 == colliderEnemy && alive == true)
-	//{
-	//	//App->particles->AddParticle(App->particles->explosion, position.x, position.y, Collider::Type::NONE, 9);
-	//	//App->particles->AddParticle(App->particles->explosion, position.x + 8, position.y + 11, Collider::Type::NONE, 14);
-	//	//App->particles->AddParticle(App->particles->explosion, position.x - 7, position.y + 12, Collider::Type::NONE, 40);
-	//	//App->particles->AddParticle(App->particles->explosion, position.x + 5, position.y - 5, Collider::Type::NONE, 28);
-	//	//App->particles->AddParticle(App->particles->explosion, position.x - 4, position.y - 4, Collider::Type::NONE, 21);
-
-	//	//App->audio->PlayFx(explosionFx);
-
-	//	//destroyed = true;
-
-	//	switch (c2->type) {
-	//	
-	//	
-	//	case(Collider::Type::PLAYER_SHOT):
-	//		if (collider->Intersects(c2->rect)) {
-	//			//currentAnimation = &death;
-	//			//currentAnimation->Update();
-	//			alive = false;
-	//		}
-	//		break;
-	//	}
-	//}
-	//}
 
 	if (delay1 >= 10) {
 		if (bulletscounter == 3) {
@@ -73,7 +47,7 @@ void Enemy_Red::Attack() {
 			else if (down == true) {
 				App->particles->enemybullet.speed.y = +1;
 				App->particles->enemybullet.speed.x = 0;
-				App->particles->AddParticle(App->particles->enemybullet, position.x, position.y, Collider::Type::ENEMY_SHOT);
+				App->particles->AddParticle(App->particles->enemybullet, position.x +4, position.y+28, Collider::Type::ENEMY_SHOT);
 			}
 			else if (right == true) {
 				App->particles->enemybullet.speed.y = 0;
@@ -93,14 +67,17 @@ void Enemy_Red::Attack() {
 			else if (downright == true) {
 				App->particles->enemybullet.speed.y = +1;
 				App->particles->enemybullet.speed.x = +1;
+				App->particles->AddParticle(App->particles->enemybullet, position.x, position.y, Collider::Type::ENEMY_SHOT);
 			}
 			else if (downleft == true) {
 				App->particles->enemybullet.speed.y = +1;
 				App->particles->enemybullet.speed.x = -1;
+				App->particles->AddParticle(App->particles->enemybullet, position.x, position.y, Collider::Type::ENEMY_SHOT);
 			}
 			else if (upleft == true) {
 				App->particles->enemybullet.speed.y = -1;
 				App->particles->enemybullet.speed.x = -1;
+				App->particles->AddParticle(App->particles->enemybullet, position.x, position.y, Collider::Type::ENEMY_SHOT);
 			}
 			delay1 = 0;
 			++bulletscounter;
@@ -140,7 +117,6 @@ void Enemy_Red::Update()
 	Attack();
 	App->particles->Update();
 	//path.Update();
-	//Enemy::Attack();
 	//position = spawnPos; //+path.GetRelativePosition();
 
 	// Call to the base class. It must be called at the end
