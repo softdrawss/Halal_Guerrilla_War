@@ -9,6 +9,7 @@
 #include "ModuleCollisions.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleEnemies.h"
+#include "ModuleFonts.h"
 
 #include "SDL/include/SDL_scancode.h"
 
@@ -306,6 +307,8 @@ bool ModulePlayer::Start()
 	collider = App->collisions->AddCollider({ position.x, position.y, 32, 64 }, Collider::Type::PLAYER, this);
 	//collider1 = App->collisions->AddSpecialCollider(250, 300, 250, Collider::Type::ATTACK, this);
 
+	char lookupTable[] = { "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ.@'?-" };
+	scoreFont = App->fonts->Load("Assets/UI _Sprites.png", lookupTable, 1);
 	return ret;
 }
 

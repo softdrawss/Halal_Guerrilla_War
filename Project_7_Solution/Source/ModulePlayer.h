@@ -81,7 +81,10 @@ public:
 	// lives of the player
 	int lives;
 	
-
+	// Font score index
+	uint score = 000;
+	int scoreFont = -1;
+	char scoreText[10] = { "\0" };
 };
 
 #endif //!__MODULE_PLAYER_H__

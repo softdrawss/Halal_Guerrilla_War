@@ -6,6 +6,7 @@
 #include "ModuleAudio.h"
 #include "ModuleCollisions.h"
 #include "ModuleEnemies.h"
+#include "ModuleFonts.h"
 
 ModuleScene::ModuleScene(bool startEnabled) : Module(startEnabled)
 {
@@ -123,37 +124,11 @@ bool ModuleScene::Start()
 	App->collisions->AddCollider({ 300, 375, 30, 25 }, Collider::Type::WATER);
 	App->collisions->AddCollider({ 300, 340, 30, 35 }, Collider::Type::WATER);
 
-	////First two columns colliders
-	//App->collisions->AddCollider({ 1375, 0, 111, 96 }, Collider::Type::WALL);
-	//App->collisions->AddCollider({ 1375, 145, 111, 96 }, Collider::Type::WALL);
 
-	////// Enemies ---
-	//App->enemies->AddEnemy(Enemy_Type::BOMB, 398, -2290);
-	//App->enemies->AddEnemy(Enemy_Type::BOMB, 500, -2290); //A partir de 500 capamunt desapareix not sure why
-	//App->enemies->AddEnemy(Enemy_Type::RED, 250, 100);
-	//App->enemies->AddEnemy(Enemy_Type::RED, 200, 200);
-	//App->enemies->AddEnemy(Enemy_Type::RED, 225, -400);
-
-	//
-
-	////// Enemies ---
-	//App->enemies->AddEnemy(Enemy_Type::BOMB, 398, -2290);
-	////App->enemies->AddEnemy(ENEMY_TYPE::BOMB, 500, -2290); //A partir de 500 capamunt desapareix not sure why
-	//App->enemies->AddEnemy(Enemy_Type::RED, 250, 200);
-	//App->enemies->AddEnemy(Enemy_Type::RED, 200, 200);
-	//App->enemies->AddEnemy(Enemy_Type::RED, 225, -400);
-	//App->enemies->AddEnemy(Enemy_Type::BOMB, 398, -2290);
-	////App->enemies->AddEnemy(ENEMY_TYPE::BOMB, 500, -2290); A partir de 500 capamunt desapareix not sure why
-	//App->enemies->AddEnemy(Enemy_Type::RED, 250, 200);
-	//App->enemies->AddEnemy(Enemy_Type::RED, 200, 200);
-	//App->enemies->AddEnemy(Enemy_Type::RED, 225, -400);
-
-	
-
-	//// Enemies ---
+	//// Enemies
 	//App->enemies->AddEnemy(Enemy_Type::BOMB, 398, -2290);
 	//App->enemies->AddEnemy(ENEMY_TYPE::BOMB, 500, -2290); //A partir de 500 capamunt desapareix not sure why
-	App->enemies->AddEnemy(Enemy_Type::RED, 250, 200);
+	App->enemies->AddEnemy(Enemy_Type::RED, 220, 200);
 
 
 	App->enemies->AddEnemy(Enemy_Type::TRUCK, 250, 200);
@@ -163,9 +138,7 @@ bool ModuleScene::Start()
 	App->player->Enable();
 	App->enemies->Enable();
 	App->collisions->Enable();
-
-
-
+	App->fonts->Enable();
 	return ret;
 }
 
@@ -198,7 +171,7 @@ bool ModuleScene::CleanUp()
 	App->player->Disable();
 	App->enemies->Disable();
 	App->collisions->Disable();
-
+	App->fonts->Disable();
 
 	return true;
 }
