@@ -28,7 +28,9 @@ class ModuleFonts : public Module
 public:
 
 	// Constructor
-	ModuleFonts(bool isEnabled);
+
+	ModuleFonts();
+
 
 	// Destructor
 	~ModuleFonts();
@@ -54,3 +56,4 @@ private:
 
 
 #endif // __ModuleFonts_H__
+
