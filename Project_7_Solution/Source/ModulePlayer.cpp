@@ -11,6 +11,7 @@
 #include "ModuleEnemies.h"
 #include "ModuleFonts.h"
 
+#include <stdio.h>
 #include "SDL/include/SDL_scancode.h"
 
 
@@ -307,8 +308,10 @@ bool ModulePlayer::Start()
 	collider = App->collisions->AddCollider({ position.x, position.y, 32, 64 }, Collider::Type::PLAYER, this);
 	//collider1 = App->collisions->AddSpecialCollider(250, 300, 250, Collider::Type::ATTACK, this);
 
-	char lookupTable[] = { "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ.@'?-" };
-	scoreFont = App->fonts->Load("Assets/UI _Sprites.png", lookupTable, 1);
+	/*char lookupTable[] = { "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ.@'?&-" };
+	scoreFont = App->fonts->Load("r", "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ.@'?&-", 1);*/
+	char lookupTable[] = { "!  ,_./0123456789$;<&?abcdefghijklmnopqrstuvwxyz" };
+	scoreFont = App->fonts->Load("Assets/Fonts/rtype_font.png", "! @,_./0123456789$;<&?abcdefghijklmnopqrstuvwxyz", 1);
 	return ret;
 }
 
@@ -1124,6 +1127,15 @@ Update_Status ModulePlayer::PostUpdate()
 		}
 
 	}
+
+	// Draw UI (score) --------------------------------------
+	//sprintf_s(scoreText, 10, "%7d", score);
+
+	// TODO 3: Blit the text of the score in at the bottom of the screen
+	//App->fonts->BlitText(200, 300, scoreFont, scoreText);
+
+	/*App->fonts->BlitText(220, 200, scoreFont, "FONT");*/
+	App->fonts->BlitText(300, 100, scoreFont, "this is just a font test");
 
 	return Update_Status::UPDATE_CONTINUE;
 }

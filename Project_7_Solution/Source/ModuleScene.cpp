@@ -6,7 +6,6 @@
 #include "ModuleAudio.h"
 #include "ModuleCollisions.h"
 #include "ModuleEnemies.h"
-#include "ModuleFonts.h"
 
 ModuleScene::ModuleScene(bool startEnabled) : Module(startEnabled)
 {
@@ -118,27 +117,31 @@ bool ModuleScene::Start()
 
 
 	// Water
-	App->collisions->AddCollider({ 200, 305, 100,105 }, Collider::Type::WATER);
-	App->collisions->AddCollider({ 175, 375, 25,105 }, Collider::Type::WATER);
-	App->collisions->AddCollider({ 500, -3354, 500, 442 }, Collider::Type::WATER);
-	App->collisions->AddCollider({ 300, 375, 30, 25 }, Collider::Type::WATER);
+	App->collisions->AddCollider({ 200, 305, 100,900 }, Collider::Type::WATER);
+	App->collisions->AddCollider({ 60, 475, 40,500 }, Collider::Type::WATER);
+	App->collisions->AddCollider({ 100, 450, 50,500 }, Collider::Type::WATER);
+	App->collisions->AddCollider({ 150, 400, 25, 150 }, Collider::Type::WATER);
+	App->collisions->AddCollider({ 175, 375, 25,500 }, Collider::Type::WATER);
+	App->collisions->AddCollider({ 300, 375, 30, 500 }, Collider::Type::WATER);
 	App->collisions->AddCollider({ 300, 340, 30, 35 }, Collider::Type::WATER);
+	App->collisions->AddCollider({ 330, 400, 20, 150 }, Collider::Type::WATER);
+	App->collisions->AddCollider({ 350, 450, 60, 150 }, Collider::Type::WATER);
+	App->collisions->AddCollider({ 500, -3354, 500, 900 }, Collider::Type::WATER);
 
 
 	//// Enemies
-	//App->enemies->AddEnemy(Enemy_Type::BOMB, 398, -2290);
-	//App->enemies->AddEnemy(ENEMY_TYPE::BOMB, 500, -2290); //A partir de 500 capamunt desapareix not sure why
+	App->enemies->AddEnemy(Enemy_Type::BOMB, 398, -2290);
+	App->enemies->AddEnemy(Enemy_Type::BOMB, 500, -2290); //A partir de 500 capamunt desapareix not sure why
 	App->enemies->AddEnemy(Enemy_Type::RED, 220, 200);
 
 
-	App->enemies->AddEnemy(Enemy_Type::TRUCK, 250, 200);
+	//App->enemies->AddEnemy(Enemy_Type::TRUCK, 250, 200);
 
 
 	//Enable the necessary modules
 	App->player->Enable();
 	App->enemies->Enable();
 	App->collisions->Enable();
-	App->fonts->Enable();
 	return ret;
 }
 
@@ -171,7 +174,7 @@ bool ModuleScene::CleanUp()
 	App->player->Disable();
 	App->enemies->Disable();
 	App->collisions->Disable();
-	App->fonts->Disable();
+
 
 	return true;
 }

@@ -42,7 +42,7 @@ void Enemy_Red::Attack() {
 			if (up == true) {
 				App->particles->enemybullet.speed.y = -1;
 				App->particles->enemybullet.speed.x = 0;
-				App->particles->AddParticle(App->particles->enemybullet, position.x, position.y, Collider::Type::ENEMY_SHOT);
+				App->particles->AddParticle(App->particles->enemybullet, position.x+10, position.y, Collider::Type::ENEMY_SHOT);
 			}
 			else if (down == true) {
 				App->particles->enemybullet.speed.y = +1;
@@ -52,27 +52,27 @@ void Enemy_Red::Attack() {
 			else if (right == true) {
 				App->particles->enemybullet.speed.y = 0;
 				App->particles->enemybullet.speed.x = +1;
-				App->particles->AddParticle(App->particles->enemybullet, position.x, position.y, Collider::Type::ENEMY_SHOT);
+				App->particles->AddParticle(App->particles->enemybullet, position.x+30, position.y+10, Collider::Type::ENEMY_SHOT);
 			}
 			else if (left == true) {
 				App->particles->enemybullet.speed.y = 0;
 				App->particles->enemybullet.speed.x = -1;
-				App->particles->AddParticle(App->particles->enemybullet, position.x, position.y, Collider::Type::ENEMY_SHOT);
+				App->particles->AddParticle(App->particles->enemybullet, position.x, position.y+8, Collider::Type::ENEMY_SHOT);
 			}
 			else if (upright == true) {
 				App->particles->enemybullet.speed.y = -1;
 				App->particles->enemybullet.speed.x = +1;
-				App->particles->AddParticle(App->particles->enemybullet, position.x, position.y, Collider::Type::ENEMY_SHOT);
+				App->particles->AddParticle(App->particles->enemybullet, position.x+25, position.y, Collider::Type::ENEMY_SHOT);
 			}
 			else if (downright == true) {
 				App->particles->enemybullet.speed.y = +1;
 				App->particles->enemybullet.speed.x = +1;
-				App->particles->AddParticle(App->particles->enemybullet, position.x, position.y, Collider::Type::ENEMY_SHOT);
+				App->particles->AddParticle(App->particles->enemybullet, position.x+20, position.y+21, Collider::Type::ENEMY_SHOT);
 			}
 			else if (downleft == true) {
 				App->particles->enemybullet.speed.y = +1;
 				App->particles->enemybullet.speed.x = -1;
-				App->particles->AddParticle(App->particles->enemybullet, position.x, position.y, Collider::Type::ENEMY_SHOT);
+				App->particles->AddParticle(App->particles->enemybullet, position.x, position.y+21, Collider::Type::ENEMY_SHOT);
 			}
 			else if (upleft == true) {
 				App->particles->enemybullet.speed.y = -1;
