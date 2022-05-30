@@ -132,10 +132,15 @@ bool ModuleScene::Start()
 	//// Enemies
 	App->enemies->AddEnemy(Enemy_Type::BOMB, 398, -2290);
 	App->enemies->AddEnemy(Enemy_Type::BOMB, 500, -2290); //A partir de 500 capamunt desapareix not sure why
-	App->enemies->AddEnemy(Enemy_Type::RED, 220, 200);
-
-
-	//App->enemies->AddEnemy(Enemy_Type::TRUCK, 250, 200);
+	App->enemies->AddEnemy(Enemy_Type::RED, 220, 220);
+	App->enemies->AddEnemy(Enemy_Type::RED, 220, 0);
+	//App->enemies->AddEnemy(Enemy_Type::RED, 100, 100);
+	//App->enemies->AddEnemy(Enemy_Type::RED, 0, 100);
+	//App->enemies->AddEnemy(Enemy_Type::RED, 220, -150);
+	//App->enemies->AddEnemy(Enemy_Type::RED, -220, 100);
+	//App->enemies->AddEnemy(Enemy_Type::RED, -420, -420);
+	//App->enemies->AddEnemy(Enemy_Type::RED, -220, 100);
+	//App->enemies->AddEnemy(Enemy_Type::TRUCK, 220, 400);
 
 
 	//Enable the necessary modules

@@ -169,9 +169,11 @@ void Enemy::Draw()
 void Enemy::OnCollision(Collider* collider)
 {
 	App->particles->AddParticle(App->particles->explosion, position.x, position.y);
-	App->audio->PlayFx(destroyedFx);
-
+	int destroyedFx = App->audio->LoadFx("Assets/gwar-198.wav");
+	App->audio->PlayFx(destroyedFx, 0);
+	
 	SetToDelete();
+	App->player->score++;
 }
 
 void Enemy::SetToDelete()

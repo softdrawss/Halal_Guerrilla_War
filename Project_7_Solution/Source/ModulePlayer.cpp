@@ -288,7 +288,7 @@ bool ModulePlayer::Start()
 	normalweapon = true;
 	heavyweapon = false;
 	dead = false;
-	lives = 3;
+	lives = 2;
 
 	texture = App->textures->Load("Assets/Guerrilla War Player 1 Spritesheet OK.png");
 	weapon_texture = App->textures->Load("Assets/Guerrilla War Weapon Spritesheet1.png");
@@ -308,11 +308,16 @@ bool ModulePlayer::Start()
 	collider = App->collisions->AddCollider({ position.x, position.y, 32, 64 }, Collider::Type::PLAYER, this);
 	//collider1 = App->collisions->AddSpecialCollider(250, 300, 250, Collider::Type::ATTACK, this);
 
-	/*char lookupTable[] = { "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ.@'?&-" };
-	scoreFont = App->fonts->Load("r", "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ.@'?&-", 1);*/
-	char lookupTable[] = { "!  ,_./0123456789$;<&?abcdefghijklmnopqrstuvwxyz" };
-	scoreFont = App->fonts->Load("Assets/Fonts/rtype_font.png", "! @,_./0123456789$;<&?abcdefghijklmnopqrstuvwxyz", 1);
+	// Font UI
+	char lookupTable[] = { "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ.@'?&- " };
+	scoreFont = App->fonts->Load("Assets/ui_font5.png", lookupTable, 1);
+	
+	// Font Images for Weapons and Granades
+	char livesTable[] = { "BG 1" };
+	weaponsFont = App->fonts->Load("Assets/ui_font4.png", livesTable, 1);
+
 	return ret;
+
 }
 
 Update_Status ModulePlayer::Update()
@@ -1073,6 +1078,8 @@ Update_Status ModulePlayer::Update()
 
 	//if dead
 	if (dead == true) {
+		int deathSound = App->audio->LoadFx("Assets/gwar-195.wav");
+		App->audio->PlayFx(deathSound, 0);
 		App->fade->FadeToBlack((Module*)App->scene, (Module*)App->sceneIntro, 60);
 	}
 
@@ -1083,7 +1090,7 @@ Update_Status ModulePlayer::Update()
 	currentAnimationlegs->Update();
 	currentAnimationtorso->Update();
 	weapon->Update();
-
+	 
 	return Update_Status::UPDATE_CONTINUE;
 }
 
@@ -1129,19 +1136,43 @@ Update_Status ModulePlayer::PostUpdate()
 	}
 
 	// Draw UI (score) --------------------------------------
-	//sprintf_s(scoreText, 10, "%7d", score);
+	sprintf_s(scoreText, 10, "%d", score);
+	//sprintf_s(livesText, 10, "%d", lives);
+	sprintf_s(granadesText, 10, "%d", granades);
+	sprintf_s(bulletsText, 10, "%d", bullets);
 
-	// TODO 3: Blit the text of the score in at the bottom of the screen
-	//App->fonts->BlitText(200, 300, scoreFont, scoreText);
+	// Text of the score in at the bottom of the screen
+	// Highscore of the level (if you kill all the enemies and save the prisoners)
+	App->fonts->BlitText(150, 75, scoreFont, "HI");
+	App->fonts->BlitText(250, 75, scoreFont, "30000");
 
-	/*App->fonts->BlitText(220, 200, scoreFont, "FONT");*/
-	App->fonts->BlitText(300, 100, scoreFont, "this is just a font test");
+	// Player 1 --> Available
+	App->fonts->BlitText(100, 100, scoreFont, "1UP");
+	App->fonts->BlitText(140, 125, scoreFont, scoreText);
+
+	// Player 2 --> Not available
+	App->fonts->BlitText(300, 100, scoreFont, "2UP");
+	App->fonts->BlitText(340, 125, scoreFont, "0");
+
+	// Weapons
+	App->fonts->BlitText(50, 150, weaponsFont, "G");
+	App->fonts->BlitText(60, 170, scoreFont, granadesText);
+
+	App->fonts->BlitText(50, 180, weaponsFont, "B");
+	App->fonts->BlitText(60, 200, scoreFont, bulletsText);
+
+	App->fonts->BlitText(60, 200, scoreFont, bulletsText);
+
+	// Lives
+	App->fonts->BlitText(60, 450, weaponsFont, "1");
+	App->fonts->BlitText(68, 450, weaponsFont, "1");
 
 	return Update_Status::UPDATE_CONTINUE;
 }
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
+	
 	if (c1 == collider && dead == false)
 	{
 
@@ -1247,11 +1278,12 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		case(Collider::Type::ENEMY_SHOT):
 			if (collider->Intersects(c2->rect)) {
 				if (collider->Intersects(c2->rect)) {
-					if (lives == 1) {
+					lives--;
+					if (lives == 0) {
 						dead = true;
+						score = 0;
 					}
 					else {
-						--lives;
 					}
 				}
 			}
@@ -1263,15 +1295,17 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			}
 		case(Collider::Type::ENEMY):
 			if (collider->Intersects(c2->rect)) {
-				if (lives == 1) {
+				lives--;
+				if (lives == 0) {
 					dead = true;
 				}
 				else {
-					--lives;
 				}
 			}
 			break;
 		}
-
+		
 	}
+	
+	
 }

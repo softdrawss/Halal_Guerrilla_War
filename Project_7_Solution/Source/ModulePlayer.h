@@ -79,12 +79,20 @@ public:
 	bool heavyweapon;
 
 	// lives of the player
-	int lives;
+	int lives = 2;
 	
 	// Font score index
 	uint score = 000;
+	int granades = 0;
+	int bullets = 0; 
+
 	int scoreFont = -1;
-	char scoreText[30] = { "\0" };
+	int weaponsFont = -1;
+	int playerFont = -1;
+	char scoreText[10] = { "\0" };
+	char livesText[10] = { "\0" };
+	char granadesText[10] = { "\0" };
+	char bulletsText[10] = { "\0" };
 };
 
 #endif //!__MODULE_PLAYER_H__
