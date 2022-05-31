@@ -2,7 +2,6 @@
 #define __ENEMY_BROWNSHIP_H__
 
 #include "Enemy.h"
-#include "Path.h"
 
 class Enemy_Truck : public Enemy
 {
@@ -17,10 +16,7 @@ public:
 
 
 private:
-	// A set of steps that define the position in the screen
-	// And an animation for each step
-	Path path;
-
+	
 	bool alive = true;
 
 	// This enemy has one sprite and one frame

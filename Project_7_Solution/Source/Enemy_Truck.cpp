@@ -5,7 +5,7 @@
 
 Enemy_Truck::Enemy_Truck(int x, int y) : Enemy(x, y, movingbehaviour)
 {
-	appear.PushBack({ 2,3,89,55 });
+	appear.PushBack({ 2,3,100,200 });
 	
 	redcurrentAnim = &appear;
 
@@ -16,8 +16,6 @@ Enemy_Truck::Enemy_Truck(int x, int y) : Enemy(x, y, movingbehaviour)
 
 void Enemy_Truck::Update()
 {
-	path.Update();
-	position -= spawnPos; //+path.GetRelativePosition();
 
 	// Call to the base class. It must be called at the end
 	// It will update the collider depending on the position

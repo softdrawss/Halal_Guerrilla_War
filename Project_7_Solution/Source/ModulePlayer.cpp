@@ -9,7 +9,9 @@
 #include "ModuleCollisions.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleEnemies.h"
+#include "ModuleFonts.h"
 
+#include <stdio.h>
 #include "SDL/include/SDL_scancode.h"
 
 
@@ -194,6 +196,12 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	legsdownleft.PushBack({ 33,338,32,32 });
 	legsdownleft.speed = 0.1f;
 
+	//animation water
+	water.PushBack({ 363, 23, 32, 32 });
+	water.PushBack({ 396, 23, 32, 32 });
+	water.PushBack({ 431, 23, 32, 32 });
+	water.PushBack({ 460, 23, 32, 32 });
+
 	//normalweapon up
 	normalweapon_up.PushBack({ 17,27,5,16 });
 	//weaponup.PushBack({ 18,40,13,24 });
@@ -306,7 +314,16 @@ bool ModulePlayer::Start()
 	collider = App->collisions->AddCollider({ position.x, position.y, 32, 64 }, Collider::Type::PLAYER, this);
 
 
+	// Font UI
+	char lookupTable[] = { "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ.@'?&- " };
+	scoreFont = App->fonts->Load("Assets/ui_font5.png", lookupTable, 1);
+	
+	// Font Images for Weapons and Granades
+	char livesTable[] = { "BG 1" };
+	weaponsFont = App->fonts->Load("Assets/ui_font4.png", livesTable, 1);
+
 	return ret;
+
 }
 
 Update_Status ModulePlayer::Update()
@@ -1054,6 +1071,11 @@ Update_Status ModulePlayer::Update()
 		}
 	}
 
+	//instawin
+	if (App->input->keys[SDL_SCANCODE_F1] == KEY_DOWN) {
+		score = 30000;
+	}
+
 	//instakill
 	if (App->input->keys[SDL_SCANCODE_F2] == KEY_DOWN) {
 		dead = true;
@@ -1067,9 +1089,17 @@ Update_Status ModulePlayer::Update()
 
 	//if dead
 	if (dead == true) {
+		score = 0;
+		int deathSound = App->audio->LoadFx("Assets/gwar-195.wav");
+		App->audio->PlayFx(deathSound, 0);
+		
 		App->fade->FadeToBlack((Module*)App->scene, (Module*)App->sceneIntro, 60);
 	}
 
+	if (lives == 0) {
+		dead = true;
+	}
+	
 	//set collider position
 	collider->SetPos(position.x, position.y);
 
@@ -1077,7 +1107,7 @@ Update_Status ModulePlayer::Update()
 	currentAnimationlegs->Update();
 	currentAnimationtorso->Update();
 	weapon->Update();
-
+	 
 	return Update_Status::UPDATE_CONTINUE;
 }
 
@@ -1122,11 +1152,43 @@ Update_Status ModulePlayer::PostUpdate()
 
 	}
 
+	// Draw UI (score) --------------------------------------
+	sprintf_s(scoreText, 10, "%d", score);
+	sprintf_s(livesText, 10, "%d", lives);
+	sprintf_s(granadesText, 10, "%d", granades);
+	sprintf_s(bulletsText, 10, "%d", bullets);
+
+	// Text of the score in at the bottom of the screen
+	// Highscore of the level (if you kill all the enemies and save the prisoners)
+	App->fonts->BlitText(150, 75, scoreFont, "HI");
+	App->fonts->BlitText(250, 75, scoreFont, "30000");
+
+	// Player 1 --> Available
+	App->fonts->BlitText(100, 100, scoreFont, "1 UP");
+	App->fonts->BlitText(140, 125, scoreFont, scoreText);
+
+	// Player 2 --> Not available
+	App->fonts->BlitText(300, 100, scoreFont, "2 UP");
+	App->fonts->BlitText(340, 125, scoreFont, "0");
+
+	// Weapons
+	App->fonts->BlitText(50, 150, weaponsFont, "G");
+	App->fonts->BlitText(60, 170, scoreFont, granadesText);
+
+	App->fonts->BlitText(50, 180, weaponsFont, "B");
+	App->fonts->BlitText(60, 200, scoreFont, bulletsText);
+
+
+	// Lives
+	App->fonts->BlitText(60, 450, weaponsFont, "1");
+	App->fonts->BlitText(68, 450, weaponsFont, "1");
+	App->fonts->BlitText(60, 475, scoreFont, livesText);
 	return Update_Status::UPDATE_CONTINUE;
 }
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
+	
 	if (c1 == collider && dead == false)
 	{
 
@@ -1232,11 +1294,11 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		case(Collider::Type::ENEMY_SHOT):
 			if (collider->Intersects(c2->rect)) {
 				if (collider->Intersects(c2->rect)) {
-					if (lives == 1) {
-						dead = true;
-					}
-					else {
-						--lives;
+					lives--;
+					//App->fonts->BlitText(60 + 8 * (lives), 450, scoreFont, " ");
+					if (lives == 0) {
+						dead == true;
+						score = 0;
 					}
 				}
 			}
@@ -1248,15 +1310,20 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			}
 		case(Collider::Type::ENEMY):
 			if (collider->Intersects(c2->rect)) {
-				if (lives == 1) {
+				lives--;
+				//App->fonts->BlitText(60 + 8 * (lives), 450, scoreFont, " ");
+				if (lives == 0) {
 					dead = true;
-				}
-				else {
-					--lives;
+					score = 0;
 				}
 			}
 			break;
-		}
-
+		case(Collider::Type::WATER):
+			if (collider->Intersects(c2->rect)) {
+				waterP = true;
+			}
+		}	
 	}
+	
+	
 }

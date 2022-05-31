@@ -196,8 +196,6 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 		if (enemies[i] != nullptr && enemies[i]->GetCollider() == c1)
 		{
 			enemies[i]->OnCollision(c2); //Notify the enemy of a collision
-			uint deathEnemy = App->audio->LoadFx("Assets/gwar-198.wav");
-			App->audio->PlayFx(deathEnemy, 0);
 			delete enemies[i];
 			enemies[i] = nullptr;
 			break;
