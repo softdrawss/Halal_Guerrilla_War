@@ -28,8 +28,8 @@ public:
 	virtual void Draw();
 
 	//virtual void Attack();
-	void Attack();
-	void Attackdown();
+	virtual void Attack();
+	virtual void Attackdown();
 
 
 	//function to know ehre is the player so it can face it
@@ -77,12 +77,17 @@ public:
 
 	bool ismoving;
 
+	//booleans for dead enemiies
+	bool dead;
+	int deathcounter;
+
 protected:
 	// A ptr to the current animation
 	Animation* redcurrentAnim = nullptr;
 	Animation* greencurrentAnim = nullptr;
 	Animation* greenlegscurrentAnim = nullptr;
 	Animation* greentorsocurrentAnim = nullptr;
+	Animation* currentdeathanim = nullptr;
 
 
 	// The enemy's collider

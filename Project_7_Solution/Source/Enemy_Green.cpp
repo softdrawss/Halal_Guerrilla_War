@@ -9,6 +9,7 @@
 #include "Enemy.h"
 #include "Application.h"
 #include "ModuleCollisions.h"
+#include "ModuleAudio.h"
 
 Enemy_Green::Enemy_Green(int x, int y, int movingbehaviour) : Enemy(x, y, movingbehaviour)
 {
@@ -59,6 +60,24 @@ Enemy_Green::Enemy_Green(int x, int y, int movingbehaviour) : Enemy(x, y, moving
 	pathup.PushBack({ 0.0f, -1.5f }, 100, &bEwalkup);
 	pathdown.PushBack({ 0.0f, 1.5f }, 100, &bEwalkdown);
 
+	//death anim
+	deathanim.PushBack({ 240,384,32,64 });
+	deathanim.PushBack({ 272,384,32,64 });
+	deathanim.PushBack({ 306,384,32,64 });
+	deathanim.PushBack({ 336,384,32,64 });
+	deathanim.PushBack({ 367,384,32,64 });
+	deathanim.PushBack({ 396,384,32,64 });
+	deathanim.PushBack({ 427,384,32,64 });
+	deathanim.PushBack({ 461,384,32,64 });
+	deathanim.PushBack({ 495,384,32,64 });
+	deathanim.PushBack({ 528,384,32,64 });
+	deathanim.PushBack({ 560,384,32,64 });
+	deathanim.PushBack({ 592,384,32,64 });
+	deathanim.PushBack({ 624,384,32,64 });
+	deathanim.speed = 0.2f;
+	deathanim.loop = false;
+
+
 	ismoving = false;
 	
 	
@@ -66,6 +85,8 @@ Enemy_Green::Enemy_Green(int x, int y, int movingbehaviour) : Enemy(x, y, moving
 	delay1 = bulletscounter = 0;
 	jajabool = false;
 	reachendpath = false;
+	dead = false;
+	deathcounter = 0;
 
 
 	collider = App->collisions->AddCollider({ 0, 0, 24, 24 }, Collider::Type::ENEMY, (Module*)App->enemies);
@@ -73,7 +94,15 @@ Enemy_Green::Enemy_Green(int x, int y, int movingbehaviour) : Enemy(x, y, moving
 
 void Enemy_Green::Update()
 {
-	if (movingbehaviour == 0) {
+
+	if (dead == true) {
+		if (deathcounter >= 70) {
+			SetToDelete();
+		}
+		currentdeathanim = &deathanim;
+		++deathcounter;
+	}
+	else if (movingbehaviour == 0) {
 		dontmove();
 	}
 	else if (movingbehaviour == 1) {
@@ -150,4 +179,11 @@ void Enemy_Green::dontmove() {
 	Attack();
 	App->particles->Update();
 	
+}
+
+void Enemy_Green::OnCollision(Collider* collider){
+	dead = true;
+	int destroyedFx = App->audio->LoadFx("Assets/gwar-198.wav");
+	App->audio->PlayFx(destroyedFx, 0);
+	App->player->score += 100;
 }

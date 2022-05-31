@@ -62,7 +62,10 @@ void Enemy::Update()
 	if (greentorsocurrentAnim != nullptr) {
 		greentorsocurrentAnim->Update();
 	}
-		
+
+	if (currentdeathanim != nullptr) {
+		currentdeathanim->Update();
+	}
 
 	if (collider != nullptr)
 		collider->SetPos(position.x, position.y);
@@ -238,27 +241,30 @@ void Enemy::Attackdown() {
 
 void Enemy::Draw()
 {
-	if (redcurrentAnim != nullptr) {
+	if (redcurrentAnim != nullptr && dead == false) {
 		App->render->Blit(texture, position.x, position.y, &(redcurrentAnim->GetCurrentFrame()));
 	}
 
-	if (greencurrentAnim != nullptr && ismoving == false) {
+	if (greencurrentAnim != nullptr && ismoving == false && dead == false) {
 		App->render->Blit(texture, position.x, position.y, &(greencurrentAnim->GetCurrentFrame()));
 	}
 
-	if (greenlegscurrentAnim != nullptr && ismoving == true) {
+	if (greenlegscurrentAnim != nullptr && ismoving == true && dead == false) {
 		App->render->Blit(texture, position.x, position.y +30, &(greenlegscurrentAnim->GetCurrentFrame()));
 	}
 
-	if (greentorsocurrentAnim != nullptr && ismoving == true) {
+	if (greentorsocurrentAnim != nullptr && ismoving == true && dead == false) {
 		App->render->Blit(texture, position.x, position.y, &(greentorsocurrentAnim->GetCurrentFrame()));
+	}
+
+	if (currentdeathanim != nullptr && dead == true) {
+		App->render->Blit(texture, position.x, position.y, &(currentdeathanim->GetCurrentFrame()));
 	}
 		
 }
 
 void Enemy::OnCollision(Collider* collider)
 {
-	App->particles->AddParticle(App->particles->explosion, position.x, position.y);
 	int destroyedFx = App->audio->LoadFx("Assets/gwar-198.wav");
 	App->audio->PlayFx(destroyedFx, 0);
 	

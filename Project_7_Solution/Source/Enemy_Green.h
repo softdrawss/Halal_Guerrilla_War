@@ -18,6 +18,7 @@ public:
 	//functions for the movement behaviours
 	void godownshootgoup();
 	void dontmove();
+	void OnCollision(Collider* collider)override;
 
 private:
 	// A set of steps that define the position in the screen
@@ -35,6 +36,7 @@ private:
 	Animation Eup, Edown, Eleft, Eright, Eupleft, Eupright, Edownleft, Edownright;
 	Animation uEwalkup, uEwalkdown, uEwalkleft, uEwalkright, uEwalkupleft, uEwalkupright, uEwalkdownleft, uEwalkdownright;
 	Animation bEwalkup, bEwalkdown, bEwalkleft, bEwalkright, bEwalkupleft, bEwalkupright, bEwalkdownleft, bEwalkdownright;
+	Animation deathanim, iddledeathanim;
 
 };
 

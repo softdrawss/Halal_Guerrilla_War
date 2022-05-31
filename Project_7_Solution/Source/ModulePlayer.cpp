@@ -276,6 +276,22 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	//heavyweapon downleft shot
 	heavyweapon_downleft_shot.PushBack({ 189,126,33,32 });
 
+	//pushbacks for the player death animations
+
+	deathanim.PushBack({ 354,209,32,64 });
+	deathanim.PushBack({ 388,209,32,64 });
+	deathanim.PushBack({ 420,209,32,64 });
+	deathanim.PushBack({ 451,209,32,64 });
+	deathanim.PushBack({ 480,209,32,64 });
+	deathanim.PushBack({ 351,272,32,64 });
+	deathanim.PushBack({ 382,272,32,64 });
+	deathanim.PushBack({ 447,272,32,64 });
+	deathanim.PushBack({ 479,272,32,64 });
+	deathanim.speed = 0.1f;
+	deathanim.loop = false;
+
+	iddledeathanim.PushBack({ 354,209,32,64 });
+
 }
 
 ModulePlayer::~ModulePlayer()
@@ -295,11 +311,13 @@ bool ModulePlayer::Start()
 	heavyweapon = false;
 	dead = false;
 	lives = 3;
+	deathcounter = 0;
 
 	texture = App->textures->Load("Assets/Guerrilla War Player 1 Spritesheet OK.png");
 	weapon_texture = App->textures->Load("Assets/Guerrilla War Weapon Spritesheet1.png");
 	currentAnimationlegs = &legsup;
 	currentAnimationtorso = &torsoup;
+	currentdeathanim = &iddledeathanim;
 	weapon = &normalweapon_up;
 	faceu = true;
 	faced = false;
@@ -1090,10 +1108,14 @@ Update_Status ModulePlayer::Update()
 	//if dead
 	if (dead == true) {
 		score = 0;
-		int deathSound = App->audio->LoadFx("Assets/gwar-195.wav");
-		App->audio->PlayFx(deathSound, 0);
-		
-		App->fade->FadeToBlack((Module*)App->scene, (Module*)App->sceneIntro, 60);
+		if (deathcounter >= 100) {
+			int deathSound = App->audio->LoadFx("Assets/gwar-195.wav");
+			App->audio->PlayFx(deathSound, 0);
+			//Start();
+			App->fade->FadeToBlack((Module*)App->scene, (Module*)App->sceneIntro, 60);
+		}
+		currentdeathanim = &deathanim;
+		++deathcounter;
 	}
 
 	if (lives == 0) {
@@ -1103,9 +1125,10 @@ Update_Status ModulePlayer::Update()
 	//set collider position
 	collider->SetPos(position.x, position.y);
 
-	//update the animations of the weapon, torso and legs
+	//update the animations of the weapon, torso and legs adn death
 	currentAnimationlegs->Update();
 	currentAnimationtorso->Update();
+	currentdeathanim->Update();
 	weapon->Update();
 	 
 	return Update_Status::UPDATE_CONTINUE;
@@ -1149,7 +1172,12 @@ Update_Status ModulePlayer::PostUpdate()
 		else if (facer == true) {
 			App->render->Blit(weapon_texture, position.x + 8, position.y + 22, &rect3);
 		}
+	}
 
+	//deth anim
+	if (dead == true) {
+		SDL_Rect rect4 = currentdeathanim->GetCurrentFrame();
+		App->render->Blit(texture, position.x, position.y, &rect4);
 	}
 
 	// Draw UI (score) --------------------------------------

@@ -22,68 +22,8 @@ Enemy_Red::Enemy_Red(int x, int y, int movingbehaviour) : Enemy(x, y, movingbeha
 	//put collider
 	collider = App->collisions->AddCollider({ 0, 0, 24, 24 }, Collider::Type::ENEMY, (Module*)App->enemies);
 
-
-	delay1 = bulletscounter = 0;
-
 }
 
-void Enemy_Red::Attack() {
-
-	if (delay1 >= 10) {
-		if (bulletscounter == 3) {
-			bulletscounter = 0;
-			delay1 = -60;
-		}
-		else {
-
-			if (up == true) {
-				App->particles->enemybullet.speed.y = -1;
-				App->particles->enemybullet.speed.x = 0;
-				App->particles->AddParticle(App->particles->enemybullet, position.x+10, position.y, Collider::Type::ENEMY_SHOT);
-			}
-			else if (down == true) {
-				App->particles->enemybullet.speed.y = +1;
-				App->particles->enemybullet.speed.x = 0;
-				App->particles->AddParticle(App->particles->enemybullet, position.x +4, position.y+28, Collider::Type::ENEMY_SHOT);
-			}
-			else if (right == true) {
-				App->particles->enemybullet.speed.y = 0;
-				App->particles->enemybullet.speed.x = +1;
-				App->particles->AddParticle(App->particles->enemybullet, position.x+30, position.y+10, Collider::Type::ENEMY_SHOT);
-			}
-			else if (left == true) {
-				App->particles->enemybullet.speed.y = 0;
-				App->particles->enemybullet.speed.x = -1;
-				App->particles->AddParticle(App->particles->enemybullet, position.x, position.y+8, Collider::Type::ENEMY_SHOT);
-			}
-			else if (upright == true) {
-				App->particles->enemybullet.speed.y = -1;
-				App->particles->enemybullet.speed.x = +1;
-				App->particles->AddParticle(App->particles->enemybullet, position.x+25, position.y, Collider::Type::ENEMY_SHOT);
-			}
-			else if (downright == true) {
-				App->particles->enemybullet.speed.y = +1;
-				App->particles->enemybullet.speed.x = +1;
-				App->particles->AddParticle(App->particles->enemybullet, position.x+20, position.y+21, Collider::Type::ENEMY_SHOT);
-			}
-			else if (downleft == true) {
-				App->particles->enemybullet.speed.y = +1;
-				App->particles->enemybullet.speed.x = -1;
-				App->particles->AddParticle(App->particles->enemybullet, position.x, position.y+21, Collider::Type::ENEMY_SHOT);
-			}
-			else if (upleft == true) {
-				App->particles->enemybullet.speed.y = -1;
-				App->particles->enemybullet.speed.x = -1;
-				App->particles->AddParticle(App->particles->enemybullet, position.x, position.y, Collider::Type::ENEMY_SHOT);
-			}
-			delay1 = 0;
-			++bulletscounter;
-		}
-		
-	}
-	++delay1;
-
-}
 
 void Enemy_Red::Update()
 {

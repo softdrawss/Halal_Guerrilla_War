@@ -50,6 +50,7 @@ public:
 	Animation* currentAnimationtorso = nullptr;
 	Animation* currentAnimationlegs = nullptr;
 	Animation* weapon = nullptr;
+	Animation* currentdeathanim = nullptr;
 
 	// all animations of movement
 
@@ -67,12 +68,15 @@ public:
 
 	Animation water;
 
+	Animation deathanim, iddledeathanim;
+
 	// The player's collider
 	Collider* collider = nullptr;
 	Collider* collider1 = nullptr;
 
-	// A flag to detect when the player has been killed
+	// A flag to detect when the player has been killed aswell as a counter to the death;
 	bool dead = false;
+	int deathcounter;
 
 	//booleans to know the direction the player is facing
 	bool facer, facel, faceu, faced, faceur, faceul, facedr, facedl, waterP;
