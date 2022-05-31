@@ -7,8 +7,9 @@
 #include "ModuleRender.h"
 #include "Application.h"
 #include "Enemy.h"
-Enemy_Red::Enemy_Red(int x, int y) : Enemy(x, y)
+Enemy_Red::Enemy_Red(int x, int y, int movingbehaviour) : Enemy(x, y, movingbehaviour)
 {
+	//pushbacks for the animations
 	Eup.PushBack({1,1,22,48});
 	Eupright.PushBack({ 30,6,30,43 });
 	Eright.PushBack({ 71,8,33,41 });
@@ -18,13 +19,9 @@ Enemy_Red::Enemy_Red(int x, int y) : Enemy(x, y)
 	Eleft.PushBack({ 196,8,35,41 });
 	Eupleft.PushBack({ 233,5,32,51 });
 
-	// TODO 3: Have the Brown Cookies describe a path in the screen
-	//path.PushBack({ -1.0f, -0.5f }, 100);
-	//path.PushBack({ -1.0f, 0.5f }, 80);
-	//path.PushBack({ -1.0f, 1.0f }, 80);
-
 	//put collider
 	collider = App->collisions->AddCollider({ 0, 0, 24, 24 }, Collider::Type::ENEMY, (Module*)App->enemies);
+
 
 	delay1 = bulletscounter = 0;
 
@@ -85,6 +82,7 @@ void Enemy_Red::Attack() {
 		
 	}
 	++delay1;
+
 }
 
 void Enemy_Red::Update()
@@ -116,8 +114,6 @@ void Enemy_Red::Update()
 
 	Attack();
 	App->particles->Update();
-	//path.Update();
-	//position = spawnPos; //+path.GetRelativePosition();
 
 	// Call to the base class. It must be called at the end
 	// It will update the collider depending on the position

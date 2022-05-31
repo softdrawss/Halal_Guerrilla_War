@@ -3,7 +3,7 @@
 #include "Application.h"
 #include "ModuleCollisions.h"
 
-Enemy_Boss::Enemy_Boss(int x, int y) : Enemy(x, y)
+Enemy_Boss::Enemy_Boss(int x, int y) : Enemy(x, y, movingbehaviour)
 {
 	fly.PushBack({ 5,72,21,22 });
 	redcurrentAnim = &fly;

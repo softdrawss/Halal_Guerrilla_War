@@ -11,7 +11,7 @@
 #pragma comment( lib, "SDL/libx86/SDL2.lib")
 #pragma comment( lib, "SDL/libx86/SDL2main.lib")
 
-Enemy::Enemy(int x, int y) : position(x, y)
+Enemy::Enemy(int x, int y, int movingbehaviour) : position(x, y)
 {
 	spawnPos = position;
 
@@ -47,8 +47,22 @@ void Enemy::Update()
 	direction();
 
 
-	if (redcurrentAnim != nullptr)
+	if (redcurrentAnim != nullptr) {
 		redcurrentAnim->Update();
+	}
+
+	if (greencurrentAnim != nullptr) {
+		greencurrentAnim->Update();
+	}
+
+	if (greenlegscurrentAnim != nullptr) {
+		greenlegscurrentAnim->Update();
+	}
+
+	if (greentorsocurrentAnim != nullptr) {
+		greentorsocurrentAnim->Update();
+	}
+		
 
 	if (collider != nullptr)
 		collider->SetPos(position.x, position.y);
@@ -149,21 +163,97 @@ void Enemy::direction() {
 	}
 }
 void Enemy::Attack() {
+	if (delay1 >= 10) {
+		if (bulletscounter == 3) {
+			bulletscounter = 0;
+			delay1 = -60;
+		}
+		else {
 
-	
+			if (up == true) {
+				App->particles->enemybullet.speed.y = -1;
+				App->particles->enemybullet.speed.x = 0;
+				App->particles->AddParticle(App->particles->enemybullet, position.x, position.y, Collider::Type::ENEMY_SHOT);
+			}
+			else if (down == true) {
+				App->particles->enemybullet.speed.y = +1;
+				App->particles->enemybullet.speed.x = 0;
+				App->particles->AddParticle(App->particles->enemybullet, position.x + 4, position.y + 28, Collider::Type::ENEMY_SHOT);
+			}
+			else if (right == true) {
+				App->particles->enemybullet.speed.y = 0;
+				App->particles->enemybullet.speed.x = +1;
+				App->particles->AddParticle(App->particles->enemybullet, position.x, position.y, Collider::Type::ENEMY_SHOT);
+			}
+			else if (left == true) {
+				App->particles->enemybullet.speed.y = 0;
+				App->particles->enemybullet.speed.x = -1;
+				App->particles->AddParticle(App->particles->enemybullet, position.x, position.y, Collider::Type::ENEMY_SHOT);
+			}
+			else if (upright == true) {
+				App->particles->enemybullet.speed.y = -1;
+				App->particles->enemybullet.speed.x = +1;
+				App->particles->AddParticle(App->particles->enemybullet, position.x, position.y, Collider::Type::ENEMY_SHOT);
+			}
+			else if (downright == true) {
+				App->particles->enemybullet.speed.y = +1;
+				App->particles->enemybullet.speed.x = +1;
+				App->particles->AddParticle(App->particles->enemybullet, position.x, position.y, Collider::Type::ENEMY_SHOT);
+			}
+			else if (downleft == true) {
+				App->particles->enemybullet.speed.y = +1;
+				App->particles->enemybullet.speed.x = -1;
+				App->particles->AddParticle(App->particles->enemybullet, position.x, position.y, Collider::Type::ENEMY_SHOT);
+			}
+			else if (upleft == true) {
+				App->particles->enemybullet.speed.y = -1;
+				App->particles->enemybullet.speed.x = -1;
+				App->particles->AddParticle(App->particles->enemybullet, position.x, position.y, Collider::Type::ENEMY_SHOT);
+			}
+			delay1 = 0;
+			++bulletscounter;
+		}
 
-
+	}
+	++delay1;
 }
 
-void Enemy::Flee() {
+void Enemy::Attackdown() {
+	if (delay1 >= 10) {
+		if (bulletscounter == 3) {
+			bulletscounter = 0;
+			delay1 = -60;
+		}
+		else {
+			App->particles->enemybullet.speed.y = +1;
+			App->particles->enemybullet.speed.x = 0;
+			App->particles->AddParticle(App->particles->enemybullet, position.x + 4, position.y + 28, Collider::Type::ENEMY_SHOT);
+			delay1 = 0;
+			++bulletscounter;
+		}
 
+	}
+	++delay1;
 }
-
 
 void Enemy::Draw()
 {
-	if (redcurrentAnim != nullptr)
+	if (redcurrentAnim != nullptr) {
 		App->render->Blit(texture, position.x, position.y, &(redcurrentAnim->GetCurrentFrame()));
+	}
+
+	if (greencurrentAnim != nullptr && ismoving == false) {
+		App->render->Blit(texture, position.x, position.y, &(greencurrentAnim->GetCurrentFrame()));
+	}
+
+	if (greenlegscurrentAnim != nullptr && ismoving == true) {
+		App->render->Blit(texture, position.x, position.y +30, &(greenlegscurrentAnim->GetCurrentFrame()));
+	}
+
+	if (greentorsocurrentAnim != nullptr && ismoving == true) {
+		App->render->Blit(texture, position.x, position.y, &(greentorsocurrentAnim->GetCurrentFrame()));
+	}
+		
 }
 
 void Enemy::OnCollision(Collider* collider)
@@ -181,19 +271,4 @@ void Enemy::SetToDelete()
 	pendingToDelete = true;
 	if (collider != nullptr)
 		collider->pendingToDelete = true;
-}
-
-void Enemy::Walkdown() 
-{
-	position.y -= speed;
-}
-
-void Enemy::Walkdiagonalleftdown() {
-	position.y -= speed;
-	position.x -= speed;
-}
-
-void Enemy::Walkdiagonalrightdown() {
-	position.y -= speed;
-	position.x += speed;
 }
