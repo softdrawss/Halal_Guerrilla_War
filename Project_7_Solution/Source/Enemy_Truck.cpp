@@ -3,7 +3,7 @@
 #include "Application.h"
 #include "ModuleCollisions.h"
 
-Enemy_Truck::Enemy_Truck(int x, int y) : Enemy(x, y)
+Enemy_Truck::Enemy_Truck(int x, int y) : Enemy(x, y, movingbehaviour)
 {
 	appear.PushBack({ 2,3,89,55 });
 	

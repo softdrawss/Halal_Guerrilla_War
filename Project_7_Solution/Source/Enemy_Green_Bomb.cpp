@@ -3,7 +3,7 @@
 #include "Application.h"
 #include "ModuleCollisions.h"
 
-Enemy_Green_Bomb::Enemy_Green_Bomb(int x, int y) : Enemy(x, y)
+Enemy_Green_Bomb::Enemy_Green_Bomb(int x, int y) : Enemy(x, y, movingbehaviour)
 {
 	still.PushBack({ 5,397,24,49 });
 	attack.PushBack({ 37,397,24, 49 });

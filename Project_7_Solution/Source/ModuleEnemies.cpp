@@ -30,7 +30,7 @@ ModuleEnemies::~ModuleEnemies()
 bool ModuleEnemies::Start()
 {
 	textureRED = App->textures->Load("Assets/EnemySpriteRec.png");
-	textureGREEN = App->textures->Load("Assets/Guerrilla War Enemy Spritesheet.png");
+	textureGREEN = App->textures->Load("Assets/Guerrilla War Enemy Spritesheet1.png");
 	textureBOMB = App->textures->Load("Assets/Guerrilla War Enemy Spritesheet.png");
 	textureBOSS = App->textures->Load("Assets/Guerrilla War Boss Spritesheet.png");
 	textureTRUCK = App->textures->Load("Assets/Guerrilla War Truck Spritesheet.png");
@@ -97,7 +97,7 @@ bool ModuleEnemies::CleanUp()
 	return true;
 }
 
-bool ModuleEnemies::AddEnemy(Enemy_Type type, int x, int y/*, iPoint direction*/)
+bool ModuleEnemies::AddEnemy(Enemy_Type type, int x, int y, int movingbehaviour)
 {
 	bool ret = false;
 
@@ -108,6 +108,7 @@ bool ModuleEnemies::AddEnemy(Enemy_Type type, int x, int y/*, iPoint direction*/
 			spawnQueue[i].type = type;
 			spawnQueue[i].x = x;
 			spawnQueue[i].y = y;
+			spawnQueue[i].movingbehaviour = movingbehaviour;
 			ret = true;
 			break;
 		}
@@ -123,15 +124,12 @@ void ModuleEnemies::HandleEnemiesSpawn()
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
 		if (spawnQueue[i].type != Enemy_Type::NO_TYPE)
-		{
-			// Spawn a new enemy if the screen has reached a spawn position
-			if (spawnQueue[i].x * SCREEN_SIZE < App->render->camera.x + (App->render->camera.w * SCREEN_SIZE) + SPAWN_MARGIN)
-			{
-				LOG("Spawning enemy at %d", spawnQueue[i].x * SCREEN_SIZE);
+		{			
+			LOG("Spawning enemy at %d", spawnQueue[i].x * SCREEN_SIZE);
 
-				SpawnEnemy(spawnQueue[i]);
-				spawnQueue[i].type = Enemy_Type::NO_TYPE; // Removing the newly spawned enemy from the queue
-			}
+			SpawnEnemy(spawnQueue[i]);
+			spawnQueue[i].type = Enemy_Type::NO_TYPE; // Removing the newly spawned enemy from the queue
+			
 		}
 	}
 }
@@ -164,11 +162,11 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 			switch (info.type)
 			{
 				case Enemy_Type::RED:
-					enemies[i] = new Enemy_Red(info.x, info.y);
+					enemies[i] = new Enemy_Red(info.x, info.y, info.movingbehaviour);
 					enemies[i]->texture = textureRED;
 					break;
 				case Enemy_Type::GREEN:
-					enemies[i] = new Enemy_Green(info.x, info.y);
+					enemies[i] = new Enemy_Green(info.x, info.y, info.movingbehaviour);
 					enemies[i]->texture = textureGREEN;
 					break;
 				case Enemy_Type::BOMB:
@@ -180,7 +178,7 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 					enemies[i]->texture = textureBOSS;
 					break;
 				case Enemy_Type::TRUCK:
-					enemies[i] = new Enemy_Boss(info.x, info.y);
+					enemies[i] = new Enemy_Truck(info.x, info.y);
 					enemies[i]->texture = textureTRUCK;
 					break;
 			}

@@ -123,40 +123,16 @@ bool ModuleScene::Start()
 	App->collisions->AddCollider({ 300, 375, 30, 25 }, Collider::Type::WATER);
 	App->collisions->AddCollider({ 300, 340, 30, 35 }, Collider::Type::WATER);
 
-	////First two columns colliders
-	//App->collisions->AddCollider({ 1375, 0, 111, 96 }, Collider::Type::WALL);
-	//App->collisions->AddCollider({ 1375, 145, 111, 96 }, Collider::Type::WALL);
-
-	////// Enemies ---
-	//App->enemies->AddEnemy(Enemy_Type::BOMB, 398, -2290);
-	//App->enemies->AddEnemy(Enemy_Type::BOMB, 500, -2290); //A partir de 500 capamunt desapareix not sure why
-	//App->enemies->AddEnemy(Enemy_Type::RED, 250, 100);
-	//App->enemies->AddEnemy(Enemy_Type::RED, 200, 200);
-	//App->enemies->AddEnemy(Enemy_Type::RED, 225, -400);
-
-	//
-
-	////// Enemies ---
-	//App->enemies->AddEnemy(Enemy_Type::BOMB, 398, -2290);
-	////App->enemies->AddEnemy(ENEMY_TYPE::BOMB, 500, -2290); //A partir de 500 capamunt desapareix not sure why
-	//App->enemies->AddEnemy(Enemy_Type::RED, 250, 200);
-	//App->enemies->AddEnemy(Enemy_Type::RED, 200, 200);
-	//App->enemies->AddEnemy(Enemy_Type::RED, 225, -400);
-	//App->enemies->AddEnemy(Enemy_Type::BOMB, 398, -2290);
-	////App->enemies->AddEnemy(ENEMY_TYPE::BOMB, 500, -2290); A partir de 500 capamunt desapareix not sure why
-	//App->enemies->AddEnemy(Enemy_Type::RED, 250, 200);
-	//App->enemies->AddEnemy(Enemy_Type::RED, 200, 200);
-	//App->enemies->AddEnemy(Enemy_Type::RED, 225, -400);
-
-	
 
 	//// Enemies ---
 	//App->enemies->AddEnemy(Enemy_Type::BOMB, 398, -2290);
 	//App->enemies->AddEnemy(ENEMY_TYPE::BOMB, 500, -2290); //A partir de 500 capamunt desapareix not sure why
-	App->enemies->AddEnemy(Enemy_Type::RED, 250, 200);
+	//App->enemies->AddEnemy(Enemy_Type::RED, 240, -630,0);
+	//App->enemies->AddEnemy(Enemy_Type::RED,420, -780,0);
 
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 240, 0,1);
 
-	App->enemies->AddEnemy(Enemy_Type::TRUCK, 250, 200);
+	//App->enemies->AddEnemy(Enemy_Type::GREEN, 180, 200, 0);
 
 
 	//Enable the necessary modules

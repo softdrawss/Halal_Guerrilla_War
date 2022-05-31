@@ -304,14 +304,14 @@ bool ModulePlayer::Start()
 
 	//add collider player
 	collider = App->collisions->AddCollider({ position.x, position.y, 32, 64 }, Collider::Type::PLAYER, this);
-	//collider1 = App->collisions->AddSpecialCollider(250, 300, 250, Collider::Type::ATTACK, this);
+
 
 	return ret;
 }
 
 Update_Status ModulePlayer::Update()
 {
-	//Reset the currentAnimation back to idle before updating the logic
+	//Reset the currentAnimation back to idle before updating
 
 	legsiddleAnim.frames[0] = currentAnimationlegs->frames[currentAnimationlegs->GetCurrentFrameint()];
 	torsoiddleAnim.frames[0] = currentAnimationtorso->frames[currentAnimationtorso->GetCurrentFrameint()];
