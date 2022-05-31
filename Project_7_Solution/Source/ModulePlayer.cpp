@@ -1927,32 +1927,42 @@ Update_Status ModulePlayer::PostUpdate()
 	sprintf_s(livesText, 10, "%d", lives);
 	sprintf_s(granadesText, 10, "%d", granades);
 	sprintf_s(bulletsText, 10, "%d", bullets);
+	sprintf_s(creditsText, 10, "%d", credits);
 
 	// Text of the score in at the bottom of the screen
 	// Highscore of the level (if you kill all the enemies and save the prisoners)
-	App->fonts->BlitText(150, 75, scoreFont, "HI");
+	App->fonts->BlitText(140, 75, scoreFont, "HI");
 	App->fonts->BlitText(250, 75, scoreFont, "30000");
 
 	// Player 1 --> Available
-	App->fonts->BlitText(100, 100, scoreFont, "1 UP");
-	App->fonts->BlitText(140, 125, scoreFont, scoreText);
+	App->fonts->BlitText(90, 100, scoreFont, "1 UP");
+	App->fonts->BlitText(130, 125, scoreFont, scoreText);
 
 	// Player 2 --> Not available
 	App->fonts->BlitText(300, 100, scoreFont, "2 UP");
 	App->fonts->BlitText(340, 125, scoreFont, "0");
 
 	// Weapons
-	App->fonts->BlitText(50, 150, weaponsFont, "G");
-	App->fonts->BlitText(60, 170, scoreFont, granadesText);
+	App->fonts->BlitText(20, 150, weaponsFont, "G");
+	App->fonts->BlitText(30, 170, scoreFont, granadesText);
 
-	App->fonts->BlitText(50, 180, weaponsFont, "B");
-	App->fonts->BlitText(60, 200, scoreFont, bulletsText);
+	App->fonts->BlitText(20, 180, weaponsFont, "B");
+	App->fonts->BlitText(30, 200, scoreFont, bulletsText);
 
 
 	// Lives
-	App->fonts->BlitText(60, 450, weaponsFont, "1");
-	App->fonts->BlitText(68, 450, weaponsFont, "1");
-	App->fonts->BlitText(60, 475, scoreFont, livesText);
+	if (lives == 2) {
+		App->fonts->BlitText(18, 450, weaponsFont, "1");
+	}if (lives == 3) {
+		App->fonts->BlitText(18, 450, weaponsFont, "1");
+		App->fonts->BlitText(26, 450, weaponsFont, "1");
+	}
+	//App->fonts->BlitText(60, 475, scoreFont, livesText);
+	
+	//credit
+	App->fonts->BlitText(315, 475, scoreFont, "CREDIT ");
+	App->fonts->BlitText(370, 475, scoreFont, creditsText);
+
 	return Update_Status::UPDATE_CONTINUE;
 }
 

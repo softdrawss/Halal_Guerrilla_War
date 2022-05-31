@@ -6,6 +6,9 @@
 #include "ModuleAudio.h"
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
+#include "ModuleFonts.h"
+#include "ModulePlayer.h"
+#include <stdio.h>
 
 SceneIntro::SceneIntro(bool startEnabled) : Module(startEnabled)
 {
@@ -31,6 +34,8 @@ bool SceneIntro::Start()
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 
+	char lookupTable[] = { "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ.@'?&- " };
+	App->player->scoreFont = App->fonts->Load("Assets/ui_font5.png", lookupTable, 1);
 	return ret;
 }
 
@@ -50,7 +55,10 @@ Update_Status SceneIntro::Update()
 Update_Status SceneIntro::PostUpdate()
 {
 	// Draw everything --------------------------------------
-	App->render->Blit(bgTexture, -50, 50, NULL);
+	sprintf_s(App->player->creditsText, 10, "%d", App->player->credits);
 
+	App->render->Blit(bgTexture, -50, 50, NULL);
+	App->fonts->BlitText(315, 475, App->player->scoreFont, "CREDIT ");
+	App->fonts->BlitText(370, 475, App->player->scoreFont, App->player->creditsText);
 	return Update_Status::UPDATE_CONTINUE;
 }

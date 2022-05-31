@@ -91,6 +91,7 @@ public:
 	uint score = 000;
 	int granades = 0;
 	int bullets = 0; 
+	int credits = 0;
 
 	int scoreFont = -1;
 	int weaponsFont = -1;
@@ -99,6 +100,7 @@ public:
 	char livesText[10] = { "\0" };
 	char granadesText[10] = { "\0" };
 	char bulletsText[10] = { "\0" };
+	char creditsText[10] = { "\0" };
 };
 
 #endif //!__MODULE_PLAYER_H__
