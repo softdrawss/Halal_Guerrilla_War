@@ -18,7 +18,7 @@ enum class Enemy_Type
 struct EnemySpawnpoint
 {
 	Enemy_Type type = Enemy_Type::NO_TYPE;
-	int x, y;
+	int x, y, movingbehaviour;
 };
 
 class Enemy;
@@ -58,7 +58,7 @@ public:
 	void OnCollision(Collider* c1, Collider* c2) override;
 
 	// Add an enemy into the queue to be spawned later
-	bool AddEnemy(Enemy_Type type, int x, int y/*, iPoint direction*/);
+	bool AddEnemy(Enemy_Type type, int x, int y, int movingbehaviour);
 
 	// Iterates the queue and checks for camera position
 	void HandleEnemiesSpawn();

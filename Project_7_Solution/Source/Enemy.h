@@ -12,7 +12,7 @@ class Enemy
 public:
 	// Constructor
 	// Saves the spawn position for later movement calculations
-	Enemy(int x, int y);
+	Enemy(int x, int y, int movingbehaviour);
 
 	// Destructor
 	virtual ~Enemy();
@@ -28,15 +28,9 @@ public:
 	virtual void Draw();
 
 	//virtual void Attack();
-	virtual void Attack();
+	void Attack();
+	void Attackdown();
 
-	//virtual void Flee();
-	virtual void Flee();
-
-	// functions to make the enemies walk
-	virtual void Walkdown();
-	virtual void Walkdiagonalrightdown();
-	virtual void Walkdiagonalleftdown();
 
 	//function to know ehre is the player so it can face it
 	void facingtoplayer();
@@ -75,9 +69,21 @@ public:
 	// direction
 	bool up, down, left, right, upright, upleft, downright, downleft;
 
+	
+
+	int delay1, bulletscounter;
+
+	int movingbehaviour;
+
+	bool ismoving;
+
 protected:
 	// A ptr to the current animation
 	Animation* redcurrentAnim = nullptr;
+	Animation* greencurrentAnim = nullptr;
+	Animation* greenlegscurrentAnim = nullptr;
+	Animation* greentorsocurrentAnim = nullptr;
+
 
 	// The enemy's collider
 	Collider* collider = nullptr;
