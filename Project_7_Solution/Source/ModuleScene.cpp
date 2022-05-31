@@ -6,6 +6,7 @@
 #include "ModuleAudio.h"
 #include "ModuleCollisions.h"
 #include "ModuleEnemies.h"
+#include "ModuleParticles.h"
 
 ModuleScene::ModuleScene(bool startEnabled) : Module(startEnabled)
 {
@@ -144,9 +145,11 @@ bool ModuleScene::Start()
 
 
 	//Enable the necessary modules
+	App->collisions->Enable();
+	App->particles->Enable();
 	App->player->Enable();
 	App->enemies->Enable();
-	App->collisions->Enable();
+	
 	return ret;
 }
 
@@ -179,7 +182,7 @@ bool ModuleScene::CleanUp()
 	App->player->Disable();
 	App->enemies->Disable();
 	App->collisions->Disable();
-
+	App->particles->Disable();
 
 	return true;
 }

@@ -56,7 +56,7 @@ public:
 
 	Animation torsoup, torsodown, torsoright, torsoleft, torsoupright, torsoupleft, torsodownright, torsodownleft;
 	Animation legsup, legsdown, legsleft, legsright, legsupright, legsupleft, legsdownright, legsdownleft;
-	Animation torsoiddleAnim, legsiddleAnim;
+	Animation torsoiddleAnim, legsiddleAnim, wateriddleAnim;
 	Animation weapon_up, weapon_down, weapon_right, weapon_left, weapon_upright, weapon_upleft, weapon_downright, weapon_downleft;
 	Animation weapon_up_shot, weapon_down_shot, weapon_right_shot, weapon_left_shot, weapon_upright_shot, weapon_upleft_shot, weapon_downright_shot, weapon_downleft_shot;
 
