@@ -21,6 +21,7 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	//iddle animation
 	torsoiddleAnim.PushBack({ 4,4,26,31 });
 	legsiddleAnim.PushBack({ 169, 0, 23, 31 });
+	wateriddleAnim.PushBack({ 363, 23, 32, 32 });
 
 	// walk forward animation
 	legsup.PushBack({ 0, 33, 32, 32 });
@@ -86,7 +87,6 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	torsoleft.PushBack({ 68, 369, 32, 32 });
 	torsoleft.PushBack({ 36, 369, 32, 32 });
 	torsoleft.speed = 0.1f;
-
 
 
 	//walk right animation
@@ -336,740 +336,1482 @@ Update_Status ModulePlayer::Update()
 	currentAnimationlegs = &legsiddleAnim;
 	currentAnimationtorso = &torsoiddleAnim;
 
-
-	//up	
-	if (faceu == true && App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
-	{
-		currentAnimationlegs = &legsupleft;
-		currentAnimationtorso = &torsoup;
-		position.x += speed;
-		position.y += speed;
-	}
-	else if (faceu == true && App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT)
-	{
-		currentAnimationlegs = &legsupright;
-		currentAnimationtorso = &torsoup;
-		position.x -= speed;
-		position.y += speed;
-	}
-	else if (faceu == true && App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
-	{
-		currentAnimationlegs = &legsupright;
-		currentAnimationtorso = &torsoup;
-		position.x += speed;
-		position.y -= speed;
-	}
-	else if (faceu == true && App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT)
-	{
-		currentAnimationlegs = &legsupleft;
-		currentAnimationtorso = &torsoup;
-		position.x -= speed;
-		position.y -= speed;
-	}
-	else if (faceu == true && App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT) {
-		currentAnimationtorso = &torsoup;
-		currentAnimationlegs = &legsup;
-		position.y -= speed;
-	}
-	else if (faceu == true && App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT) {
-		currentAnimationlegs = &legsup;
-		currentAnimationtorso = &torsoup;
-		position.y += speed;
-	}
-	else if (faceu == true && App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT) {
-		currentAnimationlegs = &legsright;
-		currentAnimationtorso = &torsoup;
-		position.x += speed;
-	}
-	else if (faceu == true && App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT) {
-		currentAnimationlegs = &legsleft;
-		currentAnimationtorso = &torsoup;
-		position.x -= speed;
-	}
-	//down
-	else if (faced == true && App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
-	{
-		currentAnimationtorso = &torsodown;
-		currentAnimationlegs = &legsdownleft;
-		position.y -= speed;
-		position.x += speed;
-	}
-	else if (faced == true && App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT)
-	{
-		currentAnimationtorso = &torsodown;
-		currentAnimationlegs = &legsdownright;
-		position.y -= speed;
-		position.x -= speed;
-	}
-	else if (faced == true && App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT)
-	{
-		currentAnimationtorso = &torsodown;
-		currentAnimationlegs = &legsdownleft;
-		position.y += speed;
-		position.x -= speed;
-	}
-	else if (faced == true && App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
-	{
-		currentAnimationtorso = &torsodown;
-		currentAnimationlegs = &legsdownright;
-		position.y += speed;
-		position.x += speed;
-	}
-	else if (faced == true && App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT) {
-		currentAnimationtorso = &torsodown;
-		currentAnimationlegs = &legsdown;
-		position.y += speed;
-	}
-	else if (faced == true && App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT)
-	{
-		currentAnimationtorso = &torsodown;
-		currentAnimationlegs = &legsdown;
-		position.y -= speed;
-	}
-	else if (faced == true && App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
-	{
-		currentAnimationtorso = &torsodown;
-		currentAnimationlegs = &legsright;
-		position.x += speed;
-	}
-	else if (faced == true && App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT)
-	{
-		currentAnimationtorso = &torsodown;
-		currentAnimationlegs = &legsleft;
-		position.x -= speed;
-	}
-
-
-	//right
-	else if (facer == true && App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT)
-	{
-		currentAnimationtorso = &torsoright;
-		currentAnimationlegs = &legsupright;
-		position.y += speed;
-		position.x -= speed;
-	}
-	else if (facer == true && App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
-	{
-		currentAnimationtorso = &torsoright;
-		currentAnimationlegs = &legsdownright;
-		position.y += speed;
-		position.x += speed;
-	}
-	else if (facer == true && App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
-	{
-		currentAnimationtorso = &torsoright;
-		currentAnimationlegs = &legsupright;
-		position.y -= speed;
-		position.x += speed;
-	}
-	else if (facer == true && App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT)
-	{
-		currentAnimationtorso = &torsoright;
-		currentAnimationlegs = &legsdownright;
-		position.y -= speed;
-		position.x -= speed;
-	}
-	else if (facer == true && App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT) {
-		currentAnimationtorso = &torsoright;
-		currentAnimationlegs = &legsright;
-		position.x += speed;
-	}
-	else if (facer == true && App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT)
-	{
-		currentAnimationtorso = &torsoright;
-		currentAnimationlegs = &legsright;
-		position.x -= speed;
-	}
-	else if (facer == true && App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT)
-	{
-		currentAnimationtorso = &torsoright;
-		currentAnimationlegs = &legsup;
-		position.y -= speed;
-	}
-	else if (facer == true && App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT)
-	{
-		currentAnimationtorso = &torsoright;
-		currentAnimationlegs = &legsdown;
-		position.y += speed;
-	}
-
-
-	//left
-	else if (facel == true && App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT)
-	{
-		currentAnimationtorso = &torsoleft;
-		currentAnimationlegs = &legsdownleft;
-		position.y += speed;
-		position.x -= speed;
-	}
-	else if (facel == true && App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
-	{
-		currentAnimationtorso = &torsoleft;
-		currentAnimationlegs = &legsupleft;
-		position.y += speed;
-		position.x += speed;
-	}
-	else if (facel == true && App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
-	{
-		currentAnimationtorso = &torsoleft;
-		currentAnimationlegs = &legsdownleft;
-		position.y -= speed;
-		position.x += speed;
-	}
-	else if (facel == true && App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT)
-	{
-		currentAnimationtorso = &torsoleft;
-		currentAnimationlegs = &legsupleft;
-		position.y -= speed;
-		position.x -= speed;
-	}
-	else if (facel == true && App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT) {
-		currentAnimationtorso = &torsoleft;
-		currentAnimationlegs = &legsleft;
-		position.x -= speed;
-	}
-	else if (facel == true && App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
-	{
-		currentAnimationtorso = &torsoleft;
-		currentAnimationlegs = &legsleft;
-		position.x += speed;
-	}
-	else if (facel == true && App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT)
-	{
-		currentAnimationtorso = &torsoleft;
-		currentAnimationlegs = &legsdown;
-		position.y += speed;
-	}
-	else if (facel == true && App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT)
-	{
-		currentAnimationtorso = &torsoleft;
-		currentAnimationlegs = &legsup;
-		position.y -= speed;
-	}
-
-
-	//upright
-	else if (faceur == true && App->input->keys[SDL_SCANCODE_W] && App->input->keys[SDL_SCANCODE_A])
-	{
-		currentAnimationtorso = &torsoupright;
-		currentAnimationlegs = &legsdownright;
-		position.x -= speed;
-		position.y -= speed;
-	}
-	else if (faceur == true && App->input->keys[SDL_SCANCODE_W] && App->input->keys[SDL_SCANCODE_D])
-	{
-		currentAnimationtorso = &torsoupright;
-		currentAnimationlegs = &legsupright;
-		position.x += speed;
-		position.y -= speed;
-	}
-	else if (faceur == true && App->input->keys[SDL_SCANCODE_S] && App->input->keys[SDL_SCANCODE_A])
-	{
-		currentAnimationtorso = &torsoupright;
-		currentAnimationlegs = &legsupright;
-		position.x -= speed;
-		position.y += speed;
-	}
-	else if (faceur == true && App->input->keys[SDL_SCANCODE_S] && App->input->keys[SDL_SCANCODE_D])
-	{
-		currentAnimationtorso = &torsoupright;
-		currentAnimationlegs = &legsdownright;
-		position.x += speed;
-		position.y += speed;
-	}
-	else if (faceur == true && App->input->keys[SDL_SCANCODE_W])
-	{
-		currentAnimationtorso = &torsoupright;
-		currentAnimationlegs = &legsup;
-		position.y -= speed;
-	}
-	else if (faceur == true && App->input->keys[SDL_SCANCODE_S])
-	{
-		currentAnimationtorso = &torsoupright;
-		currentAnimationlegs = &legsup;
-		position.y += speed;
-	}
-	else if (faceur == true && App->input->keys[SDL_SCANCODE_D]) {
-		currentAnimationtorso = &torsoupright;
-		currentAnimationlegs = &legsright;
-		position.x += speed;
-	}
-	else if (faceur == true && App->input->keys[SDL_SCANCODE_A]) {
-		currentAnimationtorso = &torsoupright;
-		currentAnimationlegs = &legsright;
-		position.x -= speed;
-	}
-
-	//upleft
-	else if (faceul == true && App->input->keys[SDL_SCANCODE_W] && App->input->keys[SDL_SCANCODE_A])
-	{
-		currentAnimationtorso = &torsoupleft;
-		currentAnimationlegs = &legsupleft;
-		position.x -= speed;
-		position.y -= speed;
-	}
-	else if (faceul == true && App->input->keys[SDL_SCANCODE_W] && App->input->keys[SDL_SCANCODE_D])
-	{
-		currentAnimationtorso = &torsoupleft;
-		currentAnimationlegs = &legsupright;
-		position.x += speed;
-		position.y -= speed;
-	}
-	else if (faceul == true && App->input->keys[SDL_SCANCODE_S] && App->input->keys[SDL_SCANCODE_A])
-	{
-		currentAnimationtorso = &torsoupleft;
-		currentAnimationlegs = &legsdownleft;
-		position.x -= speed;
-		position.y += speed;
-	}
-	else if (faceul == true && App->input->keys[SDL_SCANCODE_S] && App->input->keys[SDL_SCANCODE_D])
-	{
-		currentAnimationtorso = &torsoupleft;
-		currentAnimationlegs = &legsupleft;
-		position.x += speed;
-		position.y += speed;
-	}
-	else if (faceul == true && App->input->keys[SDL_SCANCODE_W])
-	{
-		currentAnimationtorso = &torsoupleft;
-		currentAnimationlegs = &legsup;
-		position.y -= speed;
-	}
-	else if (faceul == true && App->input->keys[SDL_SCANCODE_S])
-	{
-		currentAnimationtorso = &torsoupleft;
-		currentAnimationlegs = &legsup;
-		position.y += speed;
-	}
-	else if (faceul == true && App->input->keys[SDL_SCANCODE_D]) {
-		currentAnimationtorso = &torsoupleft;
-		currentAnimationlegs = &legsleft;
-		position.x += speed;
-	}
-	else if (faceul == true && App->input->keys[SDL_SCANCODE_A]) {
-		currentAnimationtorso = &torsoupleft;
-		currentAnimationlegs = &legsleft;
-		position.x -= speed;
-	}
-
-
-	//downright
-	else if (facedr == true && App->input->keys[SDL_SCANCODE_W] && App->input->keys[SDL_SCANCODE_A])
-	{
-		currentAnimationtorso = &torsodownright;
-		currentAnimationlegs = &legsdownright;
-		position.x -= speed;
-		position.y -= speed;
-	}
-	else if (facedr == true && App->input->keys[SDL_SCANCODE_W] && App->input->keys[SDL_SCANCODE_D])
-	{
-		currentAnimationtorso = &torsodownright;
-		currentAnimationlegs = &legsupright;
-		position.x += speed;
-		position.y -= speed;
-	}
-	else if (facedr == true && App->input->keys[SDL_SCANCODE_S] && App->input->keys[SDL_SCANCODE_A])
-	{
-		currentAnimationtorso = &torsodownright;
-		currentAnimationlegs = &legsupright;
-		position.x -= speed;
-		position.y += speed;
-	}
-	else if (facedr == true && App->input->keys[SDL_SCANCODE_S] && App->input->keys[SDL_SCANCODE_D])
-	{
-		currentAnimationtorso = &torsodownright;
-		currentAnimationlegs = &legsdownright;
-		position.x += speed;
-		position.y += speed;
-	}
-	else if (facedr == true && App->input->keys[SDL_SCANCODE_W])
-	{
-		currentAnimationtorso = &torsodownright;
-		currentAnimationlegs = &legsdown;
-		position.y -= speed;
-	}
-	else if (facedr == true && App->input->keys[SDL_SCANCODE_S])
-	{
-		currentAnimationtorso = &torsodownright;
-		currentAnimationlegs = &legsdown;
-		position.y += speed;
-	}
-	else if (facedr == true && App->input->keys[SDL_SCANCODE_D]) {
-		currentAnimationtorso = &torsodownright;
-		currentAnimationlegs = &legsright;
-		position.x += speed;
-	}
-	else if (facedr == true && App->input->keys[SDL_SCANCODE_A]) {
-		currentAnimationtorso = &torsodownright;
-		currentAnimationlegs = &legsright;
-		position.x -= speed;
-	}
-
-	//down left
-	else if (facedl == true && App->input->keys[SDL_SCANCODE_W] && App->input->keys[SDL_SCANCODE_A])
-	{
-		currentAnimationtorso = &torsodownleft;
-		currentAnimationlegs = &legsupleft;
-		position.x -= speed;
-		position.y -= speed;
-	}
-	else if (facedl == true && App->input->keys[SDL_SCANCODE_W] && App->input->keys[SDL_SCANCODE_D])
-	{
-		currentAnimationtorso = &torsodownleft;
-		currentAnimationlegs = &legsdownleft;
-		position.x += speed;
-		position.y -= speed;
-	}
-	else if (facedl == true && App->input->keys[SDL_SCANCODE_S] && App->input->keys[SDL_SCANCODE_A])
-	{
-		currentAnimationtorso = &torsodownleft;
-		currentAnimationlegs = &legsdownleft;
-		position.x -= speed;
-		position.y += speed;
-	}
-	else if (facedl == true && App->input->keys[SDL_SCANCODE_S] && App->input->keys[SDL_SCANCODE_D])
-	{
-		currentAnimationtorso = &torsodownleft;
-		currentAnimationlegs = &legsupleft;
-		position.x += speed;
-		position.y += speed;
-	}
-	else if (facedl == true && App->input->keys[SDL_SCANCODE_W])
-	{
-		currentAnimationtorso = &torsodownleft;
-		currentAnimationlegs = &legsdown;
-		position.y -= speed;
-	}
-	else if (facedl == true && App->input->keys[SDL_SCANCODE_S])
-	{
-		currentAnimationtorso = &torsodownleft;
-		currentAnimationlegs = &legsdown;
-		position.y += speed;
-	}
-	else if (facedl == true && App->input->keys[SDL_SCANCODE_D]) {
-		currentAnimationtorso = &torsodownleft;
-		currentAnimationlegs = &legsleft;
-		position.x += speed;
-	}
-	else if (facedl == true && App->input->keys[SDL_SCANCODE_A]) {
-		currentAnimationtorso = &torsodownleft;
-		currentAnimationlegs = &legsleft;
-		position.x -= speed;
-	}
-
-
-	if (normalweapon == true && heavyweapon == false) {
-		//look up
-		if (App->input->keys[SDL_SCANCODE_UP] == KEY_DOWN)
+	if (waterP = false) {
+		//up	
+		if (faceu == true && App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
 		{
-			//App->particles->AddParticle(App->particles->normal_up_shot, position.x +20, position.y+20, Collider::Type::PLAYER_SHOT);
+			currentAnimationlegs = &legsupleft;
 			currentAnimationtorso = &torsoup;
-			weapon = &normalweapon_up;
-			faceu = true;
-			faced = false;
-			facer = false;
-			facel = false;
-			faceur = false;
-			faceul = false;
-			facedr = false;
-			facedl = false;
+			position.x += speed;
+			position.y += speed;
 		}
-
-		//look down
-		if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_DOWN)
+		else if (faceu == true && App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT)
+		{
+			currentAnimationlegs = &legsupright;
+			currentAnimationtorso = &torsoup;
+			position.x -= speed;
+			position.y += speed;
+		}
+		else if (faceu == true && App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
+		{
+			currentAnimationlegs = &legsupright;
+			currentAnimationtorso = &torsoup;
+			position.x += speed;
+			position.y -= speed;
+		}
+		else if (faceu == true && App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT)
+		{
+			currentAnimationlegs = &legsupleft;
+			currentAnimationtorso = &torsoup;
+			position.x -= speed;
+			position.y -= speed;
+		}
+		else if (faceu == true && App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT) {
+			currentAnimationtorso = &torsoup;
+			currentAnimationlegs = &legsup;
+			position.y -= speed;
+		}
+		else if (faceu == true && App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT) {
+			currentAnimationlegs = &legsup;
+			currentAnimationtorso = &torsoup;
+			position.y += speed;
+		}
+		else if (faceu == true && App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT) {
+			currentAnimationlegs = &legsright;
+			currentAnimationtorso = &torsoup;
+			position.x += speed;
+		}
+		else if (faceu == true && App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT) {
+			currentAnimationlegs = &legsleft;
+			currentAnimationtorso = &torsoup;
+			position.x -= speed;
+		}
+		//down
+		else if (faced == true && App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
 		{
 			currentAnimationtorso = &torsodown;
-			weapon = &normalweapon_down;
-			faceu = false;
-			faced = true;
-			facer = false;
-			facel = false;
-			faceur = false;
-			faceul = false;
-			facedr = false;
-			facedl = false;
+			currentAnimationlegs = &legsdownleft;
+			position.y -= speed;
+			position.x += speed;
 		}
-
-		//look right
-		if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_DOWN)
-		{
-			currentAnimationtorso = &torsoright;
-			weapon = &normalweapon_right;
-			faceu = false;
-			faced = false;
-			facer = true;
-			facel = false;
-			faceur = false;
-			faceul = false;
-			facedr = false;
-			facedl = false;
-		}
-
-		//look left
-		if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_DOWN)
-		{
-			currentAnimationtorso = &torsoleft;
-			weapon = &normalweapon_left;
-			faceu = false;
-			faced = false;
-			facer = false;
-			facel = true;
-			faceur = false;
-			faceul = false;
-			facedr = false;
-			facedl = false;
-		}
-		//look upright
-		if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_UP] == KEY_DOWN)
-		{
-			currentAnimationtorso = &torsoupright;
-			weapon = &normalweapon_upright;
-			faceu = false;
-			faced = false;
-			facer = false;
-			facel = false;
-			faceur = true;
-			faceul = false;
-			facedr = false;
-			facedl = false;
-		}
-		//look upleft
-		if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_UP] == KEY_DOWN)
-		{
-			currentAnimationtorso = &torsoupleft;
-			weapon = &normalweapon_upleft;
-			faceu = false;
-			faced = false;
-			facer = false;
-			facel = false;
-			faceur = false;
-			faceul = true;
-			facedr = false;
-			facedl = false;
-		}
-		//look downright
-		if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_DOWN] == KEY_DOWN)
-		{
-			currentAnimationtorso = &torsodownright;
-			weapon = &normalweapon_downright;
-			faceu = false;
-			faced = false;
-			facer = false;
-			facel = false;
-			faceur = false;
-			faceul = false;
-			facedr = true;
-			facedl = false;
-		}
-		//look downleft
-		if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_DOWN] == KEY_DOWN)
-		{
-			currentAnimationtorso = &torsodownleft;
-			weapon = &normalweapon_downleft;
-			faceu = false;
-			faced = false;
-			facer = false;
-			facel = false;
-			faceur = false;
-			faceul = false;
-			facedr = false;
-			facedl = true;
-		}
-		//shots
-
-		if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_DOWN)
-		{
-			uint shoot = App->audio->LoadFx("Assets/gwar-137.wav");
-			if (faceu == true) {
-				App->particles->AddParticle(App->particles->normal_up_shot, position.x + 22, position.y + 4, Collider::Type::PLAYER_SHOT);
-				App->audio->PlayFx(shoot, 0);
-			}
-			else if (faced == true) {
-				App->particles->AddParticle(App->particles->normal_down_shot, position.x + 8, position.y + 35, Collider::Type::PLAYER_SHOT);
-				App->audio->PlayFx(shoot, 0);
-			}
-			else if (facer == true) {
-				App->particles->AddParticle(App->particles->normal_hr_shot, position.x + 20, position.y + 24, Collider::Type::PLAYER_SHOT);
-				App->audio->PlayFx(shoot, 0);
-			}
-			else if (facel == true) {
-				App->particles->AddParticle(App->particles->normal_hl_shot, position.x - 4, position.y + 21, Collider::Type::PLAYER_SHOT);
-				App->audio->PlayFx(shoot, 0);
-			}
-			else if (faceur == true) {
-				App->particles->AddParticle(App->particles->normal_ur_shot, position.x + 20, position.y + 20, Collider::Type::PLAYER_SHOT);
-				App->audio->PlayFx(shoot, 0);
-			}
-			else if (faceul == true) {
-				App->particles->AddParticle(App->particles->normal_ul_shot, position.x + 6, position.y + 10, Collider::Type::PLAYER_SHOT);
-				App->audio->PlayFx(shoot, 0);
-			}
-			else if (facedr == true) {
-				App->particles->AddParticle(App->particles->normal_dr_shot, position.x + 18, position.y + 35, Collider::Type::PLAYER_SHOT);
-				App->audio->PlayFx(shoot, 0);
-			}
-			else if (facedl == true) {
-				App->particles->AddParticle(App->particles->normal_dl_shot, position.x + 2, position.y + 26, Collider::Type::PLAYER_SHOT);
-				App->audio->PlayFx(shoot, 0);
-			}
-		}
-	}
-	else if (heavyweapon == true && normalweapon == false) {
-		//look up
-		if (App->input->keys[SDL_SCANCODE_UP] == KEY_DOWN)
-		{
-			//App->particles->AddParticle(App->particles->normal_up_shot, position.x +20, position.y+20, Collider::Type::PLAYER_SHOT);
-			currentAnimationtorso = &torsoup;
-			weapon = &heavyweapon_up;
-			faceu = true;
-			faced = false;
-			facer = false;
-			facel = false;
-			faceur = false;
-			faceul = false;
-			facedr = false;
-			facedl = false;
-		}
-
-		//look down
-		if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_DOWN)
+		else if (faced == true && App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT)
 		{
 			currentAnimationtorso = &torsodown;
-			weapon = &heavyweapon_down;
-			faceu = false;
-			faced = true;
-			facer = false;
-			facel = false;
-			faceur = false;
-			faceul = false;
-			facedr = false;
-			facedl = false;
+			currentAnimationlegs = &legsdownright;
+			position.y -= speed;
+			position.x -= speed;
+		}
+		else if (faced == true && App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT)
+		{
+			currentAnimationtorso = &torsodown;
+			currentAnimationlegs = &legsdownleft;
+			position.y += speed;
+			position.x -= speed;
+		}
+		else if (faced == true && App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
+		{
+			currentAnimationtorso = &torsodown;
+			currentAnimationlegs = &legsdownright;
+			position.y += speed;
+			position.x += speed;
+		}
+		else if (faced == true && App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT) {
+			currentAnimationtorso = &torsodown;
+			currentAnimationlegs = &legsdown;
+			position.y += speed;
+		}
+		else if (faced == true && App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT)
+		{
+			currentAnimationtorso = &torsodown;
+			currentAnimationlegs = &legsdown;
+			position.y -= speed;
+		}
+		else if (faced == true && App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
+		{
+			currentAnimationtorso = &torsodown;
+			currentAnimationlegs = &legsright;
+			position.x += speed;
+		}
+		else if (faced == true && App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT)
+		{
+			currentAnimationtorso = &torsodown;
+			currentAnimationlegs = &legsleft;
+			position.x -= speed;
 		}
 
-		//look right
-		if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_DOWN)
+
+		//right
+		else if (facer == true && App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT)
 		{
 			currentAnimationtorso = &torsoright;
-			weapon = &heavyweapon_right;
-			faceu = false;
-			faced = false;
-			facer = true;
-			facel = false;
-			faceur = false;
-			faceul = false;
-			facedr = false;
-			facedl = false;
+			currentAnimationlegs = &legsupright;
+			position.y += speed;
+			position.x -= speed;
+		}
+		else if (facer == true && App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
+		{
+			currentAnimationtorso = &torsoright;
+			currentAnimationlegs = &legsdownright;
+			position.y += speed;
+			position.x += speed;
+		}
+		else if (facer == true && App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
+		{
+			currentAnimationtorso = &torsoright;
+			currentAnimationlegs = &legsupright;
+			position.y -= speed;
+			position.x += speed;
+		}
+		else if (facer == true && App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT)
+		{
+			currentAnimationtorso = &torsoright;
+			currentAnimationlegs = &legsdownright;
+			position.y -= speed;
+			position.x -= speed;
+		}
+		else if (facer == true && App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT) {
+			currentAnimationtorso = &torsoright;
+			currentAnimationlegs = &legsright;
+			position.x += speed;
+		}
+		else if (facer == true && App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT)
+		{
+			currentAnimationtorso = &torsoright;
+			currentAnimationlegs = &legsright;
+			position.x -= speed;
+		}
+		else if (facer == true && App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT)
+		{
+			currentAnimationtorso = &torsoright;
+			currentAnimationlegs = &legsup;
+			position.y -= speed;
+		}
+		else if (facer == true && App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT)
+		{
+			currentAnimationtorso = &torsoright;
+			currentAnimationlegs = &legsdown;
+			position.y += speed;
 		}
 
-		//look left
-		if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_DOWN)
+
+		//left
+		else if (facel == true && App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT)
 		{
 			currentAnimationtorso = &torsoleft;
-			weapon = &heavyweapon_left;
-			faceu = false;
-			faced = false;
-			facer = false;
-			facel = true;
-			faceur = false;
-			faceul = false;
-			facedr = false;
-			facedl = false;
+			currentAnimationlegs = &legsdownleft;
+			position.y += speed;
+			position.x -= speed;
 		}
-		//look upright
-		if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_UP] == KEY_DOWN)
+		else if (facel == true && App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
 		{
-			currentAnimationtorso = &torsoupright;
-			weapon = &heavyweapon_upright;
-			faceu = false;
-			faced = false;
-			facer = false;
-			facel = false;
-			faceur = true;
-			faceul = false;
-			facedr = false;
-			facedl = false;
+			currentAnimationtorso = &torsoleft;
+			currentAnimationlegs = &legsupleft;
+			position.y += speed;
+			position.x += speed;
 		}
-		//look upleft
-		if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_UP] == KEY_DOWN)
+		else if (facel == true && App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
 		{
-			currentAnimationtorso = &torsoupleft;
-			weapon = &heavyweapon_upleft;
-			faceu = false;
-			faced = false;
-			facer = false;
-			facel = false;
-			faceur = false;
-			faceul = true;
-			facedr = false;
-			facedl = false;
+			currentAnimationtorso = &torsoleft;
+			currentAnimationlegs = &legsdownleft;
+			position.y -= speed;
+			position.x += speed;
 		}
-		//look downright
-		if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_DOWN] == KEY_DOWN)
+		else if (facel == true && App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT)
 		{
-			currentAnimationtorso = &torsodownright;
-			weapon = &heavyweapon_downright;
-			faceu = false;
-			faced = false;
-			facer = false;
-			facel = false;
-			faceur = false;
-			faceul = false;
-			facedr = true;
-			facedl = false;
+			currentAnimationtorso = &torsoleft;
+			currentAnimationlegs = &legsupleft;
+			position.y -= speed;
+			position.x -= speed;
 		}
-		//look downleft
-		if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_DOWN] == KEY_DOWN)
+		else if (facel == true && App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT) {
+			currentAnimationtorso = &torsoleft;
+			currentAnimationlegs = &legsleft;
+			position.x -= speed;
+		}
+		else if (facel == true && App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
 		{
-			currentAnimationtorso = &torsodownleft;
-			weapon = &heavyweapon_downleft;
-			faceu = false;
-			faced = false;
-			facer = false;
-			facel = false;
-			faceur = false;
-			faceul = false;
-			facedr = false;
-			facedl = true;
+			currentAnimationtorso = &torsoleft;
+			currentAnimationlegs = &legsleft;
+			position.x += speed;
+		}
+		else if (facel == true && App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT)
+		{
+			currentAnimationtorso = &torsoleft;
+			currentAnimationlegs = &legsdown;
+			position.y += speed;
+		}
+		else if (facel == true && App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT)
+		{
+			currentAnimationtorso = &torsoleft;
+			currentAnimationlegs = &legsup;
+			position.y -= speed;
 		}
 
-		//shots
-		if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_DOWN)
+
+		//upright
+		else if (faceur == true && App->input->keys[SDL_SCANCODE_W] && App->input->keys[SDL_SCANCODE_A])
 		{
-			uint shootheavy = App->audio->LoadFx("Assets/gwar-137.wav");
-			if (faceu == true) {
-				App->particles->AddParticle(App->particles->normal_up_shot, position.x + 22, position.y + 4, Collider::Type::PLAYER_SHOT);
-				App->audio->PlayFx(shootheavy, 0);
+			currentAnimationtorso = &torsoupright;
+			currentAnimationlegs = &legsdownright;
+			position.x -= speed;
+			position.y -= speed;
+		}
+		else if (faceur == true && App->input->keys[SDL_SCANCODE_W] && App->input->keys[SDL_SCANCODE_D])
+		{
+			currentAnimationtorso = &torsoupright;
+			currentAnimationlegs = &legsupright;
+			position.x += speed;
+			position.y -= speed;
+		}
+		else if (faceur == true && App->input->keys[SDL_SCANCODE_S] && App->input->keys[SDL_SCANCODE_A])
+		{
+			currentAnimationtorso = &torsoupright;
+			currentAnimationlegs = &legsupright;
+			position.x -= speed;
+			position.y += speed;
+		}
+		else if (faceur == true && App->input->keys[SDL_SCANCODE_S] && App->input->keys[SDL_SCANCODE_D])
+		{
+			currentAnimationtorso = &torsoupright;
+			currentAnimationlegs = &legsdownright;
+			position.x += speed;
+			position.y += speed;
+		}
+		else if (faceur == true && App->input->keys[SDL_SCANCODE_W])
+		{
+			currentAnimationtorso = &torsoupright;
+			currentAnimationlegs = &legsup;
+			position.y -= speed;
+		}
+		else if (faceur == true && App->input->keys[SDL_SCANCODE_S])
+		{
+			currentAnimationtorso = &torsoupright;
+			currentAnimationlegs = &legsup;
+			position.y += speed;
+		}
+		else if (faceur == true && App->input->keys[SDL_SCANCODE_D]) {
+			currentAnimationtorso = &torsoupright;
+			currentAnimationlegs = &legsright;
+			position.x += speed;
+		}
+		else if (faceur == true && App->input->keys[SDL_SCANCODE_A]) {
+			currentAnimationtorso = &torsoupright;
+			currentAnimationlegs = &legsright;
+			position.x -= speed;
+		}
+
+		//upleft
+		else if (faceul == true && App->input->keys[SDL_SCANCODE_W] && App->input->keys[SDL_SCANCODE_A])
+		{
+			currentAnimationtorso = &torsoupleft;
+			currentAnimationlegs = &legsupleft;
+			position.x -= speed;
+			position.y -= speed;
+		}
+		else if (faceul == true && App->input->keys[SDL_SCANCODE_W] && App->input->keys[SDL_SCANCODE_D])
+		{
+			currentAnimationtorso = &torsoupleft;
+			currentAnimationlegs = &legsupright;
+			position.x += speed;
+			position.y -= speed;
+		}
+		else if (faceul == true && App->input->keys[SDL_SCANCODE_S] && App->input->keys[SDL_SCANCODE_A])
+		{
+			currentAnimationtorso = &torsoupleft;
+			currentAnimationlegs = &legsdownleft;
+			position.x -= speed;
+			position.y += speed;
+		}
+		else if (faceul == true && App->input->keys[SDL_SCANCODE_S] && App->input->keys[SDL_SCANCODE_D])
+		{
+			currentAnimationtorso = &torsoupleft;
+			currentAnimationlegs = &legsupleft;
+			position.x += speed;
+			position.y += speed;
+		}
+		else if (faceul == true && App->input->keys[SDL_SCANCODE_W])
+		{
+			currentAnimationtorso = &torsoupleft;
+			currentAnimationlegs = &legsup;
+			position.y -= speed;
+		}
+		else if (faceul == true && App->input->keys[SDL_SCANCODE_S])
+		{
+			currentAnimationtorso = &torsoupleft;
+			currentAnimationlegs = &legsup;
+			position.y += speed;
+		}
+		else if (faceul == true && App->input->keys[SDL_SCANCODE_D]) {
+			currentAnimationtorso = &torsoupleft;
+			currentAnimationlegs = &legsleft;
+			position.x += speed;
+		}
+		else if (faceul == true && App->input->keys[SDL_SCANCODE_A]) {
+			currentAnimationtorso = &torsoupleft;
+			currentAnimationlegs = &legsleft;
+			position.x -= speed;
+		}
+
+
+		//downright
+		else if (facedr == true && App->input->keys[SDL_SCANCODE_W] && App->input->keys[SDL_SCANCODE_A])
+		{
+			currentAnimationtorso = &torsodownright;
+			currentAnimationlegs = &legsdownright;
+			position.x -= speed;
+			position.y -= speed;
+		}
+		else if (facedr == true && App->input->keys[SDL_SCANCODE_W] && App->input->keys[SDL_SCANCODE_D])
+		{
+			currentAnimationtorso = &torsodownright;
+			currentAnimationlegs = &legsupright;
+			position.x += speed;
+			position.y -= speed;
+		}
+		else if (facedr == true && App->input->keys[SDL_SCANCODE_S] && App->input->keys[SDL_SCANCODE_A])
+		{
+			currentAnimationtorso = &torsodownright;
+			currentAnimationlegs = &legsupright;
+			position.x -= speed;
+			position.y += speed;
+		}
+		else if (facedr == true && App->input->keys[SDL_SCANCODE_S] && App->input->keys[SDL_SCANCODE_D])
+		{
+			currentAnimationtorso = &torsodownright;
+			currentAnimationlegs = &legsdownright;
+			position.x += speed;
+			position.y += speed;
+		}
+		else if (facedr == true && App->input->keys[SDL_SCANCODE_W])
+		{
+			currentAnimationtorso = &torsodownright;
+			currentAnimationlegs = &legsdown;
+			position.y -= speed;
+		}
+		else if (facedr == true && App->input->keys[SDL_SCANCODE_S])
+		{
+			currentAnimationtorso = &torsodownright;
+			currentAnimationlegs = &legsdown;
+			position.y += speed;
+		}
+		else if (facedr == true && App->input->keys[SDL_SCANCODE_D]) {
+			currentAnimationtorso = &torsodownright;
+			currentAnimationlegs = &legsright;
+			position.x += speed;
+		}
+		else if (facedr == true && App->input->keys[SDL_SCANCODE_A]) {
+			currentAnimationtorso = &torsodownright;
+			currentAnimationlegs = &legsright;
+			position.x -= speed;
+		}
+
+		//down left
+		else if (facedl == true && App->input->keys[SDL_SCANCODE_W] && App->input->keys[SDL_SCANCODE_A])
+		{
+			currentAnimationtorso = &torsodownleft;
+			currentAnimationlegs = &legsupleft;
+			position.x -= speed;
+			position.y -= speed;
+		}
+		else if (facedl == true && App->input->keys[SDL_SCANCODE_W] && App->input->keys[SDL_SCANCODE_D])
+		{
+			currentAnimationtorso = &torsodownleft;
+			currentAnimationlegs = &legsdownleft;
+			position.x += speed;
+			position.y -= speed;
+		}
+		else if (facedl == true && App->input->keys[SDL_SCANCODE_S] && App->input->keys[SDL_SCANCODE_A])
+		{
+			currentAnimationtorso = &torsodownleft;
+			currentAnimationlegs = &legsdownleft;
+			position.x -= speed;
+			position.y += speed;
+		}
+		else if (facedl == true && App->input->keys[SDL_SCANCODE_S] && App->input->keys[SDL_SCANCODE_D])
+		{
+			currentAnimationtorso = &torsodownleft;
+			currentAnimationlegs = &legsupleft;
+			position.x += speed;
+			position.y += speed;
+		}
+		else if (facedl == true && App->input->keys[SDL_SCANCODE_W])
+		{
+			currentAnimationtorso = &torsodownleft;
+			currentAnimationlegs = &legsdown;
+			position.y -= speed;
+		}
+		else if (facedl == true && App->input->keys[SDL_SCANCODE_S])
+		{
+			currentAnimationtorso = &torsodownleft;
+			currentAnimationlegs = &legsdown;
+			position.y += speed;
+		}
+		else if (facedl == true && App->input->keys[SDL_SCANCODE_D]) {
+			currentAnimationtorso = &torsodownleft;
+			currentAnimationlegs = &legsleft;
+			position.x += speed;
+		}
+		else if (facedl == true && App->input->keys[SDL_SCANCODE_A]) {
+			currentAnimationtorso = &torsodownleft;
+			currentAnimationlegs = &legsleft;
+			position.x -= speed;
+		}
+
+
+		if (normalweapon == true && heavyweapon == false) {
+			//look up
+			if (App->input->keys[SDL_SCANCODE_UP] == KEY_DOWN)
+			{
+				//App->particles->AddParticle(App->particles->normal_up_shot, position.x +20, position.y+20, Collider::Type::PLAYER_SHOT);
+				currentAnimationtorso = &torsoup;
+				weapon = &normalweapon_up;
+				faceu = true;
+				faced = false;
+				facer = false;
+				facel = false;
+				faceur = false;
+				faceul = false;
+				facedr = false;
+				facedl = false;
 			}
-			else if (faced == true) {
-				App->audio->PlayFx(shootheavy, 0);
-				App->particles->AddParticle(App->particles->normal_down_shot, position.x + 8, position.y + 35, Collider::Type::PLAYER_SHOT);
+
+			//look down
+			if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_DOWN)
+			{
+				currentAnimationtorso = &torsodown;
+				weapon = &normalweapon_down;
+				faceu = false;
+				faced = true;
+				facer = false;
+				facel = false;
+				faceur = false;
+				faceul = false;
+				facedr = false;
+				facedl = false;
 			}
-			else if (facer == true) {
-				App->audio->PlayFx(shootheavy, 0);
-				App->particles->AddParticle(App->particles->normal_hr_shot, position.x + 20, position.y + 24, Collider::Type::PLAYER_SHOT);
+
+			//look right
+			if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_DOWN)
+			{
+				currentAnimationtorso = &torsoright;
+				weapon = &normalweapon_right;
+				faceu = false;
+				faced = false;
+				facer = true;
+				facel = false;
+				faceur = false;
+				faceul = false;
+				facedr = false;
+				facedl = false;
 			}
-			else if (facel == true) {
-				App->audio->PlayFx(shootheavy, 0);
-				App->particles->AddParticle(App->particles->normal_hl_shot, position.x - 4, position.y + 21, Collider::Type::PLAYER_SHOT);
+
+			//look left
+			if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_DOWN)
+			{
+				currentAnimationtorso = &torsoleft;
+				weapon = &normalweapon_left;
+				faceu = false;
+				faced = false;
+				facer = false;
+				facel = true;
+				faceur = false;
+				faceul = false;
+				facedr = false;
+				facedl = false;
 			}
-			else if (faceur == true) {
-				App->audio->PlayFx(shootheavy, 0);
-				App->particles->AddParticle(App->particles->normal_ur_shot, position.x + 20, position.y + 20, Collider::Type::PLAYER_SHOT);
+			//look upright
+			if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_UP] == KEY_DOWN)
+			{
+				currentAnimationtorso = &torsoupright;
+				weapon = &normalweapon_upright;
+				faceu = false;
+				faced = false;
+				facer = false;
+				facel = false;
+				faceur = true;
+				faceul = false;
+				facedr = false;
+				facedl = false;
 			}
-			else if (faceul == true) {
-				App->audio->PlayFx(shootheavy, 0);
-				App->particles->AddParticle(App->particles->normal_ul_shot, position.x + 6, position.y + 10, Collider::Type::PLAYER_SHOT);
+			//look upleft
+			if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_UP] == KEY_DOWN)
+			{
+				currentAnimationtorso = &torsoupleft;
+				weapon = &normalweapon_upleft;
+				faceu = false;
+				faced = false;
+				facer = false;
+				facel = false;
+				faceur = false;
+				faceul = true;
+				facedr = false;
+				facedl = false;
 			}
-			else if (facedr == true) {
-				App->audio->PlayFx(shootheavy, 0);
-				App->particles->AddParticle(App->particles->normal_dr_shot, position.x + 18, position.y + 35, Collider::Type::PLAYER_SHOT);
+			//look downright
+			if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_DOWN] == KEY_DOWN)
+			{
+				currentAnimationtorso = &torsodownright;
+				weapon = &normalweapon_downright;
+				faceu = false;
+				faced = false;
+				facer = false;
+				facel = false;
+				faceur = false;
+				faceul = false;
+				facedr = true;
+				facedl = false;
 			}
-			else if (facedl == true) {
-				App->audio->PlayFx(shootheavy, 0);
-				App->particles->AddParticle(App->particles->normal_dl_shot, position.x + 2, position.y + 26, Collider::Type::PLAYER_SHOT);
+			//look downleft
+			if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_DOWN] == KEY_DOWN)
+			{
+				currentAnimationtorso = &torsodownleft;
+				weapon = &normalweapon_downleft;
+				faceu = false;
+				faced = false;
+				facer = false;
+				facel = false;
+				faceur = false;
+				faceul = false;
+				facedr = false;
+				facedl = true;
+			}
+			//shots
+
+			if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_DOWN)
+			{
+				uint shoot = App->audio->LoadFx("Assets/gwar-137.wav");
+				if (faceu == true) {
+					App->particles->AddParticle(App->particles->normal_up_shot, position.x + 22, position.y + 4, Collider::Type::PLAYER_SHOT);
+					App->audio->PlayFx(shoot, 0);
+				}
+				else if (faced == true) {
+					App->particles->AddParticle(App->particles->normal_down_shot, position.x + 8, position.y + 35, Collider::Type::PLAYER_SHOT);
+					App->audio->PlayFx(shoot, 0);
+				}
+				else if (facer == true) {
+					App->particles->AddParticle(App->particles->normal_hr_shot, position.x + 20, position.y + 24, Collider::Type::PLAYER_SHOT);
+					App->audio->PlayFx(shoot, 0);
+				}
+				else if (facel == true) {
+					App->particles->AddParticle(App->particles->normal_hl_shot, position.x - 4, position.y + 21, Collider::Type::PLAYER_SHOT);
+					App->audio->PlayFx(shoot, 0);
+				}
+				else if (faceur == true) {
+					App->particles->AddParticle(App->particles->normal_ur_shot, position.x + 20, position.y + 20, Collider::Type::PLAYER_SHOT);
+					App->audio->PlayFx(shoot, 0);
+				}
+				else if (faceul == true) {
+					App->particles->AddParticle(App->particles->normal_ul_shot, position.x + 6, position.y + 10, Collider::Type::PLAYER_SHOT);
+					App->audio->PlayFx(shoot, 0);
+				}
+				else if (facedr == true) {
+					App->particles->AddParticle(App->particles->normal_dr_shot, position.x + 18, position.y + 35, Collider::Type::PLAYER_SHOT);
+					App->audio->PlayFx(shoot, 0);
+				}
+				else if (facedl == true) {
+					App->particles->AddParticle(App->particles->normal_dl_shot, position.x + 2, position.y + 26, Collider::Type::PLAYER_SHOT);
+					App->audio->PlayFx(shoot, 0);
+				}
+			}
+		}
+		else if (heavyweapon == true && normalweapon == false) {
+			//look up
+			if (App->input->keys[SDL_SCANCODE_UP] == KEY_DOWN)
+			{
+				//App->particles->AddParticle(App->particles->normal_up_shot, position.x +20, position.y+20, Collider::Type::PLAYER_SHOT);
+				currentAnimationtorso = &torsoup;
+				weapon = &heavyweapon_up;
+				faceu = true;
+				faced = false;
+				facer = false;
+				facel = false;
+				faceur = false;
+				faceul = false;
+				facedr = false;
+				facedl = false;
+			}
+
+			//look down
+			if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_DOWN)
+			{
+				currentAnimationtorso = &torsodown;
+				weapon = &heavyweapon_down;
+				faceu = false;
+				faced = true;
+				facer = false;
+				facel = false;
+				faceur = false;
+				faceul = false;
+				facedr = false;
+				facedl = false;
+			}
+
+			//look right
+			if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_DOWN)
+			{
+				currentAnimationtorso = &torsoright;
+				weapon = &heavyweapon_right;
+				faceu = false;
+				faced = false;
+				facer = true;
+				facel = false;
+				faceur = false;
+				faceul = false;
+				facedr = false;
+				facedl = false;
+			}
+
+			//look left
+			if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_DOWN)
+			{
+				currentAnimationtorso = &torsoleft;
+				weapon = &heavyweapon_left;
+				faceu = false;
+				faced = false;
+				facer = false;
+				facel = true;
+				faceur = false;
+				faceul = false;
+				facedr = false;
+				facedl = false;
+			}
+			//look upright
+			if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_UP] == KEY_DOWN)
+			{
+				currentAnimationtorso = &torsoupright;
+				weapon = &heavyweapon_upright;
+				faceu = false;
+				faced = false;
+				facer = false;
+				facel = false;
+				faceur = true;
+				faceul = false;
+				facedr = false;
+				facedl = false;
+			}
+			//look upleft
+			if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_UP] == KEY_DOWN)
+			{
+				currentAnimationtorso = &torsoupleft;
+				weapon = &heavyweapon_upleft;
+				faceu = false;
+				faced = false;
+				facer = false;
+				facel = false;
+				faceur = false;
+				faceul = true;
+				facedr = false;
+				facedl = false;
+			}
+			//look downright
+			if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_DOWN] == KEY_DOWN)
+			{
+				currentAnimationtorso = &torsodownright;
+				weapon = &heavyweapon_downright;
+				faceu = false;
+				faced = false;
+				facer = false;
+				facel = false;
+				faceur = false;
+				faceul = false;
+				facedr = true;
+				facedl = false;
+			}
+			//look downleft
+			if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_DOWN] == KEY_DOWN)
+			{
+				currentAnimationtorso = &torsodownleft;
+				weapon = &heavyweapon_downleft;
+				faceu = false;
+				faced = false;
+				facer = false;
+				facel = false;
+				faceur = false;
+				faceul = false;
+				facedr = false;
+				facedl = true;
+			}
+
+			//shots
+			if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_DOWN)
+			{
+				uint shootheavy = App->audio->LoadFx("Assets/gwar-137.wav");
+				if (faceu == true) {
+					App->particles->AddParticle(App->particles->normal_up_shot, position.x + 22, position.y + 4, Collider::Type::PLAYER_SHOT);
+					App->audio->PlayFx(shootheavy, 0);
+				}
+				else if (faced == true) {
+					App->audio->PlayFx(shootheavy, 0);
+					App->particles->AddParticle(App->particles->normal_down_shot, position.x + 8, position.y + 35, Collider::Type::PLAYER_SHOT);
+				}
+				else if (facer == true) {
+					App->audio->PlayFx(shootheavy, 0);
+					App->particles->AddParticle(App->particles->normal_hr_shot, position.x + 20, position.y + 24, Collider::Type::PLAYER_SHOT);
+				}
+				else if (facel == true) {
+					App->audio->PlayFx(shootheavy, 0);
+					App->particles->AddParticle(App->particles->normal_hl_shot, position.x - 4, position.y + 21, Collider::Type::PLAYER_SHOT);
+				}
+				else if (faceur == true) {
+					App->audio->PlayFx(shootheavy, 0);
+					App->particles->AddParticle(App->particles->normal_ur_shot, position.x + 20, position.y + 20, Collider::Type::PLAYER_SHOT);
+				}
+				else if (faceul == true) {
+					App->audio->PlayFx(shootheavy, 0);
+					App->particles->AddParticle(App->particles->normal_ul_shot, position.x + 6, position.y + 10, Collider::Type::PLAYER_SHOT);
+				}
+				else if (facedr == true) {
+					App->audio->PlayFx(shootheavy, 0);
+					App->particles->AddParticle(App->particles->normal_dr_shot, position.x + 18, position.y + 35, Collider::Type::PLAYER_SHOT);
+				}
+				else if (facedl == true) {
+					App->audio->PlayFx(shootheavy, 0);
+					App->particles->AddParticle(App->particles->normal_dl_shot, position.x + 2, position.y + 26, Collider::Type::PLAYER_SHOT);
+				}
 			}
 		}
 	}
+	else {
+		wateriddleAnim.frames[0] = currentAnimationlegs->frames[currentAnimationlegs->GetCurrentFrameint()];
+		currentAnimationlegs = &wateriddleAnim;
+		//up	
+		if (faceu == true && App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
+		{
+			currentAnimationlegs = &water;
+			currentAnimationtorso = &torsoup;
+			position.x += speed;
+			position.y += speed;
+		}
+		else if (faceu == true && App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT)
+		{
+			currentAnimationlegs = &water;
+			currentAnimationtorso = &torsoup;
+			position.x -= speed;
+			position.y += speed;
+		}
+		else if (faceu == true && App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
+		{
+			currentAnimationlegs = &water;
+			currentAnimationtorso = &torsoup;
+			position.x += speed;
+			position.y -= speed;
+		}
+		else if (faceu == true && App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT)
+		{
+			currentAnimationlegs = &water;
+			currentAnimationtorso = &torsoup;
+			position.x -= speed;
+			position.y -= speed;
+		}
+		else if (faceu == true && App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT) {
+			currentAnimationtorso = &torsoup;
+			currentAnimationlegs = &water;
+			position.y -= speed;
+		}
+		else if (faceu == true && App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT) {
+			currentAnimationlegs = &water;
+			currentAnimationtorso = &torsoup;
+			position.y += speed;
+		}
+		else if (faceu == true && App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT) {
+			currentAnimationlegs = &water;
+			currentAnimationtorso = &torsoup;
+			position.x += speed;
+		}
+		else if (faceu == true && App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT) {
+			currentAnimationlegs = &water;
+			currentAnimationtorso = &torsoup;
+			position.x -= speed;
+		}
+		//down
+		else if (faced == true && App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
+		{
+			currentAnimationtorso = &torsodown;
+			currentAnimationlegs = &water;
+			position.y -= speed;
+			position.x += speed;
+		}
+		else if (faced == true && App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT)
+		{
+			currentAnimationtorso = &torsodown;
+			currentAnimationlegs = &water;
+			position.y -= speed;
+			position.x -= speed;
+		}
+		else if (faced == true && App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT)
+		{
+			currentAnimationtorso = &torsodown;
+			currentAnimationlegs = &water;
+			position.y += speed;
+			position.x -= speed;
+		}
+		else if (faced == true && App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
+		{
+			currentAnimationtorso = &torsodown;
+			currentAnimationlegs = &water;
+			position.y += speed;
+			position.x += speed;
+		}
+		else if (faced == true && App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT) {
+			currentAnimationtorso = &torsodown;
+			currentAnimationlegs = &water;
+			position.y += speed;
+		}
+		else if (faced == true && App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT)
+		{
+			currentAnimationtorso = &torsodown;
+			currentAnimationlegs = &water;
+			position.y -= speed;
+		}
+		else if (faced == true && App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
+		{
+			currentAnimationtorso = &torsodown;
+			currentAnimationlegs = &water;
+			position.x += speed;
+		}
+		else if (faced == true && App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT)
+		{
+			currentAnimationtorso = &torsodown;
+			currentAnimationlegs = &water;
+			position.x -= speed;
+		}
+
+
+		//right
+		else if (facer == true && App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT)
+		{
+			currentAnimationtorso = &torsoright;
+			currentAnimationlegs = &water;
+			position.y += speed;
+			position.x -= speed;
+		}
+		else if (facer == true && App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
+		{
+			currentAnimationtorso = &torsoright;
+			currentAnimationlegs = &water;
+			position.y += speed;
+			position.x += speed;
+		}
+		else if (facer == true && App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
+		{
+			currentAnimationtorso = &torsoright;
+			currentAnimationlegs = &water;
+			position.y -= speed;
+			position.x += speed;
+		}
+		else if (facer == true && App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT)
+		{
+			currentAnimationtorso = &torsoright;
+			currentAnimationlegs = &water;
+			position.y -= speed;
+			position.x -= speed;
+		}
+		else if (facer == true && App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT) {
+			currentAnimationtorso = &torsoright;
+			currentAnimationlegs = &water;
+			position.x += speed;
+		}
+		else if (facer == true && App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT)
+		{
+			currentAnimationtorso = &torsoright;
+			currentAnimationlegs = &water;
+			position.x -= speed;
+		}
+		else if (facer == true && App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT)
+		{
+			currentAnimationtorso = &torsoright;
+			currentAnimationlegs = &water;
+			position.y -= speed;
+		}
+		else if (facer == true && App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT)
+		{
+			currentAnimationtorso = &torsoright;
+			currentAnimationlegs = &water;
+			position.y += speed;
+		}
+
+
+		//left
+		else if (facel == true && App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT)
+		{
+			currentAnimationtorso = &torsoleft;
+			currentAnimationlegs = &water;
+			position.y += speed;
+			position.x -= speed;
+		}
+		else if (facel == true && App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
+		{
+			currentAnimationtorso = &torsoleft;
+			currentAnimationlegs = &water;
+			position.y += speed;
+			position.x += speed;
+		}
+		else if (facel == true && App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
+		{
+			currentAnimationtorso = &torsoleft;
+			currentAnimationlegs = &water;
+			position.y -= speed;
+			position.x += speed;
+		}
+		else if (facel == true && App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT)
+		{
+			currentAnimationtorso = &torsoleft;
+			currentAnimationlegs = &water;
+			position.y -= speed;
+			position.x -= speed;
+		}
+		else if (facel == true && App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT) {
+			currentAnimationtorso = &torsoleft;
+			currentAnimationlegs = &water;
+			position.x -= speed;
+		}
+		else if (facel == true && App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
+		{
+			currentAnimationtorso = &torsoleft;
+			currentAnimationlegs = &water;
+			position.x += speed;
+		}
+		else if (facel == true && App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT)
+		{
+			currentAnimationtorso = &torsoleft;
+			currentAnimationlegs = &water;
+			position.y += speed;
+		}
+		else if (facel == true && App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT)
+		{
+			currentAnimationtorso = &torsoleft;
+			currentAnimationlegs = &water;
+			position.y -= speed;
+		}
+
+
+		//upright
+		else if (faceur == true && App->input->keys[SDL_SCANCODE_W] && App->input->keys[SDL_SCANCODE_A])
+		{
+			currentAnimationtorso = &torsoupright;
+			currentAnimationlegs = &water;
+			position.x -= speed;
+			position.y -= speed;
+		}
+		else if (faceur == true && App->input->keys[SDL_SCANCODE_W] && App->input->keys[SDL_SCANCODE_D])
+		{
+			currentAnimationtorso = &torsoupright;
+			currentAnimationlegs = &water;
+			position.x += speed;
+			position.y -= speed;
+		}
+		else if (faceur == true && App->input->keys[SDL_SCANCODE_S] && App->input->keys[SDL_SCANCODE_A])
+		{
+			currentAnimationtorso = &torsoupright;
+			currentAnimationlegs = &water;
+			position.x -= speed;
+			position.y += speed;
+		}
+		else if (faceur == true && App->input->keys[SDL_SCANCODE_S] && App->input->keys[SDL_SCANCODE_D])
+		{
+			currentAnimationtorso = &torsoupright;
+			currentAnimationlegs = &water;
+			position.x += speed;
+			position.y += speed;
+		}
+		else if (faceur == true && App->input->keys[SDL_SCANCODE_W])
+		{
+			currentAnimationtorso = &torsoupright;
+			currentAnimationlegs = &water;
+			position.y -= speed;
+		}
+		else if (faceur == true && App->input->keys[SDL_SCANCODE_S])
+		{
+			currentAnimationtorso = &torsoupright;
+			currentAnimationlegs = &water;
+			position.y += speed;
+		}
+		else if (faceur == true && App->input->keys[SDL_SCANCODE_D]) {
+			currentAnimationtorso = &torsoupright;
+			currentAnimationlegs = &water;
+			position.x += speed;
+		}
+		else if (faceur == true && App->input->keys[SDL_SCANCODE_A]) {
+			currentAnimationtorso = &torsoupright;
+			currentAnimationlegs = &water;
+			position.x -= speed;
+		}
+
+		//upleft
+		else if (faceul == true && App->input->keys[SDL_SCANCODE_W] && App->input->keys[SDL_SCANCODE_A])
+		{
+			currentAnimationtorso = &torsoupleft;
+			currentAnimationlegs = &water;
+			position.x -= speed;
+			position.y -= speed;
+		}
+		else if (faceul == true && App->input->keys[SDL_SCANCODE_W] && App->input->keys[SDL_SCANCODE_D])
+		{
+			currentAnimationtorso = &torsoupleft;
+			currentAnimationlegs = &water;
+			position.x += speed;
+			position.y -= speed;
+		}
+		else if (faceul == true && App->input->keys[SDL_SCANCODE_S] && App->input->keys[SDL_SCANCODE_A])
+		{
+			currentAnimationtorso = &torsoupleft;
+			currentAnimationlegs = &water;
+			position.x -= speed;
+			position.y += speed;
+		}
+		else if (faceul == true && App->input->keys[SDL_SCANCODE_S] && App->input->keys[SDL_SCANCODE_D])
+		{
+			currentAnimationtorso = &torsoupleft;
+			currentAnimationlegs = &water;
+			position.x += speed;
+			position.y += speed;
+		}
+		else if (faceul == true && App->input->keys[SDL_SCANCODE_W])
+		{
+			currentAnimationtorso = &torsoupleft;
+			currentAnimationlegs = &water;
+			position.y -= speed;
+		}
+		else if (faceul == true && App->input->keys[SDL_SCANCODE_S])
+		{
+			currentAnimationtorso = &torsoupleft;
+			currentAnimationlegs = &water;
+			position.y += speed;
+		}
+		else if (faceul == true && App->input->keys[SDL_SCANCODE_D]) {
+			currentAnimationtorso = &torsoupleft;
+			currentAnimationlegs = &water;
+			position.x += speed;
+		}
+		else if (faceul == true && App->input->keys[SDL_SCANCODE_A]) {
+			currentAnimationtorso = &torsoupleft;
+			currentAnimationlegs = &water;
+			position.x -= speed;
+		}
+
+
+		//downright
+		else if (facedr == true && App->input->keys[SDL_SCANCODE_W] && App->input->keys[SDL_SCANCODE_A])
+		{
+			currentAnimationtorso = &torsodownright;
+			currentAnimationlegs = &water;
+			position.x -= speed;
+			position.y -= speed;
+		}
+		else if (facedr == true && App->input->keys[SDL_SCANCODE_W] && App->input->keys[SDL_SCANCODE_D])
+		{
+			currentAnimationtorso = &torsodownright;
+			currentAnimationlegs = &water;
+			position.x += speed;
+			position.y -= speed;
+		}
+		else if (facedr == true && App->input->keys[SDL_SCANCODE_S] && App->input->keys[SDL_SCANCODE_A])
+		{
+			currentAnimationtorso = &torsodownright;
+			currentAnimationlegs = &water;
+			position.x -= speed;
+			position.y += speed;
+		}
+		else if (facedr == true && App->input->keys[SDL_SCANCODE_S] && App->input->keys[SDL_SCANCODE_D])
+		{
+			currentAnimationtorso = &torsodownright;
+			currentAnimationlegs = &water;
+			position.x += speed;
+			position.y += speed;
+		}
+		else if (facedr == true && App->input->keys[SDL_SCANCODE_W])
+		{
+			currentAnimationtorso = &torsodownright;
+			currentAnimationlegs = &water;
+			position.y -= speed;
+		}
+		else if (facedr == true && App->input->keys[SDL_SCANCODE_S])
+		{
+			currentAnimationtorso = &torsodownright;
+			currentAnimationlegs = &water;
+			position.y += speed;
+		}
+		else if (facedr == true && App->input->keys[SDL_SCANCODE_D]) {
+			currentAnimationtorso = &torsodownright;
+			currentAnimationlegs = &water;
+			position.x += speed;
+		}
+		else if (facedr == true && App->input->keys[SDL_SCANCODE_A]) {
+			currentAnimationtorso = &torsodownright;
+			currentAnimationlegs = &water;
+			position.x -= speed;
+		}
+
+		//down left
+		else if (facedl == true && App->input->keys[SDL_SCANCODE_W] && App->input->keys[SDL_SCANCODE_A])
+		{
+			currentAnimationtorso = &torsodownleft;
+			currentAnimationlegs = &water;
+			position.x -= speed;
+			position.y -= speed;
+		}
+		else if (facedl == true && App->input->keys[SDL_SCANCODE_W] && App->input->keys[SDL_SCANCODE_D])
+		{
+			currentAnimationtorso = &torsodownleft;
+			currentAnimationlegs = &water;
+			position.x += speed;
+			position.y -= speed;
+		}
+		else if (facedl == true && App->input->keys[SDL_SCANCODE_S] && App->input->keys[SDL_SCANCODE_A])
+		{
+			currentAnimationtorso = &torsodownleft;
+			currentAnimationlegs = &water;
+			position.x -= speed;
+			position.y += speed;
+		}
+		else if (facedl == true && App->input->keys[SDL_SCANCODE_S] && App->input->keys[SDL_SCANCODE_D])
+		{
+			currentAnimationtorso = &torsodownleft;
+			currentAnimationlegs = &water;
+			position.x += speed;
+			position.y += speed;
+		}
+		else if (facedl == true && App->input->keys[SDL_SCANCODE_W])
+		{
+			currentAnimationtorso = &torsodownleft;
+			currentAnimationlegs = &water;
+			position.y -= speed;
+		}
+		else if (facedl == true && App->input->keys[SDL_SCANCODE_S])
+		{
+			currentAnimationtorso = &torsodownleft;
+			currentAnimationlegs = &water;
+			position.y += speed;
+		}
+		else if (facedl == true && App->input->keys[SDL_SCANCODE_D]) {
+			currentAnimationtorso = &torsodownleft;
+			currentAnimationlegs = &water;
+			position.x += speed;
+		}
+		else if (facedl == true && App->input->keys[SDL_SCANCODE_A]) {
+			currentAnimationtorso = &torsodownleft;
+			currentAnimationlegs = &water;
+			position.x -= speed;
+		}
+
+
+		if (normalweapon == true && heavyweapon == false) {
+			//look up
+			if (App->input->keys[SDL_SCANCODE_UP] == KEY_DOWN)
+			{
+				//App->particles->AddParticle(App->particles->normal_up_shot, position.x +20, position.y+20, Collider::Type::PLAYER_SHOT);
+				currentAnimationtorso = &torsoup;
+				weapon = &normalweapon_up;
+				faceu = true;
+				faced = false;
+				facer = false;
+				facel = false;
+				faceur = false;
+				faceul = false;
+				facedr = false;
+				facedl = false;
+			}
+
+			//look down
+			if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_DOWN)
+			{
+				currentAnimationtorso = &torsodown;
+				weapon = &normalweapon_down;
+				faceu = false;
+				faced = true;
+				facer = false;
+				facel = false;
+				faceur = false;
+				faceul = false;
+				facedr = false;
+				facedl = false;
+			}
+
+			//look right
+			if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_DOWN)
+			{
+				currentAnimationtorso = &torsoright;
+				weapon = &normalweapon_right;
+				faceu = false;
+				faced = false;
+				facer = true;
+				facel = false;
+				faceur = false;
+				faceul = false;
+				facedr = false;
+				facedl = false;
+			}
+
+			//look left
+			if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_DOWN)
+			{
+				currentAnimationtorso = &torsoleft;
+				weapon = &normalweapon_left;
+				faceu = false;
+				faced = false;
+				facer = false;
+				facel = true;
+				faceur = false;
+				faceul = false;
+				facedr = false;
+				facedl = false;
+			}
+			//look upright
+			if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_UP] == KEY_DOWN)
+			{
+				currentAnimationtorso = &torsoupright;
+				weapon = &normalweapon_upright;
+				faceu = false;
+				faced = false;
+				facer = false;
+				facel = false;
+				faceur = true;
+				faceul = false;
+				facedr = false;
+				facedl = false;
+			}
+			//look upleft
+			if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_UP] == KEY_DOWN)
+			{
+				currentAnimationtorso = &torsoupleft;
+				weapon = &normalweapon_upleft;
+				faceu = false;
+				faced = false;
+				facer = false;
+				facel = false;
+				faceur = false;
+				faceul = true;
+				facedr = false;
+				facedl = false;
+			}
+			//look downright
+			if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_DOWN] == KEY_DOWN)
+			{
+				currentAnimationtorso = &torsodownright;
+				weapon = &normalweapon_downright;
+				faceu = false;
+				faced = false;
+				facer = false;
+				facel = false;
+				faceur = false;
+				faceul = false;
+				facedr = true;
+				facedl = false;
+			}
+			//look downleft
+			if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_DOWN] == KEY_DOWN)
+			{
+				currentAnimationtorso = &torsodownleft;
+				weapon = &normalweapon_downleft;
+				faceu = false;
+				faced = false;
+				facer = false;
+				facel = false;
+				faceur = false;
+				faceul = false;
+				facedr = false;
+				facedl = true;
+			}
+			//shots
+
+			if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_DOWN)
+			{
+				uint shoot = App->audio->LoadFx("Assets/gwar-137.wav");
+				if (faceu == true) {
+					App->particles->AddParticle(App->particles->normal_up_shot, position.x + 22, position.y + 4, Collider::Type::PLAYER_SHOT);
+					App->audio->PlayFx(shoot, 0);
+				}
+				else if (faced == true) {
+					App->particles->AddParticle(App->particles->normal_down_shot, position.x + 8, position.y + 35, Collider::Type::PLAYER_SHOT);
+					App->audio->PlayFx(shoot, 0);
+				}
+				else if (facer == true) {
+					App->particles->AddParticle(App->particles->normal_hr_shot, position.x + 20, position.y + 24, Collider::Type::PLAYER_SHOT);
+					App->audio->PlayFx(shoot, 0);
+				}
+				else if (facel == true) {
+					App->particles->AddParticle(App->particles->normal_hl_shot, position.x - 4, position.y + 21, Collider::Type::PLAYER_SHOT);
+					App->audio->PlayFx(shoot, 0);
+				}
+				else if (faceur == true) {
+					App->particles->AddParticle(App->particles->normal_ur_shot, position.x + 20, position.y + 20, Collider::Type::PLAYER_SHOT);
+					App->audio->PlayFx(shoot, 0);
+				}
+				else if (faceul == true) {
+					App->particles->AddParticle(App->particles->normal_ul_shot, position.x + 6, position.y + 10, Collider::Type::PLAYER_SHOT);
+					App->audio->PlayFx(shoot, 0);
+				}
+				else if (facedr == true) {
+					App->particles->AddParticle(App->particles->normal_dr_shot, position.x + 18, position.y + 35, Collider::Type::PLAYER_SHOT);
+					App->audio->PlayFx(shoot, 0);
+				}
+				else if (facedl == true) {
+					App->particles->AddParticle(App->particles->normal_dl_shot, position.x + 2, position.y + 26, Collider::Type::PLAYER_SHOT);
+					App->audio->PlayFx(shoot, 0);
+				}
+			}
+		}
+		else if (heavyweapon == true && normalweapon == false) {
+			//look up
+			if (App->input->keys[SDL_SCANCODE_UP] == KEY_DOWN)
+			{
+				//App->particles->AddParticle(App->particles->normal_up_shot, position.x +20, position.y+20, Collider::Type::PLAYER_SHOT);
+				currentAnimationtorso = &torsoup;
+				weapon = &heavyweapon_up;
+				faceu = true;
+				faced = false;
+				facer = false;
+				facel = false;
+				faceur = false;
+				faceul = false;
+				facedr = false;
+				facedl = false;
+			}
+
+			//look down
+			if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_DOWN)
+			{
+				currentAnimationtorso = &torsodown;
+				weapon = &heavyweapon_down;
+				faceu = false;
+				faced = true;
+				facer = false;
+				facel = false;
+				faceur = false;
+				faceul = false;
+				facedr = false;
+				facedl = false;
+			}
+
+			//look right
+			if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_DOWN)
+			{
+				currentAnimationtorso = &torsoright;
+				weapon = &heavyweapon_right;
+				faceu = false;
+				faced = false;
+				facer = true;
+				facel = false;
+				faceur = false;
+				faceul = false;
+				facedr = false;
+				facedl = false;
+			}
+
+			//look left
+			if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_DOWN)
+			{
+				currentAnimationtorso = &torsoleft;
+				weapon = &heavyweapon_left;
+				faceu = false;
+				faced = false;
+				facer = false;
+				facel = true;
+				faceur = false;
+				faceul = false;
+				facedr = false;
+				facedl = false;
+			}
+			//look upright
+			if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_UP] == KEY_DOWN)
+			{
+				currentAnimationtorso = &torsoupright;
+				weapon = &heavyweapon_upright;
+				faceu = false;
+				faced = false;
+				facer = false;
+				facel = false;
+				faceur = true;
+				faceul = false;
+				facedr = false;
+				facedl = false;
+			}
+			//look upleft
+			if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_UP] == KEY_DOWN)
+			{
+				currentAnimationtorso = &torsoupleft;
+				weapon = &heavyweapon_upleft;
+				faceu = false;
+				faced = false;
+				facer = false;
+				facel = false;
+				faceur = false;
+				faceul = true;
+				facedr = false;
+				facedl = false;
+			}
+			//look downright
+			if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_DOWN] == KEY_DOWN)
+			{
+				currentAnimationtorso = &torsodownright;
+				weapon = &heavyweapon_downright;
+				faceu = false;
+				faced = false;
+				facer = false;
+				facel = false;
+				faceur = false;
+				faceul = false;
+				facedr = true;
+				facedl = false;
+			}
+			//look downleft
+			if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_DOWN] == KEY_DOWN)
+			{
+				currentAnimationtorso = &torsodownleft;
+				weapon = &heavyweapon_downleft;
+				faceu = false;
+				faced = false;
+				facer = false;
+				facel = false;
+				faceur = false;
+				faceul = false;
+				facedr = false;
+				facedl = true;
+			}
+
+			//shots
+			if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_DOWN)
+			{
+				uint shootheavy = App->audio->LoadFx("Assets/gwar-137.wav");
+				if (faceu == true) {
+					App->particles->AddParticle(App->particles->normal_up_shot, position.x + 22, position.y + 4, Collider::Type::PLAYER_SHOT);
+					App->audio->PlayFx(shootheavy, 0);
+				}
+				else if (faced == true) {
+					App->audio->PlayFx(shootheavy, 0);
+					App->particles->AddParticle(App->particles->normal_down_shot, position.x + 8, position.y + 35, Collider::Type::PLAYER_SHOT);
+				}
+				else if (facer == true) {
+					App->audio->PlayFx(shootheavy, 0);
+					App->particles->AddParticle(App->particles->normal_hr_shot, position.x + 20, position.y + 24, Collider::Type::PLAYER_SHOT);
+				}
+				else if (facel == true) {
+					App->audio->PlayFx(shootheavy, 0);
+					App->particles->AddParticle(App->particles->normal_hl_shot, position.x - 4, position.y + 21, Collider::Type::PLAYER_SHOT);
+				}
+				else if (faceur == true) {
+					App->audio->PlayFx(shootheavy, 0);
+					App->particles->AddParticle(App->particles->normal_ur_shot, position.x + 20, position.y + 20, Collider::Type::PLAYER_SHOT);
+				}
+				else if (faceul == true) {
+					App->audio->PlayFx(shootheavy, 0);
+					App->particles->AddParticle(App->particles->normal_ul_shot, position.x + 6, position.y + 10, Collider::Type::PLAYER_SHOT);
+				}
+				else if (facedr == true) {
+					App->audio->PlayFx(shootheavy, 0);
+					App->particles->AddParticle(App->particles->normal_dr_shot, position.x + 18, position.y + 35, Collider::Type::PLAYER_SHOT);
+				}
+				else if (facedl == true) {
+					App->audio->PlayFx(shootheavy, 0);
+					App->particles->AddParticle(App->particles->normal_dl_shot, position.x + 2, position.y + 26, Collider::Type::PLAYER_SHOT);
+				}
+			}
+		}
+		/*if (!OnCollision(c1, c2)) {
+
+		}*/
+	}
+	
 
 	//instawin
 	if (App->input->keys[SDL_SCANCODE_F1] == KEY_DOWN) {
@@ -1319,10 +2061,33 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			}
 			break;
 		case(Collider::Type::WATER):
-			if (collider->Intersects(c2->rect)) {
+			if (collider->Intersects(c2->rect)==true) {
 				waterP = true;
+				if (collider->Intersects(c2->rect)==false) {
+					waterP = false;
+				}
+
 			}
-		}	
+		case(Collider::Type::NONE):
+			if (collider->Intersects(c2->rect) == true) {
+				waterP = false;
+				if (collider->Intersects(c2->rect) == false) {
+					waterP = false;
+				}
+
+			}
+		}
+
+		if (c2->type == Collider::Type::WATER) {
+			if (collider->Intersects(c2->rect) == true) {
+				waterP = true;
+				if (collider->Intersects(c2->rect) == false) {
+					waterP = false;
+				}
+
+			}
+		}
+
 	}
 	
 	
