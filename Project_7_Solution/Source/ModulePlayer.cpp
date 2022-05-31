@@ -196,6 +196,12 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	legsdownleft.PushBack({ 33,338,32,32 });
 	legsdownleft.speed = 0.1f;
 
+	//animation water
+	water.PushBack({ 363, 23, 32, 32 });
+	water.PushBack({ 396, 23, 32, 32 });
+	water.PushBack({ 431, 23, 32, 32 });
+	water.PushBack({ 460, 23, 32, 32 });
+
 	//normalweapon up
 	normalweapon_up.PushBack({ 17,27,5,16 });
 	//weaponup.PushBack({ 18,40,13,24 });
@@ -288,7 +294,7 @@ bool ModulePlayer::Start()
 	normalweapon = true;
 	heavyweapon = false;
 	dead = false;
-	lives = 2;
+	lives = 3;
 
 	texture = App->textures->Load("Assets/Guerrilla War Player 1 Spritesheet OK.png");
 	weapon_texture = App->textures->Load("Assets/Guerrilla War Weapon Spritesheet1.png");
@@ -1065,6 +1071,11 @@ Update_Status ModulePlayer::Update()
 		}
 	}
 
+	//instawin
+	if (App->input->keys[SDL_SCANCODE_F1] == KEY_DOWN) {
+		score = 30000;
+	}
+
 	//instakill
 	if (App->input->keys[SDL_SCANCODE_F2] == KEY_DOWN) {
 		dead = true;
@@ -1078,11 +1089,17 @@ Update_Status ModulePlayer::Update()
 
 	//if dead
 	if (dead == true) {
+		score = 0;
 		int deathSound = App->audio->LoadFx("Assets/gwar-195.wav");
 		App->audio->PlayFx(deathSound, 0);
+		
 		App->fade->FadeToBlack((Module*)App->scene, (Module*)App->sceneIntro, 60);
 	}
 
+	if (lives == 0) {
+		dead = true;
+	}
+	
 	//set collider position
 	collider->SetPos(position.x, position.y);
 
@@ -1137,7 +1154,7 @@ Update_Status ModulePlayer::PostUpdate()
 
 	// Draw UI (score) --------------------------------------
 	sprintf_s(scoreText, 10, "%d", score);
-	//sprintf_s(livesText, 10, "%d", lives);
+	sprintf_s(livesText, 10, "%d", lives);
 	sprintf_s(granadesText, 10, "%d", granades);
 	sprintf_s(bulletsText, 10, "%d", bullets);
 
@@ -1147,11 +1164,11 @@ Update_Status ModulePlayer::PostUpdate()
 	App->fonts->BlitText(250, 75, scoreFont, "30000");
 
 	// Player 1 --> Available
-	App->fonts->BlitText(100, 100, scoreFont, "1UP");
+	App->fonts->BlitText(100, 100, scoreFont, "1 UP");
 	App->fonts->BlitText(140, 125, scoreFont, scoreText);
 
 	// Player 2 --> Not available
-	App->fonts->BlitText(300, 100, scoreFont, "2UP");
+	App->fonts->BlitText(300, 100, scoreFont, "2 UP");
 	App->fonts->BlitText(340, 125, scoreFont, "0");
 
 	// Weapons
@@ -1161,12 +1178,11 @@ Update_Status ModulePlayer::PostUpdate()
 	App->fonts->BlitText(50, 180, weaponsFont, "B");
 	App->fonts->BlitText(60, 200, scoreFont, bulletsText);
 
-	App->fonts->BlitText(60, 200, scoreFont, bulletsText);
 
 	// Lives
 	App->fonts->BlitText(60, 450, weaponsFont, "1");
 	App->fonts->BlitText(68, 450, weaponsFont, "1");
-
+	App->fonts->BlitText(60, 475, scoreFont, livesText);
 	return Update_Status::UPDATE_CONTINUE;
 }
 
@@ -1279,11 +1295,10 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			if (collider->Intersects(c2->rect)) {
 				if (collider->Intersects(c2->rect)) {
 					lives--;
+					//App->fonts->BlitText(60 + 8 * (lives), 450, scoreFont, " ");
 					if (lives == 0) {
-						dead = true;
+						dead == true;
 						score = 0;
-					}
-					else {
 					}
 				}
 			}
@@ -1296,15 +1311,18 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		case(Collider::Type::ENEMY):
 			if (collider->Intersects(c2->rect)) {
 				lives--;
+				//App->fonts->BlitText(60 + 8 * (lives), 450, scoreFont, " ");
 				if (lives == 0) {
 					dead = true;
-				}
-				else {
+					score = 0;
 				}
 			}
 			break;
-		}
-		
+		case(Collider::Type::WATER):
+			if (collider->Intersects(c2->rect)) {
+				waterP = true;
+			}
+		}	
 	}
 	
 	

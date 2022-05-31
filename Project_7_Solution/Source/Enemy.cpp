@@ -173,7 +173,7 @@ void Enemy::OnCollision(Collider* collider)
 	App->audio->PlayFx(destroyedFx, 0);
 	
 	SetToDelete();
-	App->player->score++;
+	App->player->score+=100;
 }
 
 void Enemy::SetToDelete()

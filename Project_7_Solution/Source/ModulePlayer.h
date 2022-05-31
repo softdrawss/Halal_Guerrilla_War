@@ -65,6 +65,8 @@ public:
 	Animation heavyweapon_up, heavyweapon_down, heavyweapon_right, heavyweapon_left, heavyweapon_upright, heavyweapon_upleft, heavyweapon_downright, heavyweapon_downleft;
 	Animation heavyweapon_up_shot, heavyweapon_down_shot, heavyweapon_right_shot, heavyweapon_left_shot, heavyweapon_upright_shot, heavyweapon_upleft_shot, heavyweapon_downright_shot, heavyweapon_downleft_shot;
 
+	Animation water;
+
 	// The player's collider
 	Collider* collider = nullptr;
 	Collider* collider1 = nullptr;
@@ -73,13 +75,13 @@ public:
 	bool dead = false;
 
 	//booleans to know the direction the player is facing
-	bool facer, facel, faceu, faced, faceur, faceul, facedr, facedl;
+	bool facer, facel, faceu, faced, faceur, faceul, facedr, facedl, waterP;
 	//booleans for the powerups
 	bool normalweapon;
 	bool heavyweapon;
 
 	// lives of the player
-	int lives = 2;
+	int lives = 3;
 	
 	// Font score index
 	uint score = 000;

@@ -126,8 +126,8 @@ bool ModuleScene::Start()
 	App->collisions->AddCollider({ 300, 340, 30, 35 }, Collider::Type::WATER);
 	App->collisions->AddCollider({ 330, 400, 20, 150 }, Collider::Type::WATER);
 	App->collisions->AddCollider({ 350, 450, 60, 150 }, Collider::Type::WATER);
-	App->collisions->AddCollider({ 500, -3354, 500, 900 }, Collider::Type::WATER);
-
+	App->collisions->AddCollider({ 500, -3354, 280, 442 }, Collider::Type::WATER);
+	App->collisions->AddCollider({ 850, -3354, 275, 442 }, Collider::Type::WATER);
 
 	//// Enemies
 	App->enemies->AddEnemy(Enemy_Type::BOMB, 398, -2290);
