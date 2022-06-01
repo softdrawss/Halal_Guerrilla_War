@@ -132,16 +132,15 @@ bool ModuleScene::Start()
 	App->collisions->AddCollider({ 850, -3354, 275, 442 }, Collider::Type::WATER);
 
 	//// Enemies
-	//App->enemies->AddEnemy(Enemy_Type::BOMB, 398, -2290, 0);
-	//App->enemies->AddEnemy(Enemy_Type::BOMB, 500, -2290, 0); 
-	//App->enemies->AddEnemy(Enemy_Type::RED, 220, 220, 0);
-	//App->enemies->AddEnemy(Enemy_Type::RED, 220, 0, 0);
+	App->enemies->AddEnemy(Enemy_Type::BOMB, 398, -2290, 0);
+	App->enemies->AddEnemy(Enemy_Type::BOMB, 500, -2290, 0); 
+	App->enemies->AddEnemy(Enemy_Type::RED, 220, 220, 0);
+	App->enemies->AddEnemy(Enemy_Type::RED, 220, 0, 0);
 
 
 	App->enemies->AddEnemy(Enemy_Type::GREEN, 240, 0,1);
 
 	//App->enemies->AddEnemy(Enemy_Type::GREEN, 180, 200, 0);
-
 
 
 	//Enable the necessary modules

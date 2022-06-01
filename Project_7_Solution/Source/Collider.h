@@ -25,7 +25,8 @@ struct Collider
 		PLAYER_SHOT,
 		ENEMY_SHOT,
 		POWERUP,
-		MAX
+		MAX,
+		PRISONER
 	};
 
 	//Methods

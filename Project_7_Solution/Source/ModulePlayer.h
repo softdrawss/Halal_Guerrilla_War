@@ -85,7 +85,7 @@ public:
 	bool heavyweapon;
 
 	// lives of the player
-	int lives = 3;
+	int lives = 0;
 	
 	// Font score index
 	uint score = 000;

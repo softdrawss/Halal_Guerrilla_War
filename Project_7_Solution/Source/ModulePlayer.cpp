@@ -311,6 +311,8 @@ bool ModulePlayer::Start()
 	heavyweapon = false;
 	dead = false;
 	lives = 3;
+	granades = 50;
+	bullets = 0;
 	deathcounter = 0;
 
 	texture = App->textures->Load("Assets/Guerrilla War Player 1 Spritesheet OK.png");
@@ -1834,6 +1836,10 @@ Update_Status ModulePlayer::Update()
 	//instawin
 	if (App->input->keys[SDL_SCANCODE_F1] == KEY_DOWN) {
 		score = 30000;
+		if (score > 30000) {
+			score = 30000;
+
+		}
 	}
 
 	//instakill
@@ -1850,6 +1856,7 @@ Update_Status ModulePlayer::Update()
 	//if dead
 	if (dead == true) {
 		score = 0;
+		lives = 0;
 		if (deathcounter >= 100) {
 			int deathSound = App->audio->LoadFx("Assets/gwar-195.wav");
 			App->audio->PlayFx(deathSound, 0);
@@ -1922,32 +1929,32 @@ Update_Status ModulePlayer::PostUpdate()
 		App->render->Blit(texture, position.x, position.y, &rect4);
 	}
 
-	// Draw UI (score) --------------------------------------
-	sprintf_s(scoreText, 10, "%d", score);
+	// Draw UI (variables) --------------------------------------
+	sprintf_s(scoreText, 10, "%7d", score);
 	sprintf_s(livesText, 10, "%d", lives);
-	sprintf_s(granadesText, 10, "%d", granades);
-	sprintf_s(bulletsText, 10, "%d", bullets);
+	sprintf_s(granadesText, 10, "%2d", granades);
+	sprintf_s(bulletsText, 10, "%2d", bullets);
 	sprintf_s(creditsText, 10, "%d", credits);
 
-	// Text of the score in at the bottom of the screen
+	// Text of the screen
 	// Highscore of the level (if you kill all the enemies and save the prisoners)
-	App->fonts->BlitText(140, 75, scoreFont, "HI");
+	App->fonts->BlitText(130, 75, scoreFont, "HI");
 	App->fonts->BlitText(250, 75, scoreFont, "30000");
 
 	// Player 1 --> Available
-	App->fonts->BlitText(90, 100, scoreFont, "1 UP");
-	App->fonts->BlitText(130, 125, scoreFont, scoreText);
+	App->fonts->BlitText(83, 85, scoreFont, "1 UP");
+	App->fonts->BlitText(75, 95, scoreFont, scoreText);
 
 	// Player 2 --> Not available
-	App->fonts->BlitText(300, 100, scoreFont, "2 UP");
-	App->fonts->BlitText(340, 125, scoreFont, "0");
+	App->fonts->BlitText(290, 85, scoreFont, "2 UP");
+	App->fonts->BlitText(330, 95, scoreFont, "0");
 
 	// Weapons
 	App->fonts->BlitText(20, 150, weaponsFont, "G");
-	App->fonts->BlitText(30, 170, scoreFont, granadesText);
+	App->fonts->BlitText(20, 170, scoreFont, granadesText);
 
 	App->fonts->BlitText(20, 180, weaponsFont, "B");
-	App->fonts->BlitText(30, 200, scoreFont, bulletsText);
+	App->fonts->BlitText(20, 200, scoreFont, bulletsText);
 
 
 	// Lives
@@ -2104,19 +2111,22 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 				if (collider->Intersects(c2->rect)==false) {
 					waterP = false;
 				}
-
+				break;
 			}
-		case(Collider::Type::NONE):
-			if (collider->Intersects(c2->rect) == true) {
+		/*case(Collider::Type::NONE):
+			if (collider->Intersects(c2->rect) == false) {
 				waterP = false;
-				if (collider->Intersects(c2->rect) == false) {
-					waterP = false;
-				}
+				
 
+			}*/
+		case(Collider::Type::PRISONER):
+			if (collider->Intersects(c2->rect) == true) {
+				granades = 50;
 			}
+		
 		}
 
-		if (c2->type == Collider::Type::WATER) {
+		/*if (c2->type == Collider::Type::WATER) {
 			if (collider->Intersects(c2->rect) == true) {
 				waterP = true;
 				if (collider->Intersects(c2->rect) == false) {
@@ -2124,9 +2134,9 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 				}
 
 			}
-		}
+		}*/
 
 	}
-	
+
 	
 }

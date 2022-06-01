@@ -43,11 +43,21 @@ Update_Status SceneIntro::Update()
 {
 
 
-	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN) {
-		bgTexture = App->textures->Load("Assets/title.png");
-		App->fade->FadeToBlack(this, (Module*)App->scene, 150);
+	
+
+	if (App->input->keys[SDL_SCANCODE_RETURN] == Key_State::KEY_DOWN) {
+		App->player->credits++;
+		
+		
 	}
 
+	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN && App->player->credits>0) {
+
+		bgTexture = App->textures->Load("Assets/title.png");
+
+		App->fade->FadeToBlack(this, (Module*)App->scene, 200);
+		App->player->credits--;
+	}
 	return Update_Status::UPDATE_CONTINUE;
 }
 
