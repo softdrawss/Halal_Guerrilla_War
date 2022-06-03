@@ -31,7 +31,12 @@ public:
 	// The scene sprite sheet loaded into an SDL_Texture
 	SDL_Texture* bgTexture = nullptr;
 
-	Animation* sceneIntro;
+	int introFont = -1;
+	int credits = 0;
+	char creditsText[10] = { "\0" };
+
+
+	Animation* sceneAnim;
 
 private:
 };

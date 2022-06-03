@@ -9,8 +9,7 @@
 
 struct SDL_Texture;
 
-struct Font
-{
+struct Font {
 	// Lookup table. All characters displayed in the same order as the texture
 	char table[MAX_FONT_CHARS];
 
@@ -23,14 +22,11 @@ struct Font
 	uint char_w, char_h;
 };
 
-class ModuleFonts : public Module
-{
+class ModuleFonts : public Module {
 public:
 
 	// Constructor
-
-	ModuleFonts(bool startEnabled);
-
+	ModuleFonts(bool isEnabled);
 
 	// Destructor
 	~ModuleFonts();
