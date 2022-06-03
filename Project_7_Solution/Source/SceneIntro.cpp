@@ -27,7 +27,7 @@ bool SceneIntro::Start()
 
 	bool ret = true;
 
-	bgTexture = App->textures->Load("Assets/Intro.png");
+	bgTexture = App->textures->Load("Assets/names.png");
 
 	//App->audio->PlayMusic("Assets/Music/introTitle.ogg", 1.0f);
 
@@ -35,7 +35,7 @@ bool SceneIntro::Start()
 	App->render->camera.y = 0;
 
 	char lookupTable[] = { "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ.@'?&- " };
-	App->player->scoreFont = App->fonts->Load("Assets/ui_font5.png", lookupTable, 1);
+	introFont = App->fonts->Load("Assets/ui_font5.png", lookupTable, 1);
 	return ret;
 }
 
@@ -45,18 +45,19 @@ Update_Status SceneIntro::Update()
 
 	
 
-	if (App->input->keys[SDL_SCANCODE_RETURN] == Key_State::KEY_DOWN) {
-		App->player->credits++;
-		
-		
+	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN) {
+		credits++;
+		int audioCredit = App->audio->LoadFx("Assets/gwar-191.wav");
+		App->audio->PlayFx(audioCredit);
 	}
 
-	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN && App->player->credits>0) {
+	if (App->input->keys[SDL_SCANCODE_RETURN] == Key_State::KEY_DOWN && credits>0) {
 
-		bgTexture = App->textures->Load("Assets/title.png");
-
-		App->fade->FadeToBlack(this, (Module*)App->scene, 200);
-		App->player->credits--;
+		App->fade->FadeToBlack(this, (Module*)App->sceneCutscene, 200);
+		
+		
+		credits--;
+		App->fonts->UnLoad(introFont);
 	}
 	return Update_Status::UPDATE_CONTINUE;
 }
@@ -65,10 +66,10 @@ Update_Status SceneIntro::Update()
 Update_Status SceneIntro::PostUpdate()
 {
 	// Draw everything --------------------------------------
-	sprintf_s(App->player->creditsText, 10, "%d", App->player->credits);
+	sprintf_s(creditsText, 10, "%d", credits);
 
 	App->render->Blit(bgTexture, -50, 50, NULL);
-	App->fonts->BlitText(315, 475, App->player->scoreFont, "CREDIT ");
-	App->fonts->BlitText(370, 475, App->player->scoreFont, App->player->creditsText);
+	App->fonts->BlitText(315, 475, introFont, "CREDIT ");
+	App->fonts->BlitText(370, 475, introFont, creditsText);
 	return Update_Status::UPDATE_CONTINUE;
 }

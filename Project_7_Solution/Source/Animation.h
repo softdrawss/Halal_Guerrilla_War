@@ -66,6 +66,13 @@ public:
 	void SetCurrentFrame(int frame) {
 		currentFrame = frame;
 	}
+
+	void FullReset() {
+		this->currentFrame = 0;
+		this->totalFrames = 0;
+		this->loopCount = 0;
+		this->pingpongDirection = 1;
+	}
 };
 
 #endif
