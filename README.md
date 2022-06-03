@@ -26,4 +26,5 @@ To start the game and shoot press space.
 
 To move the camera freely you can use IJKL and to see the colliders you can press F1.
 
+Win instantly: F1
 Die instantly: F2
