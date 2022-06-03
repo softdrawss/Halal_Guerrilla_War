@@ -311,7 +311,7 @@ bool ModulePlayer::Start()
 	heavyweapon = false;
 	dead = false;
 	lives = 3;
-	granades = 50;
+	granades = MAX_GRANADES;
 	bullets = 0;
 	deathcounter = 0;
 
@@ -2121,7 +2121,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			}*/
 	/*	case(Collider::Type::PRISONER):
 			if (collider->Intersects(c2->rect) == true) {
-				granades = 50;
+				granades = MAX_GRANADES;
 			}
 		*/
 		}

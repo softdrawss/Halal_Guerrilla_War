@@ -29,6 +29,7 @@ typedef unsigned int uint;
 #define WIN_BORDERLESS 0
 #define WIN_RESIZABLE 0
 #define VSYNC 1
+#define MAX_GRANADES 50
 
 #define SCENE_DURATION 500
 
