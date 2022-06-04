@@ -265,6 +265,8 @@ void Enemy::Draw()
 
 void Enemy::OnCollision(Collider* collider)
 {
+	//should be only when collision type = player shot
+	//if ((collider->Intersects(c2->rect) == true)
 	int destroyedFx = App->audio->LoadFx("Assets/gwar-198.wav");
 	App->audio->PlayFx(destroyedFx, 0);
 	

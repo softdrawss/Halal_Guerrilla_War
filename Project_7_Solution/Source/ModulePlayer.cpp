@@ -2119,11 +2119,11 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 				
 
 			}*/
-	/*	case(Collider::Type::PRISONER):
+		case(Collider::Type::PRISONER):
 			if (collider->Intersects(c2->rect) == true) {
 				granades = MAX_GRANADES;
 			}
-		*/
+		
 		}
 
 		/*if (c2->type == Collider::Type::WATER) {

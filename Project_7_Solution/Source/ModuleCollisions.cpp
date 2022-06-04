@@ -76,14 +76,14 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::WATER][Collider::Type::POWERUP] = false;
 	//matrix[Collider::Type::WATER][Collider::Type::PRISONER] = false;
 
-	/*matrix[Collider::Type::PRISONER][Collider::Type::WALL] = false;
+	matrix[Collider::Type::PRISONER][Collider::Type::WALL] = false;
 	matrix[Collider::Type::PRISONER][Collider::Type::WATER] = false;
 	matrix[Collider::Type::PRISONER][Collider::Type::PLAYER] = true;
 	matrix[Collider::Type::PRISONER][Collider::Type::ENEMY] = true;
 	matrix[Collider::Type::PRISONER][Collider::Type::PLAYER_SHOT] = false;
 	matrix[Collider::Type::PRISONER][Collider::Type::ENEMY_SHOT] = false;
 	matrix[Collider::Type::PRISONER][Collider::Type::POWERUP] = false;
-	matrix[Collider::Type::PRISONER][Collider::Type::PRISONER] = false;*/
+	matrix[Collider::Type::PRISONER][Collider::Type::PRISONER] = false;
 
 }
 

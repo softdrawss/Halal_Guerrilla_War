@@ -116,6 +116,8 @@ bool ModuleScene::Start()
 	App->collisions->AddCollider({ 250, -205, 36,25 }, Collider::Type::DESTROYABLE_WALL);
 	App->collisions->AddCollider({ 286, -205, 36,25 }, Collider::Type::DESTROYABLE_WALL);
 
+	//prisoners
+	
 
 	// Water
 	App->collisions->AddCollider({ 200, 305, 100,900 }, Collider::Type::WATER);
