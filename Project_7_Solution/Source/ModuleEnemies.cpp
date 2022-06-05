@@ -60,7 +60,7 @@ Update_Status ModuleEnemies::Update()
 
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
-		if(enemies[i] != nullptr)
+		if (enemies[i] != nullptr)
 			enemies[i]->Update();
 	}
 
@@ -85,9 +85,9 @@ bool ModuleEnemies::CleanUp()
 {
 	LOG("Freeing all enemies");
 
-	for(uint i = 0; i < MAX_ENEMIES; ++i)
+	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
-		if(enemies[i] != nullptr)
+		if (enemies[i] != nullptr)
 		{
 			delete enemies[i];
 			enemies[i] = nullptr;
@@ -124,11 +124,15 @@ void ModuleEnemies::HandleEnemiesSpawn()
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
 		if (spawnQueue[i].type != Enemy_Type::NO_TYPE)
-		{			
-			LOG("Spawning enemy at %d", spawnQueue[i].x * SCREEN_SIZE);
+		{
+			if (spawnQueue[i].y > App->render->camera.y - SPAWN_MARGIN) {
 
-			SpawnEnemy(spawnQueue[i]);
-			spawnQueue[i].type = Enemy_Type::NO_TYPE; // Removing the newly spawned enemy from the queue
+
+				LOG("Spawning enemy at %d", spawnQueue[i].x * SCREEN_SIZE);
+
+				SpawnEnemy(spawnQueue[i]);
+				spawnQueue[i].type = Enemy_Type::NO_TYPE; // Removing the newly spawned enemy from the queue
+			}
 			
 		}
 	}
@@ -140,9 +144,9 @@ void ModuleEnemies::HandleEnemiesDespawn()
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
 		if (enemies[i] != nullptr)
-		{
+		{ 
 			// Delete the enemy when it has reached the end of the screen
-			if (enemies[i]->position.x * SCREEN_SIZE < (App->render->camera.x) - SPAWN_MARGIN)
+			if (enemies[i]->position.y > App->render->camera.y + App->render->camera.h + SPAWN_MARGIN || enemies[i]->position.y < -4050)
 			{
 				LOG("DeSpawning enemy at %d", enemies[i]->position.x * SCREEN_SIZE);
 

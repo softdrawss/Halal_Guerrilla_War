@@ -306,6 +306,9 @@ bool ModulePlayer::Start()
 	position.x = 250;
 	position.y = 300;
 
+	App->render->camera.y = 0;
+	App->render->camera.y = 0;
+
 	bool ret = true;
 	normalweapon = true;
 	heavyweapon = false;
@@ -329,6 +332,7 @@ bool ModulePlayer::Start()
 	faceul = false;
 	facedr = false;
 	facedl = false;
+	waterP = false;
 
 	//add collider player
 	collider = App->collisions->AddCollider({ position.x, position.y, 32, 64 }, Collider::Type::PLAYER, this);
@@ -356,7 +360,7 @@ Update_Status ModulePlayer::Update()
 	currentAnimationlegs = &legsiddleAnim;
 	currentAnimationtorso = &torsoiddleAnim;
 
-	if (waterP = false) {
+	if (waterP == false) {
 		//up	
 		if (faceu == true && App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
 		{
@@ -1827,9 +1831,6 @@ Update_Status ModulePlayer::Update()
 				}
 			}
 		}
-		/*if (!OnCollision(c1, c2)) {
-
-		}*/
 	}
 	
 
@@ -1970,6 +1971,7 @@ Update_Status ModulePlayer::PostUpdate()
 	App->fonts->BlitText(315, 475, scoreFont, "CREDIT ");
 	App->fonts->BlitText(370, 475, scoreFont, creditsText);
 
+	waterP = false;
 	return Update_Status::UPDATE_CONTINUE;
 }
 
@@ -1987,19 +1989,19 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 					if (position.y > c2->rect.y + c2->rect.h - 2) {
 						position.y += speed;
 						if (position.y <= App->render->cameralimits.y + 1) {
-							App->render->camera.y -= App->render->cameraSpeed;
+							App->render->camera.y += App->render->cameraSpeed;
 						}
 					}
 					else if (position.y < c2->rect.y - c1->rect.h + 2) {
 						position.y -= speed;
 						if (position.y + 64 >= App->render->cameralimits.y + App->render->cameralimits.h - 1) {
-							App->render->camera.y += App->render->cameraSpeed;
+							App->render->camera.y -= App->render->cameraSpeed;
 						}
 					}
 					else {
 						position.x += speed;
 						if (position.x <= App->render->cameralimits.x + 1) {
-							App->render->camera.x -= App->render->cameraSpeed;
+							App->render->camera.x += App->render->cameraSpeed;
 						}
 					}
 
@@ -2016,39 +2018,39 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 					else if (position.y < c2->rect.y - c1->rect.h + 2) {
 						position.y -= speed;
 						if (position.y + 64 >= App->render->cameralimits.y + App->render->cameralimits.h - 1) {
-							App->render->camera.y += App->render->cameraSpeed;
+							App->render->camera.y -= App->render->cameraSpeed;
 						}
 
 					}
 					else {
 						position.x -= speed;
 						if (App->player->position.x + 32 >= App->render->cameralimits.x + App->render->cameralimits.w - 1) {
-							App->render->camera.x += App->render->cameraSpeed;
+							App->render->camera.x -= App->render->cameraSpeed;
 						}
 					}
 				}
 			}
 			break;
 		case (Collider::Type::DESTROYABLE_WALL):
-			if (c1->Intersects(c2->rect)) {
-				if (position.x >= c2->rect.x) {
+			if (collider->Intersects(c2->rect)) {
+				if (position.x >= c2->rect.x) { 
 
 					if (position.y > c2->rect.y + c2->rect.h - 2) {
 						position.y += speed;
 						if (position.y <= App->render->cameralimits.y + 1) {
-							App->render->camera.y -= App->render->cameraSpeed;
+							App->render->camera.y += App->render->cameraSpeed;
 						}
 					}
 					else if (position.y < c2->rect.y - c1->rect.h + 2) {
 						position.y -= speed;
 						if (position.y + 64 >= App->render->cameralimits.y + App->render->cameralimits.h - 1) {
-							App->render->camera.y += App->render->cameraSpeed;
+							App->render->camera.y -= App->render->cameraSpeed;
 						}
 					}
 					else {
 						position.x += speed;
 						if (position.x <= App->render->cameralimits.x + 1) {
-							App->render->camera.x -= App->render->cameraSpeed;
+							App->render->camera.x += App->render->cameraSpeed;
 						}
 					}
 
@@ -2065,14 +2067,14 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 					else if (position.y < c2->rect.y - c1->rect.h + 2) {
 						position.y -= speed;
 						if (position.y + 64 >= App->render->cameralimits.y + App->render->cameralimits.h - 1) {
-							App->render->camera.y += App->render->cameraSpeed;
+							App->render->camera.y -= App->render->cameraSpeed;
 						}
 
 					}
 					else {
 						position.x -= speed;
 						if (App->player->position.x + 32 >= App->render->cameralimits.x + App->render->cameralimits.w - 1) {
-							App->render->camera.x += App->render->cameraSpeed;
+							App->render->camera.x -= App->render->cameraSpeed;
 						}
 					}
 				}
@@ -2106,19 +2108,10 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			}
 			break;
 		case(Collider::Type::WATER):
-			if (collider->Intersects(c2->rect)==true) {
+			if (collider->Intersects(c2->rect) == true) {
 				waterP = true;
-				if (collider->Intersects(c2->rect)==false) {
-					waterP = false;
-				}
-				break;
-			}
-		/*case(Collider::Type::NONE):
-			if (collider->Intersects(c2->rect) == false) {
-				waterP = false;
-				
-
-			}*/
+			}		
+			break;
 		case(Collider::Type::PRISONER):
 			if (collider->Intersects(c2->rect) == true) {
 				granades = MAX_GRANADES;

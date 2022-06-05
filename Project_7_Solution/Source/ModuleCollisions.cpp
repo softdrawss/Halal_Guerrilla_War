@@ -16,7 +16,7 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 
 	matrix[Collider::Type::WALL][Collider::Type::WALL] = false;
 	matrix[Collider::Type::WALL][Collider::Type::PLAYER] = true;
-	matrix[Collider::Type::WALL][Collider::Type::ENEMY] = true;
+	matrix[Collider::Type::WALL][Collider::Type::ENEMY] = false;
 	matrix[Collider::Type::WALL][Collider::Type::PLAYER_SHOT] = true;
 	matrix[Collider::Type::WALL][Collider::Type::ENEMY_SHOT] = true;
 	matrix[Collider::Type::WALL][Collider::Type::POWERUP] = false;
@@ -39,6 +39,7 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::ENEMY][Collider::Type::ENEMY_SHOT] = false;
 	matrix[Collider::Type::ENEMY][Collider::Type::POWERUP] = false;
 	matrix[Collider::Type::ENEMY][Collider::Type::WATER] = false;
+	matrix[Collider::Type::ENEMY][Collider::Type::DESTROYABLE_WALL] = false;
 	//matrix[Collider::Type::ENEMY][Collider::Type::PRISONER] = true;
 
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::WALL] = true;
@@ -69,7 +70,7 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 
 	matrix[Collider::Type::WATER][Collider::Type::WALL] = false;
 	matrix[Collider::Type::WATER][Collider::Type::WATER] = false;
-	matrix[Collider::Type::WATER][Collider::Type::PLAYER] = false;
+	matrix[Collider::Type::WATER][Collider::Type::PLAYER] = true;
 	matrix[Collider::Type::WATER][Collider::Type::ENEMY] = false;
 	matrix[Collider::Type::WATER][Collider::Type::PLAYER_SHOT] = false;
 	matrix[Collider::Type::WATER][Collider::Type::ENEMY_SHOT] = false;
@@ -79,11 +80,13 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::PRISONER][Collider::Type::WALL] = false;
 	matrix[Collider::Type::PRISONER][Collider::Type::WATER] = false;
 	matrix[Collider::Type::PRISONER][Collider::Type::PLAYER] = true;
-	matrix[Collider::Type::PRISONER][Collider::Type::ENEMY] = true;
+	matrix[Collider::Type::PRISONER][Collider::Type::ENEMY] = false;
 	matrix[Collider::Type::PRISONER][Collider::Type::PLAYER_SHOT] = false;
 	matrix[Collider::Type::PRISONER][Collider::Type::ENEMY_SHOT] = false;
 	matrix[Collider::Type::PRISONER][Collider::Type::POWERUP] = false;
 	matrix[Collider::Type::PRISONER][Collider::Type::PRISONER] = false;
+
+	matrix[Collider::Type::DESTROYABLE_WALL][Collider::Type::ENEMY] = false;
 
 }
 

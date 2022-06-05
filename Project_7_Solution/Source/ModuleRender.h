@@ -52,10 +52,10 @@ public:
 	// A rectangle that represents the camera section
 	// Sprites will be rendered to the screen depending on the camera position
 	SDL_Rect camera = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
-	SDL_Rect cameralimits = { 225, 325, 50, 0 };
+	SDL_Rect cameralimits = { 225, 325, 50, 50 };
 
 	// The speed at which the camera will be moving
-	int cameraSpeed = 2;
+	int cameraSpeed = 1;
 
 };
 
