@@ -28,7 +28,7 @@ ModulePowerUp::~ModulePowerUp()
 
 bool ModulePowerUp::Start()
 {
-	texturePRISONER = App->textures->Load("Assets/EnemySpriteRec.png");
+	texturePRISONER = App->textures->Load("Assets/Guerrilla War Prisoner Spritesheet.png");
 	textureWEAPON = App->textures->Load("Assets/Guerrilla War Weapon Spritesheet.png");
 	
 

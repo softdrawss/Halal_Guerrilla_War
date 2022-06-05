@@ -102,10 +102,10 @@
     <ClInclude Include="Particle.h" />
     <ClInclude Include="Path.h" />
     <ClInclude Include="PowerUp.h" />
-    <ClInclude Include="PUPrisonerr.h" />
+    <ClInclude Include="PU_Prisoner.h" />
     <ClInclude Include="SceneCutscene.h" />
     <ClInclude Include="SceneIntro.h" />
-    <ClInclude Include="PUWeapon.h" />
+    <ClInclude Include="PU_Weapon.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
@@ -135,8 +135,8 @@
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="Path.cpp" />
     <ClCompile Include="PowerUp.cpp" />
-    <ClCompile Include="PUPrisoner.cpp" />
-    <ClCompile Include="PUWeapon.cpp" />
+    <ClCompile Include="PU_Prisoner.cpp" />
+    <ClCompile Include="PU_Weapon.cpp" />
     <ClCompile Include="SceneCutscene.cpp" />
     <ClCompile Include="SceneIntro.cpp" />
   </ItemGroup>

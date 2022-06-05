@@ -121,10 +121,10 @@
     <ClInclude Include="PowerUp.h">
       <Filter>Source Files\Entities\PowerUps</Filter>
     </ClInclude>
-    <ClInclude Include="PUPrisonerr.h">
+    <ClInclude Include="PU_Prisoner.h">
       <Filter>Source Files\Entities\PowerUps</Filter>
     </ClInclude>
-    <ClInclude Include="PUWeapon.h">
+    <ClInclude Include="PU_Weapon.h">
       <Filter>Source Files\Entities\PowerUps</Filter>
     </ClInclude>
   </ItemGroup>
@@ -216,10 +216,10 @@
     <ClCompile Include="PowerUp.cpp">
       <Filter>Source Files\Entities\PowerUps</Filter>
     </ClCompile>
-    <ClCompile Include="PUPrisoner.cpp">
+    <ClCompile Include="PU_Prisoner.cpp">
       <Filter>Source Files\Entities\PowerUps</Filter>
     </ClCompile>
-    <ClCompile Include="PUWeapon.cpp">
+    <ClCompile Include="PU_Weapon.cpp">
       <Filter>Source Files\Entities\PowerUps</Filter>
     </ClCompile>
   </ItemGroup>

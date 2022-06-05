@@ -5,7 +5,6 @@
 #include "ModuleCollisions.h"
 #include "ModuleParticles.h"
 #include "ModuleRender.h"
-#include "Application.h"
 #include "Enemy.h"
 Enemy_Red::Enemy_Red(int x, int y, int movingbehaviour) : Enemy(x, y, movingbehaviour)
 {
