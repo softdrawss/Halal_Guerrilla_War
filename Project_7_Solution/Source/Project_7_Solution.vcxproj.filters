@@ -121,6 +121,12 @@
     <ClInclude Include="PowerUp.h">
       <Filter>Source Files\Entities\PowerUps</Filter>
     </ClInclude>
+    <ClInclude Include="PUPrisonerr.h">
+      <Filter>Source Files\Entities\PowerUps</Filter>
+    </ClInclude>
+    <ClInclude Include="PUWeapon.h">
+      <Filter>Source Files\Entities\PowerUps</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Module.cpp">
@@ -208,6 +214,12 @@
       <Filter>Source Files\Modules\Gameplay</Filter>
     </ClCompile>
     <ClCompile Include="PowerUp.cpp">
+      <Filter>Source Files\Entities\PowerUps</Filter>
+    </ClCompile>
+    <ClCompile Include="PUPrisoner.cpp">
+      <Filter>Source Files\Entities\PowerUps</Filter>
+    </ClCompile>
+    <ClCompile Include="PUWeapon.cpp">
       <Filter>Source Files\Entities\PowerUps</Filter>
     </ClCompile>
   </ItemGroup>
