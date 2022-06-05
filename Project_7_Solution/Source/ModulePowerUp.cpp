@@ -4,13 +4,11 @@
 #include "ModuleRender.h"
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
-//
-//#include "Enemy.h"
-//#include "Enemy_Red.h"
-//#include "Enemy_Green.h"
-//#include "Enemy_Green_Bomb.h"
-//#include "Enemy_Boss.h"
-//#include "Enemy_Truck.h"
+
+#include "PowerUp.h"
+#include "PU_Prisoner.h"
+#include "PU_Weapon.h"
+
 
 #define SPAWN_MARGIN2 50
 

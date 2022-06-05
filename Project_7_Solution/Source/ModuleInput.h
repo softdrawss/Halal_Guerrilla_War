@@ -46,11 +46,11 @@ public:
 	// Uninitializes the SDL system for input detection
 	bool CleanUp() override;
 
-public:
+	float reduce_val(float v1, float min, float clamp_to);
+
 	// An array to fill in the state of all the keyboard keys
+	
 	Key_State keys[MAX_KEYS] = { KEY_IDLE };
-
-
 	SDL_GameController* sdl_controllers[MAX_CONTROLLERS];
 	GameController controllers[MAX_CONTROLLERS];
 	int num_controllers;
