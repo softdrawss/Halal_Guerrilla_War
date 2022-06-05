@@ -17,6 +17,7 @@ class ModuleScene;
 class ModuleParticles;
 class ModuleCollisions;
 class ModuleEnemies;
+class ModulePowerUp;
 class ModuleFadeToBlack;
 class ModuleFonts;
 class ModuleRender;
@@ -60,6 +61,7 @@ public:
 
 	ModuleEnemies* enemies = nullptr;
 	ModuleParticles* particles = nullptr;
+	ModulePowerUp* powerups = nullptr;
 
 	ModuleCollisions* collisions = nullptr;
 	ModuleFadeToBlack* fade = nullptr;
