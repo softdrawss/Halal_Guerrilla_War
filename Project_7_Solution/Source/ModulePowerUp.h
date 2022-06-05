@@ -1,7 +1,8 @@
-#ifndef __MODULE_ENEMIES_H__
-#define __MODULE_ENEMIES_H__
+#ifndef __MODULE_POWERUP_H__
+#define __MODULE_POWERUP_H__
 
 #include "Module.h"
+
 
 #define MAX_POWERUPS 100
 
@@ -17,8 +18,11 @@ enum class PowerUp_Type
 struct PowerUpSpawnpoint
 {
 	PowerUp_Type type = PowerUp_Type::NO_TYPE;
+	int x, y;
 };
 
+
+class PowerUp;
 struct SDL_Texture;
 
 class ModulePowerUp : public Module
@@ -55,35 +59,33 @@ public:
 	void OnCollision(Collider* c1, Collider* c2) override;
 
 	// Add an enemy into the queue to be spawned later
-	bool AddPowerUp(PowerUp_Type type, int x, int y, int movingbehaviour);
+	bool AddPowerUp(PowerUp_Type type, int x, int y);
 
 	// Iterates the queue and checks for camera position
-	void HandleEnemiesSpawn();
+	void HandlePowerUpSpawn();
 
 	// Destroys any enemies that have moved outside the camera limits
-	void HandleEnemiesDespawn();
+	void HandlePowerUpDespawn();
 
 private:
 	// Spawns a new enemy using the data from the queue
-	void SpawnEnemy(const PowerUpSpawnpoint& info);
+	void SpawnPowerUp(const PowerUpSpawnpoint& info);
 
 
 private:
 	// A queue with all spawn points information
-	//EnemySpawnpoint spawnQueue[MAX_ENEMIES];
+	PowerUpSpawnpoint spawnQueue[MAX_POWERUPS];
 
 	// All spawned enemies in the scene
-	//Enemy* enemies[MAX_ENEMIES] = { nullptr };
+	PowerUp* powerups[MAX_POWERUPS] = { nullptr };
 
 	// The enemies sprite sheet
-	SDL_Texture* textureRED = nullptr;
-	SDL_Texture* textureGREEN = nullptr;
-	SDL_Texture* textureBOMB = nullptr;
-	SDL_Texture* textureBOSS = nullptr;
-	SDL_Texture* textureTRUCK = nullptr;
+	SDL_Texture* texturePRISONER = nullptr;
+	SDL_Texture* textureWEAPON = nullptr;
+	
 
 	// The audio fx for destroying an enemy
-	int enemyDestroyedFx = 0;
+	int powerUpsound = 0;
 };
 
-#endif // __MODULE_ENEMIES_H__
+#endif // __MODULE_POWERUP_H__
