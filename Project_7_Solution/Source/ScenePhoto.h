@@ -1,19 +1,19 @@
-#ifndef __SCENE_INTRO_H__
-#define __SCENE_INTRO_H__
+#ifndef __SCENE_PHOTO_H__
+#define __SCENE_PHOTO_H__
 
 #include "Module.h"
 #include "Animation.h"
 
 struct SDL_Texture;
 
-class SceneIntro : public Module
+class ScenePhoto : public Module
 {
 public:
 	//Constructor
-	SceneIntro(bool startEnabled);
+	ScenePhoto(bool startEnabled);
 
 	//Destructor
-	~SceneIntro();
+	~ScenePhoto();
 
 	// Called when the module is activated
 	// Loads the necessary textures for the map background
@@ -35,13 +35,7 @@ public:
 	SDL_Texture* bgTexture = nullptr;
 
 	int introFont = -1;
-	int credits = 0;
-	char creditsText[10] = { "\0" };
-
-
-	Animation* sceneAnim;
 
 private:
 };
-
 #endif

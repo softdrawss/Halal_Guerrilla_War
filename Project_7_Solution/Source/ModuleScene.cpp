@@ -7,6 +7,7 @@
 #include "ModuleCollisions.h"
 #include "ModuleEnemies.h"
 #include "ModuleParticles.h"
+#include "ModulePowerUp.h"
 
 ModuleScene::ModuleScene(bool startEnabled) : Module(startEnabled)
 {
@@ -29,7 +30,7 @@ bool ModuleScene::Start()
 	bool ret = true;
 
 	bgTexture = App->textures->Load("Assets/Guerrilla_War_ARC_Map_Level1 copia.png");
-	App->audio->PlayMusic("Assets/gwar-107.ogg");
+	App->audio->PlayMusic("Assets/gwar-107.ogg", 1.0f);
 	
 	//left wall colliders
 	App->collisions->AddCollider({ -30, 420, 64,105 }, Collider::Type::WALL);
@@ -145,12 +146,15 @@ bool ModuleScene::Start()
 	//App->enemies->AddEnemy(Enemy_Type::GREEN, 180, 200, 0);
 
 
+	//prisoners
+	//App->powerUps->AddPowerUp(PowerUp_Type::PRISONER, 220, 0);
+
 	//Enable the necessary modules
 	App->collisions->Enable();
 	App->particles->Enable();
 	App->player->Enable();
 	App->enemies->Enable();
-	
+	App->powerUps->Enable();
 	return ret;
 }
 
@@ -180,11 +184,12 @@ Update_Status ModuleScene::PostUpdate()
 
 bool ModuleScene::CleanUp()
 {
+	//App->audio->Disable();
 	App->player->Disable();
 	App->enemies->Disable();
 	App->collisions->Disable();
 	App->particles->Disable();
-
+	App->powerUps->Disable();
 	return true;
 }
 

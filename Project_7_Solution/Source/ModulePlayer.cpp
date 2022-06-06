@@ -403,6 +403,7 @@ bool ModulePlayer::Start()
 	normalweapon = true;
 	heavyweapon = false;
 	dead = false;
+	winner = false;
 	lives = 3;
 	granades = MAX_GRANADES;
 	bullets = 0;
@@ -523,7 +524,29 @@ Update_Status ModulePlayer::Update()
 	currentAnimationlegs = &legsiddleAnim;
 	currentAnimationtorso = &torsoiddleAnim;
 
-	if (waterP == false) {
+	// GAMEPAD: Fire with any button for now to check they all work
+	bool button_press = false;
+	for (int i = 0; i < SDL_CONTROLLER_BUTTON_MAX; ++i)
+		if (App->input->controllers[0].buttons[i] == KEY_DOWN)
+		{
+			button_press = true; break;
+		}
+
+	// GAMEPAD: Triggers Count as axis, have specific values
+	if (App->input->controllers[0].LT > SDL_MAX_SINT16 / 2) {
+		position.x *= 2;
+		position.y *= 2;
+	}
+	if (App->input->controllers[0].RT > SDL_MAX_SINT16 / 2) {
+		position.x *= 3;
+		position.y *= 3;
+	}
+
+	if (waterP == false && App->input->num_controllers > 0) {
+
+		position.x += App->input->reduce_val(App->input->controllers[0].j1_x, 3000, 2)+speed;
+		position.y += App->input->reduce_val(App->input->controllers[0].j1_y, 3000, 2)+speed;
+		
 		//up	
 		if (faceu == true && App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
 		{
@@ -1063,7 +1086,7 @@ Update_Status ModulePlayer::Update()
 			}
 			//shots
 
-			if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_DOWN)
+			if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_DOWN || button_press)
 			{
 				uint shoot = App->audio->LoadFx("Assets/gwar-142.wav");
 				if (faceu == true) {
@@ -1957,7 +1980,7 @@ Update_Status ModulePlayer::Update()
 			}
 
 			//shots
-			if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_DOWN)
+			if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_DOWN || button_press)
 			{
 				uint shootheavy = App->audio->LoadFx("Assets/gwar-142.wav");
 				if (faceu == true) {
@@ -2009,10 +2032,11 @@ Update_Status ModulePlayer::Update()
 	//instawin
 	if (App->input->keys[SDL_SCANCODE_F1] == KEY_DOWN) {
 		score = 30000;
+		winner = true;
 		if (score > 30000) {
 			score = 30000;
-
 		}
+		
 	}
 
 	//instakill
@@ -2047,6 +2071,13 @@ Update_Status ModulePlayer::Update()
 		++grenadeanimcounter;
 	}
 	
+	//if winner
+	if (winner == true) {
+		
+		App->fade->FadeToBlack((Module*)App->scene, (Module*)App->sceneWin, 60);
+
+	}
+
 	//set collider position
 	collider->SetPos(position.x, position.y);
 

@@ -4,13 +4,11 @@
 #include "ModuleRender.h"
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
-//
-//#include "Enemy.h"
-//#include "Enemy_Red.h"
-//#include "Enemy_Green.h"
-//#include "Enemy_Green_Bomb.h"
-//#include "Enemy_Boss.h"
-//#include "Enemy_Truck.h"
+
+#include "PowerUp.h"
+#include "PU_Prisoner.h"
+#include "PU_Weapon.h"
+
 
 #define SPAWN_MARGIN2 50
 
@@ -79,7 +77,7 @@ Update_Status ModulePowerUp::PostUpdate()
 // Called before quitting
 bool ModulePowerUp::CleanUp()
 {
-	LOG("Freeing all enemies");
+	LOG("Freeing all powerups");
 
 	for (uint i = 0; i < MAX_POWERUPS; ++i)
 	{
@@ -120,10 +118,10 @@ void ModulePowerUp::HandlePowerUpSpawn()
 	{
 		if (spawnQueue[i].type != PowerUp_Type::NO_TYPE)
 		{
-			LOG("Spawning enemy at %d", spawnQueue[i].x * SCREEN_SIZE);
+			LOG("Spawning powerup at %d", spawnQueue[i].x * SCREEN_SIZE);
 
 			SpawnPowerUp(spawnQueue[i]);
-			spawnQueue[i].type = PowerUp_Type::NO_TYPE; // Removing the newly spawned enemy from the queue
+			spawnQueue[i].type = PowerUp_Type::NO_TYPE; // Removing the newly spawned powerUp from the queue
 
 		}
 	}
@@ -139,7 +137,7 @@ void ModulePowerUp::HandlePowerUpDespawn()
 			// Delete the enemy when it has reached the end of the screen
 			if (powerups[i]->position.x * SCREEN_SIZE < (App->render->camera.x) - SPAWN_MARGIN2)
 			{
-				LOG("DeSpawning enemy at %d", powerups[i]->position.x * SCREEN_SIZE);
+				LOG("DeSpawning powerup at %d", powerups[i]->position.x * SCREEN_SIZE);
 
 				powerups[i]->SetToDelete();
 			}

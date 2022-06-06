@@ -20,17 +20,10 @@ bool ModuleInput::Init()
 		LOG("SDL_EVENTS could not initialize! SDL_Error: %s\n", SDL_GetError());
 		ret = false;
 	}
-
-	
-	
-	//Initialize Controller
-	num_controllers = SDL_NumJoysticks();
-	for (int i = 0; i < num_controllers; ++i)
-		if (SDL_IsGameController(i))
-			sdl_controllers[i] = SDL_GameControllerOpen(i);
-	// Here we don't really have access to the controller
-	// SDL_GameController* is obfuscated, it is to know they are there.
-	// We will pass data to our own array of controllers
+	if (SDL_Init(SDL_INIT_GAMECONTROLLER) != 0) {
+		SDL_Log("Unable to initialize SDL controllers: %s", SDL_GetError());
+		return false;
+	}
 
 	return ret;
 }
@@ -54,6 +47,16 @@ Update_Status ModuleInput::PreUpdate()
 		else
 			keys[i] = (keys[i] == KEY_REPEAT || keys[i] == KEY_DOWN) ? KEY_UP : KEY_IDLE;
 	}
+
+	//Initialize Controller
+	num_controllers = SDL_NumJoysticks();
+	for (int i = 0; i < num_controllers; ++i)
+		if (SDL_IsGameController(i))
+			sdl_controllers[i] = SDL_GameControllerOpen(i);
+	// Here we don't really have access to the controller
+	// SDL_GameController* is obfuscated, it is to know they are there.
+	// We will pass data to our own array of controllers
+
 
 	// Parse Controller button stats
 	SDL_GameControllerUpdate();
@@ -83,4 +86,12 @@ bool ModuleInput::CleanUp()
 
 	SDL_QuitSubSystem(SDL_INIT_EVENTS);
 	return true;
+}
+
+float ModuleInput::reduce_val(float v1, float min, float clamp_to) {
+	float sign = v1 / fabs(v1);
+	float reduced = v1 - ((fabs(v1) > min) ? sign * min : v1);
+	float to_1 = reduced / (float)(SDL_MAX_SINT16);
+	float reclamped = to_1 * clamp_to;
+	return reclamped;
 }

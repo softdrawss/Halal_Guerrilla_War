@@ -11,11 +11,15 @@
 PU_Prisoner::PU_Prisoner(int x, int y) : PowerUp(x, y)
 {
 	
-	help->PushBack({ 8, 5, 18, 54 });
-	help->PushBack({ 40, 5, 18, 54 });
-	help->PushBack({ 73, 5, 18, 54 });
-	help->PushBack({ 103, 5, 18, 54 });
+	help.PushBack({ 5, 2, 30, 57 });
+	help.PushBack({ 35, 2, 30, 57 });
+	help.PushBack({ 73, 2, 30, 57 });
+	help.PushBack({ 103, 2, 30, 57 });
+	
+	saved.PushBack({ 2, 74, 30, 57 });
 
+	death.PushBack({});
+	currentAnim = &help;
 	//put collider
 	collider = App->collisions->AddCollider({ 0, 0, 18, 54 }, Collider::Type::PRISONER, (Module*)App->powerUps);
 

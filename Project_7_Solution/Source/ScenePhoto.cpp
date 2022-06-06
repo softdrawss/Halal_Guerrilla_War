@@ -1,4 +1,4 @@
-#include "SceneIntro.h"
+#include "ScenePhoto.h"
 
 #include "Application.h"
 #include "ModuleTextures.h"
@@ -7,30 +7,28 @@
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleFonts.h"
-#include "ModulePlayer.h"
+#include "SceneIntro.h"
 #include <stdio.h>
 
-SceneIntro::SceneIntro(bool startEnabled) : Module(startEnabled)
+ScenePhoto::ScenePhoto(bool startEnabled) : Module(startEnabled)
 {
 
 }
 
-SceneIntro::~SceneIntro()
+ScenePhoto::~ScenePhoto()
 {
 
 }
 
 // Load assets
-bool SceneIntro::Start()
+bool ScenePhoto::Start()
 {
 	LOG("Loading background assets");
 
 	bool ret = true;
 
-	bgTexture = App->textures->Load("Assets/names.png");
-	App->audio->PlayMusic("Assets/gwar-110.wav", 1.0f);
-	//App->audio->PlayMusic("Assets/Music/introTitle.ogg", 1.0f);
-
+	bgTexture = App->textures->Load("Assets/Intro.png");
+	
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 
@@ -39,36 +37,28 @@ bool SceneIntro::Start()
 	return ret;
 }
 
-Update_Status SceneIntro::Update()
+Update_Status ScenePhoto::Update()
 {
 	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN) {
-		credits++;
-		int audioCredit = App->audio->LoadFx("Assets/gwar-191.wav");
-		App->audio->PlayFx(audioCredit);
+		App->fade->FadeToBlack(this, (Module*)App->sceneCutscene, 200);
 	}
 
-	if (App->input->keys[SDL_SCANCODE_RETURN] == Key_State::KEY_DOWN && credits>0) {
-		App->fade->FadeToBlack(this, (Module*)App->scenePhoto, 200);
-		
-		
-		credits--;
-	}
 	return Update_Status::UPDATE_CONTINUE;
 }
 
 // Update: draw background
-Update_Status SceneIntro::PostUpdate()
+Update_Status ScenePhoto::PostUpdate()
 {
 	// Draw everything --------------------------------------
-	sprintf_s(creditsText, 10, "%d", credits);
+	sprintf_s(App->sceneIntro->creditsText, 10, "%d", App->sceneIntro->credits);
 
-	App->render->Blit(bgTexture, 0, 30, NULL);
+	App->render->Blit(bgTexture, -50, 30, NULL);
 	App->fonts->BlitText(315, 475, introFont, "CREDIT ");
-	App->fonts->BlitText(370, 475, introFont, creditsText);
+	App->fonts->BlitText(370, 475, introFont, App->sceneIntro->creditsText);
 	return Update_Status::UPDATE_CONTINUE;
 }
 
-bool SceneIntro::CleanUp() 
+bool ScenePhoto::CleanUp()
 {
 	App->textures->Unload(bgTexture);
 	App->fonts->UnLoad(introFont);

@@ -23,9 +23,10 @@ private:
 	Collider* colliderEnemy = nullptr;
 
 	//animations for the enemy
-	Animation* help;
-	Animation* saved;
+	Animation help;
+	Animation saved;
 	Animation death;
+	Animation* currentAnim;
 };
 
 

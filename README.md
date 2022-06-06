@@ -22,9 +22,10 @@ Guerrilla War, released in Japan as Guevara, is an overhead run and gun game pro
 To move the player, use the WASD controls.
 
 To change the direction of the player, use the four arrows in order to look at the diagonals press to arrows at the same time.
-To start the game and shoot press space.
 
 To move the camera freely you can use IJKL and to see the colliders you can press F1.
 
+Insert coin/Shoot: SPACE
+Start game: RETURN
 Win instantly: F1
 Die instantly: F2

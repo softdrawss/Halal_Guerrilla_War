@@ -106,6 +106,9 @@
     <ClInclude Include="SceneCutscene.h" />
     <ClInclude Include="SceneIntro.h" />
     <ClInclude Include="PU_Weapon.h" />
+    <ClInclude Include="ScenePhoto.h" />
+    <ClInclude Include="SceneText.h" />
+    <ClInclude Include="SceneWin.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
@@ -139,6 +142,9 @@
     <ClCompile Include="PU_Weapon.cpp" />
     <ClCompile Include="SceneCutscene.cpp" />
     <ClCompile Include="SceneIntro.cpp" />
+    <ClCompile Include="ScenePhoto.cpp" />
+    <ClCompile Include="SceneText.cpp" />
+    <ClCompile Include="SceneWin.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
