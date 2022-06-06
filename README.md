@@ -34,3 +34,8 @@ Insert coin/Shoot: SPACE
 Start game: RETURN
 Win instantly: F1
 Die instantly: F2
+
+## Video of our Guerrilla War:
+
+https://youtu.be/tNBJfrx_Yxg
+
