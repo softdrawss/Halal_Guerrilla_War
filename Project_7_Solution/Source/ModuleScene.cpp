@@ -137,8 +137,148 @@ bool ModuleScene::Start()
 	//// Enemies
 	//App->enemies->AddEnemy(Enemy_Type::BOMB, 398, -2290, 0);
 	//App->enemies->AddEnemy(Enemy_Type::BOMB, 500, -2290, 0); 
-	//App->enemies->AddEnemy(Enemy_Type::RED, 220, 20, 0);
-	//App->enemies->AddEnemy(Enemy_Type::RED, 220, 0, 0);
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 200, 0, 1);
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 220, 0, 1);
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 240, 0, 1);
+
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 200, -60, 1);
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 220, -60, 1);
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 240, -60, 1);
+
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 200, -100, 1);
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 220, -100, 1);
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 240, -100, 1);
+
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 200, -140, 1);
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 220, -140, 1);
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 240, -140, 1);
+
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 250, -205, 0);
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 150, -205, 0);
+	App->enemies->AddEnemy(Enemy_Type::RED, 200, -225, 0);
+
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 200, -300, 1);
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 220, -300, 1);
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 240, -300, 1);
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 260, -300, 1);
+
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 200, -360, 1);
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 220, -360, 1);
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 240, -360, 1);
+
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 200, -410, 1);
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 220, -410, 1);
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 240, -410, 1);
+
+	App->enemies->AddEnemy(Enemy_Type::RED, 240, -410, 0);
+
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 200, -480, 1);
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 230, -480, 1);
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 300, -600, 0);
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 80, -680, 0);
+
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 200, -480, 1);
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 220, -480, 1);
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 240, -480, 1);
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 260, -480, 1);
+
+	App->enemies->AddEnemy(Enemy_Type::RED, 400, -600, 0);
+
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 160, -850, 0);
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 190, -850, 0);
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 210, -850, 0);
+
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 500, -800, 0);
+
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 470, -1000, 1);
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 510, -1000, 1);
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 550, -1000, 1);
+
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 470, -1200, 1);
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 510, -1210, 1);
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 550, -1290, 1);
+
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 470, -1300, 1);
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 510, -1320, 1);
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 550, -13600, 1);
+
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 470, -1450, 1);
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 510, -1480, 1);
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 550, -1500, 1);
+
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 470, -1600, 1);
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 510, -1630, 1);
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 550, -1700, 1);
+
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 440, -1500, 0);
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 440, -1550, 0);
+
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 740, -1500, 0);
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 740, -1550, 0);
+
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 740, -1600, 0);
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 740, -1650, 0);
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 740, -1700, 0);
+
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 440, -1600, 0);
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 440, -1650, 0);
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 440, -1700, 0);
+
+	App->enemies->AddEnemy(Enemy_Type::RED, 440, -1800, 0);
+	App->enemies->AddEnemy(Enemy_Type::RED, 740, -1800, 0);
+
+	App->enemies->AddEnemy(Enemy_Type::RED, 640, -1800, 0);
+	App->enemies->AddEnemy(Enemy_Type::RED, 640, -1920, 0);
+	App->enemies->AddEnemy(Enemy_Type::RED, 640, -1990, 0);
+	App->enemies->AddEnemy(Enemy_Type::RED, 640, -2050, 0);
+	App->enemies->AddEnemy(Enemy_Type::RED, 640, -2190, 0);
+	App->enemies->AddEnemy(Enemy_Type::RED, 640, -2300, 0);
+
+	App->enemies->AddEnemy(Enemy_Type::RED, 340, -1800, 0);
+	App->enemies->AddEnemy(Enemy_Type::RED, 340, -1920, 0);
+	App->enemies->AddEnemy(Enemy_Type::RED, 340, -1990, 0);
+	App->enemies->AddEnemy(Enemy_Type::RED, 340, -2050, 0);
+	App->enemies->AddEnemy(Enemy_Type::RED, 340, -2190, 0);
+	App->enemies->AddEnemy(Enemy_Type::RED, 340, -2300, 0);
+
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 700, -2600, 1);
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 740, -2600, 1);
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 780, -2600, 1);
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 820, -2600, 1);
+
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 700, -2900, 1);
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 740, -2900, 1);
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 780, -2900, 1);
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 820, -2900, 1);
+
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 780, -3100, 1);
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 820, -3100, 1);
+
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 780, -3300, 1);
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 820, -3300, 1);
+
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 780, -3500, 1);
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 820, -3500, 1);
+
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 780, -3700, 1);
+	App->enemies->AddEnemy(Enemy_Type::GREEN, 820, -3700, 1);
+
+	App->enemies->AddEnemy(Enemy_Type::BOSS, 800, -4000, 0);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 	//App->enemies->AddEnemy(Enemy_Type::GREEN, 240, 0,1);

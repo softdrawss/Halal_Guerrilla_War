@@ -429,7 +429,7 @@ bool ModulePlayer::Start()
 	grenadeanimcounter = 10;
 
 	//add collider player
-	collider = App->collisions->AddCollider({ position.x, position.y, 32, 64 }, Collider::Type::PLAYER, this);
+	collider = App->collisions->AddCollider({ position.x, position.y, 32, 64 }, Collider::Type::NONE, this);
 
 
 	// Font UI
