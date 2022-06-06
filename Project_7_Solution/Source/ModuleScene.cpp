@@ -7,6 +7,7 @@
 #include "ModuleCollisions.h"
 #include "ModuleEnemies.h"
 #include "ModuleParticles.h"
+#include "ModulePowerUp.h"
 
 ModuleScene::ModuleScene(bool startEnabled) : Module(startEnabled)
 {
@@ -145,12 +146,15 @@ bool ModuleScene::Start()
 	//App->enemies->AddEnemy(Enemy_Type::GREEN, 180, 200, 0);
 
 
+	//prisoners
+	//App->powerUps->AddPowerUp(PowerUp_Type::PRISONER, 220, 0);
+
 	//Enable the necessary modules
 	App->collisions->Enable();
 	App->particles->Enable();
 	App->player->Enable();
 	App->enemies->Enable();
-	
+	App->powerUps->Enable();
 	return ret;
 }
 
@@ -185,7 +189,7 @@ bool ModuleScene::CleanUp()
 	App->enemies->Disable();
 	App->collisions->Disable();
 	App->particles->Disable();
-
+	App->powerUps->Disable();
 	return true;
 }
 

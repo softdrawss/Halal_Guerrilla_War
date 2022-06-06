@@ -115,7 +115,7 @@ bool SceneCutscene::Start() {
 	boat.x = (SCREEN_WIDTH / 2) - 8;
 	boat.y = (SCREEN_HEIGHT / 2) + 64;
 
-	planes[0].x = (SCREEN_WIDTH / 2) - 64;
+	planes[0].x = (SCREEN_WIDTH / 2) - 55;
 	planes[0].y = SCREEN_HEIGHT + 96;
 	planes[1].x = 0 - 32;
 	planes[1].y = SCREEN_HEIGHT + 128 + 96;
@@ -135,7 +135,7 @@ bool SceneCutscene::Start() {
 	titleAnim.FullReset();
 	titleAnim.PushBack({ 0, 240, 207, 158 });
 	titleAnim.loop = false;
-	title.x = 100;
+	title.x = 110;
 	title.y = 125;
 	return ret;
 }
@@ -143,7 +143,7 @@ bool SceneCutscene::Start() {
 Update_Status SceneCutscene::Update() {
 
 	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN || duration >= SCENE_DURATION) {
-		App->fade->FadeToBlack(this, (Module*)App->scene, 200);
+		App->fade->FadeToBlack(this, (Module*)App->sceneText, 200);
 	}
 	/*int planeAudio = App->audio->LoadFx("Assets/gwar-130.wav");
 	App->audio->PlayFx(planeAudio, 0);*/
@@ -168,42 +168,42 @@ Update_Status SceneCutscene::Update() {
 	if (duration == 180) {
 		assetsAnim[2].Reset();
 		bombs[0].x = (SCREEN_WIDTH / 2) - 8;
-		bombs[0].y = -528; //-176
+		bombs[0].y = -328; //-176
 	}
 	if (duration == 185) {
 		assetsAnim[3].Reset();
 		bombs[1].x = (SCREEN_WIDTH / 2) - 8;
-		bombs[1].y = -588; //-206
+		bombs[1].y = -388; //-206
 	}
 	if (duration == 200) {
 		assetsAnim[4].Reset();
 		bombs[2].x = (SCREEN_WIDTH / 2) - 8;
-		bombs[2].y = -648; //-236
+		bombs[2].y = -448; //-236
 	}
 	if (duration == 210) {
 		assetsAnim[5].Reset();
 		bombs[3].x = (SCREEN_WIDTH / 2) - 8;
-		bombs[3].y = -708; //-266
+		bombs[3].y = -508; //-266
 	}
 	if (duration == 220) {
 		assetsAnim[6].Reset();
 		bombs[4].x = (SCREEN_WIDTH / 2) - 8;
-		bombs[4].y = -768; //-296
+		bombs[4].y = -568; //-296
 	}
 	if (duration == 230) {
 		assetsAnim[7].Reset();
 		bombs[5].x = (SCREEN_WIDTH / 2) - 8;
-		bombs[5].y = -828; //-326
+		bombs[5].y = -628; //-326
 	}
 	if (duration == 240) {
 		assetsAnim[8].Reset();
 		bombs[6].x = (SCREEN_WIDTH / 2) - 8;
-		bombs[6].y = -888; //-356
+		bombs[6].y = -688; //-356
 	}
 	if (duration == 250) {
 		assetsAnim[9].Reset();
 		bombs[7].x = (SCREEN_WIDTH / 2) - 8;
-		bombs[7].y = -948; //-386
+		bombs[7].y = -748; //-386
 	}
 	if (duration == 475) {
 		assetsAnim[1].Reset();
@@ -247,7 +247,7 @@ Update_Status SceneCutscene::Update() {
 
 // Update: draw background
 Update_Status SceneCutscene::PostUpdate() {
-	App->render->Blit(bgTexture, 0 + 100, SCREEN_HEIGHT - 2050, NULL);
+	App->render->Blit(bgTexture, 0, SCREEN_HEIGHT - 2050, NULL);
 
 	for (int i = 0; i < MAX_ASSETS_TITLE; ++i) {
 		SDL_Rect rect = assetsAnim[i].GetCurrentFrame();
@@ -264,7 +264,7 @@ Update_Status SceneCutscene::PostUpdate() {
 
 	// Player 1 --> Available
 	App->fonts->BlitText(83, 85, introFont, "1 UP");
-	App->fonts->BlitText(75, 95, introFont, App->player->scoreText);
+	App->fonts->BlitText(125, 95, introFont, "0");
 
 	// Player 2 --> Not available
 	App->fonts->BlitText(290, 85, introFont, "2 UP");
