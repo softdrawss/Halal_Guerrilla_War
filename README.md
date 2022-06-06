@@ -37,5 +37,5 @@ Die instantly: F2
 
 ## Video of our Guerrilla War:
 
-https://youtu.be/tNBJfrx_Yxg
+[https://youtu.be/tNBJfrx_Yxg](https://www.youtube.com/watch?v=tNBJfrx_Yxg)
 
