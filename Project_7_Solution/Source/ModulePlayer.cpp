@@ -313,6 +313,7 @@ bool ModulePlayer::Start()
 	normalweapon = true;
 	heavyweapon = false;
 	dead = false;
+	winner = false;
 	lives = 3;
 	granades = MAX_GRANADES;
 	bullets = 0;
@@ -1859,10 +1860,11 @@ Update_Status ModulePlayer::Update()
 	//instawin
 	if (App->input->keys[SDL_SCANCODE_F1] == KEY_DOWN) {
 		score = 30000;
+		winner = true;
 		if (score > 30000) {
 			score = 30000;
 		}
-		winner = true;
+		
 	}
 
 	//instakill
@@ -1895,9 +1897,9 @@ Update_Status ModulePlayer::Update()
 	}
 	
 	//if winner
-	if (winner = true) {
+	if (winner == true) {
 		
-		//App->fade->FadeToBlack((Module*)App->scene, (Module*)App->sceneIntro, 60);
+		App->fade->FadeToBlack((Module*)App->scene, (Module*)App->sceneWin, 60);
 
 	}
 

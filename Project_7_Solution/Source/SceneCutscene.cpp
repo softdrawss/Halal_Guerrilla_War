@@ -280,6 +280,7 @@ bool SceneCutscene::CleanUp() {
 	App->textures->Unload(bgTexture);
 	App->textures->Unload(introAssets);
 	App->textures->Unload(titleImage);
+	App->fonts->UnLoad(introFont);
 	bgTexture = nullptr;
 	introAssets = nullptr;
 	titleImage = nullptr;

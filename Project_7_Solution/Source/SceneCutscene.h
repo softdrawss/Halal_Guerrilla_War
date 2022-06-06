@@ -30,7 +30,7 @@ public:
 	Update_Status PostUpdate() override;
 
 	// Disables the player, the enemies and the powerups.
-	bool CleanUp();
+	bool CleanUp() override;
 
 
 public:

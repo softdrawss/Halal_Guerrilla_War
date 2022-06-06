@@ -53,7 +53,6 @@ Update_Status SceneIntro::Update()
 		
 		
 		credits--;
-		App->fonts->UnLoad(introFont);
 	}
 	return Update_Status::UPDATE_CONTINUE;
 }
@@ -68,4 +67,12 @@ Update_Status SceneIntro::PostUpdate()
 	App->fonts->BlitText(315, 475, introFont, "CREDIT ");
 	App->fonts->BlitText(370, 475, introFont, creditsText);
 	return Update_Status::UPDATE_CONTINUE;
+}
+
+bool SceneIntro::CleanUp() 
+{
+	App->textures->Unload(bgTexture);
+	App->fonts->UnLoad(introFont);
+	bgTexture = nullptr;
+	return true;
 }

@@ -29,7 +29,7 @@ bool ModuleScene::Start()
 	bool ret = true;
 
 	bgTexture = App->textures->Load("Assets/Guerrilla_War_ARC_Map_Level1 copia.png");
-	App->audio->PlayMusic("Assets/gwar-107.ogg");
+	App->audio->PlayMusic("Assets/gwar-107.ogg", 1.0f);
 	
 	//left wall colliders
 	App->collisions->AddCollider({ -30, 420, 64,105 }, Collider::Type::WALL);
@@ -180,6 +180,7 @@ Update_Status ModuleScene::PostUpdate()
 
 bool ModuleScene::CleanUp()
 {
+	//App->audio->Disable();
 	App->player->Disable();
 	App->enemies->Disable();
 	App->collisions->Disable();
