@@ -75,7 +75,7 @@ public:
 	Collider* collider1 = nullptr;
 
 	// A flag to detect when the player has been killed aswell as a counter to the death;
-	bool dead = false;
+	bool dead = false, winner = false;
 	int deathcounter;
 
 	//booleans to know the direction the player is facing

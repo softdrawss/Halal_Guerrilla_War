@@ -10,6 +10,8 @@
 #include "ModuleFadeToBlack.h"
 #include "SceneIntro.h"
 #include "SDL/include/SDL_scancode.h"
+#include "ModuleFonts.h"
+#include <stdio.h>
 
 SceneCutscene::SceneCutscene(bool startEnabled) : Module(startEnabled) {
 
@@ -25,8 +27,11 @@ bool SceneCutscene::Start() {
 
 	bgTexture = App->textures->Load("Assets/title_map_large.png");
 	introAssets = App->textures->Load("Assets/intro_assets.png");
+	titleImage = App->textures->Load("Assets/intro_assets.png");
+	char lookupTable[] = { "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ.@'?&- " };
+	introFont = App->fonts->Load("Assets/ui_font5.png", lookupTable, 1);
 
-	//App->audio->PlayMusic("Assets/sounds/bgm/112.ogg", 1.0f);
+	App->audio->PlayMusic("Assets/gwar-112.wav", 1.0f);
 	duration = 0;
 
 	bombsAnim.FullReset();
@@ -127,7 +132,11 @@ bool SceneCutscene::Start() {
 	bombs[6].x = SCREEN_WIDTH;
 	bombs[7].x = -32;
 
-
+	titleAnim.FullReset();
+	titleAnim.PushBack({ 0, 240, 207, 158 });
+	titleAnim.loop = false;
+	title.x = 100;
+	title.y = 125;
 	return ret;
 }
 
@@ -136,6 +145,8 @@ Update_Status SceneCutscene::Update() {
 	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN || duration >= SCENE_DURATION) {
 		App->fade->FadeToBlack(this, (Module*)App->scene, 200);
 	}
+	/*int planeAudio = App->audio->LoadFx("Assets/gwar-130.wav");
+	App->audio->PlayFx(planeAudio, 0);*/
 
 	if (App->input->keys[SDL_SCANCODE_ESCAPE] == Key_State::KEY_REPEAT) {
 		return Update_Status::UPDATE_STOP;
@@ -194,12 +205,14 @@ Update_Status SceneCutscene::Update() {
 		bombs[7].x = (SCREEN_WIDTH / 2) - 8;
 		bombs[7].y = -948; //-386
 	}
-	if (duration == 425) {
+	if (duration == 475) {
 		assetsAnim[1].Reset();
 		playerMini.x = boat.x;
 		playerMini.y = boat.y + 16;
+		int miniPlayerSound = App->audio->LoadFx("Assets/gwar-184.wav");
+		App->audio->PlayFx(miniPlayerSound, 0);
 	}
-
+	
 	for (int i = 0; i < 8; ++i) {
 		if (i % 2 == 0) {
 			if (assetsAnim[i + 2].GetCurrentFrameint() < 6) {
@@ -234,20 +247,29 @@ Update_Status SceneCutscene::Update() {
 
 // Update: draw background
 Update_Status SceneCutscene::PostUpdate() {
-	App->render->Blit(bgTexture, 0+100, SCREEN_HEIGHT - 2000, NULL);
+	App->render->Blit(bgTexture, 0 + 100, SCREEN_HEIGHT - 2050, NULL);
 
 	for (int i = 0; i < MAX_ASSETS_TITLE; ++i) {
 		SDL_Rect rect = assetsAnim[i].GetCurrentFrame();
 		App->render->Blit(introAssets, assetsPoint[i]->x, assetsPoint[i]->y, &rect);
 	}
 
+	sprintf_s(App->sceneIntro->creditsText, 10, "%d", App->sceneIntro->credits);
+
+	SDL_Rect titleREC = titleAnim.GetCurrentFrame();
+
+	App->render->Blit(titleImage, title.x, title.y, &titleREC, NULL, false);
+	App->fonts->BlitText(315, 475, introFont, "CREDIT ");
+	App->fonts->BlitText(370, 475, introFont, App->sceneIntro->creditsText);
 	return Update_Status::UPDATE_CONTINUE;
 }
 
 bool SceneCutscene::CleanUp() {
 	App->textures->Unload(bgTexture);
 	App->textures->Unload(introAssets);
+	App->textures->Unload(titleImage);
 	bgTexture = nullptr;
 	introAssets = nullptr;
+	titleImage = nullptr;
 	return true;
 }

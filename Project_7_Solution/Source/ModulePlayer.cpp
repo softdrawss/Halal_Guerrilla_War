@@ -1861,8 +1861,8 @@ Update_Status ModulePlayer::Update()
 		score = 30000;
 		if (score > 30000) {
 			score = 30000;
-
 		}
+		winner = true;
 	}
 
 	//instakill
@@ -1894,6 +1894,11 @@ Update_Status ModulePlayer::Update()
 		dead = true;
 	}
 	
+	//if winner
+	if (winner = true) {
+		
+	}
+
 	//set collider position
 	collider->SetPos(position.x, position.y);
 

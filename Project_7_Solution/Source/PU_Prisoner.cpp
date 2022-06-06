@@ -16,6 +16,9 @@ PU_Prisoner::PU_Prisoner(int x, int y) : PowerUp(x, y)
 	help->PushBack({ 73, 5, 18, 54 });
 	help->PushBack({ 103, 5, 18, 54 });
 
+
+	death.PushBack({});
+
 	//put collider
 	collider = App->collisions->AddCollider({ 0, 0, 18, 54 }, Collider::Type::PRISONER, (Module*)App->powerUps);
 

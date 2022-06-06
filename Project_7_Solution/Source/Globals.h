@@ -31,6 +31,6 @@ typedef unsigned int uint;
 #define VSYNC 1
 #define MAX_GRANADES 50
 
-#define SCENE_DURATION 500
+#define SCENE_DURATION 800
 
 #endif // __GLOBALS_H__

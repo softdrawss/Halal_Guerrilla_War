@@ -32,6 +32,7 @@ public:
 	// Disables the player, the enemies and the powerups.
 	bool CleanUp();
 
+
 public:
 	// Scene duration
 	uint duration;
@@ -39,6 +40,7 @@ public:
 	// The scene sprite sheet loaded into an SDL_Texture
 	SDL_Texture* bgTexture = nullptr;
 	SDL_Texture* introAssets = nullptr;
+	SDL_Texture* titleImage = nullptr;
 
 	// Textures & Animations
 	iPoint planes[3];
@@ -53,8 +55,14 @@ public:
 	iPoint playerMini;
 	Animation playerMiniAnim;
 
+	iPoint title;
+	Animation titleAnim;
+
 	iPoint* assetsPoint[MAX_ASSETS_TITLE];
 	Animation assetsAnim[MAX_ASSETS_TITLE];
+
+	int introFont = -1;
+	char creditsText[10] = { "\0" };
 };
 
 #endif // __MODULE_SCENETITLE_H__

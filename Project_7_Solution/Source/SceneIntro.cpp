@@ -28,7 +28,7 @@ bool SceneIntro::Start()
 	bool ret = true;
 
 	bgTexture = App->textures->Load("Assets/names.png");
-
+	App->audio->PlayMusic("Assets/gwar-110.wav", 1.0f);
 	//App->audio->PlayMusic("Assets/Music/introTitle.ogg", 1.0f);
 
 	App->render->camera.x = 0;
@@ -41,10 +41,6 @@ bool SceneIntro::Start()
 
 Update_Status SceneIntro::Update()
 {
-
-
-	
-
 	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN) {
 		credits++;
 		int audioCredit = App->audio->LoadFx("Assets/gwar-191.wav");
@@ -68,7 +64,7 @@ Update_Status SceneIntro::PostUpdate()
 	// Draw everything --------------------------------------
 	sprintf_s(creditsText, 10, "%d", credits);
 
-	App->render->Blit(bgTexture, -50, 50, NULL);
+	App->render->Blit(bgTexture, 0, -50, NULL);
 	App->fonts->BlitText(315, 475, introFont, "CREDIT ");
 	App->fonts->BlitText(370, 475, introFont, creditsText);
 	return Update_Status::UPDATE_CONTINUE;
