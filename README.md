@@ -1,6 +1,6 @@
 # Halal Games
 ## Team photo
-![IMG20220304124917](https://user-images.githubusercontent.com/99961049/156935031-2c02602d-13b8-476a-b2fc-f64ac1fd8916.jpg)
+![hals](https://user-images.githubusercontent.com/99959289/172249033-3367adc8-8e60-4851-8355-a232e31400b5.jpg)
 
 ## Guerrilla War
 ![Guerrilla_War_Logo](https://user-images.githubusercontent.com/99961049/156935060-bc1aedb6-1516-403e-b973-c48197d096ed.gif)
