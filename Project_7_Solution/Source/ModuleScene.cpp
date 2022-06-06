@@ -138,7 +138,7 @@ bool ModuleScene::Start()
 	//App->enemies->AddEnemy(Enemy_Type::BOMB, 398, -2290, 0);
 	//App->enemies->AddEnemy(Enemy_Type::BOMB, 500, -2290, 0); 
 	//App->enemies->AddEnemy(Enemy_Type::RED, 220, 20, 0);
-	App->enemies->AddEnemy(Enemy_Type::RED, 220, 0, 0);
+	//App->enemies->AddEnemy(Enemy_Type::RED, 220, 0, 0);
 
 
 	//App->enemies->AddEnemy(Enemy_Type::GREEN, 240, 0,1);
@@ -147,7 +147,7 @@ bool ModuleScene::Start()
 
 
 	//prisoners
-	//App->powerUps->AddPowerUp(PowerUp_Type::PRISONER, 220, 0);
+	App->powerUps->AddPowerUp(PowerUp_Type::PRISONER, 220, 0);
 
 	//Enable the necessary modules
 	App->collisions->Enable();

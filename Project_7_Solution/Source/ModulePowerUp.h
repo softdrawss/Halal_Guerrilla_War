@@ -68,7 +68,7 @@ public:
 	void HandlePowerUpDespawn();
 
 private:
-	// Spawns a new enemy using the data from the queue
+	// Spawns a new powerup using the data from the queue
 	void SpawnPowerUp(const PowerUpSpawnpoint& info);
 
 

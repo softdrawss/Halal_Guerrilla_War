@@ -155,7 +155,7 @@ void ModulePowerUp::SpawnPowerUp(const PowerUpSpawnpoint& info)
 			switch (info.type)
 			{
 			case PowerUp_Type::PRISONER:
-				//powerups[i] = new Enemy_Green_Bomb(info.x, info.y);
+				powerups[i] = new PU_Prisoner(info.x, info.y);
 				powerups[i]->texture = texturePRISONER;
 				break;
 			case PowerUp_Type::WEAPON:
