@@ -177,7 +177,6 @@ void Enemy_Green::dontmove() {
 	}
 
 	Attack();
-	App->particles->Update();
 	
 }
 

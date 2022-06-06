@@ -9,7 +9,7 @@ Particle::Particle()
 }
 
 Particle::Particle(const Particle& p) : anim(p.anim), position(p.position), speed(p.speed),
-frameCount(p.frameCount), lifetime(p.lifetime)
+frameCount(p.frameCount), lifetime(p.lifetime), hasExplosion(p.hasExplosion), isexplosion(p.isexplosion)
 {
 
 }
@@ -47,8 +47,15 @@ bool Particle::Update()
 		position.x += speed.x;
 		position.y += speed.y;
 
-		if (collider != nullptr)
-			collider->SetPos(position.x, position.y);
+		if (collider != nullptr) {
+			if (isexplosion == true) {
+				collider->SetPos(position.x-10, position.y-5);
+			}
+			else {
+				collider->SetPos(position.x, position.y);
+			}
+		}
+
 	}
 
 	return ret;

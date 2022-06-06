@@ -196,6 +196,96 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	legsdownleft.PushBack({ 33,338,32,32 });
 	legsdownleft.speed = 0.1f;
 
+
+	//pushbakcs for the torso throwing greande anim
+	torsogrenadeup.PushBack({ 191,1,32,32 });
+	torsogrenadeup.PushBack({ 223,1,32,32 });
+	torsogrenadeup.PushBack({ 255,1,32,32 });
+	torsogrenadeup.PushBack({ 287,1,32,32 });
+	torsogrenadeup.PushBack({ 319,1,32,32 });
+	torsogrenadeup.PushBack({ 287,1,32,32 });
+	torsogrenadeup.PushBack({ 255,1,32,32 });
+	torsogrenadeup.PushBack({ 223,1,32,32 });
+	torsogrenadeup.speed = 0.4f;
+	torsogrenadeup.loop = false;
+
+	torsogrenadedown.PushBack({ 191,244,32,32 });
+	torsogrenadedown.PushBack({ 223,244,32,32 });
+	torsogrenadedown.PushBack({ 255,244,32,32 });
+	torsogrenadedown.PushBack({ 287,244,32,32 });
+	torsogrenadedown.PushBack({ 319,244,32,32 });
+	torsogrenadedown.PushBack({ 287,244,32,32 });
+	torsogrenadedown.PushBack({ 255,244,32,32 });
+	torsogrenadedown.PushBack({ 223,244,32,32 });
+	torsogrenadedown.speed = 0.4f;
+	torsogrenadedown.loop = false;
+	
+	torsogrenaderight.PushBack({ 192,123,32,32 });
+	torsogrenaderight.PushBack({ 224,123,32,32 });
+	torsogrenaderight.PushBack({ 256,123,32,32 });
+	torsogrenaderight.PushBack({ 288,123,32,32 });
+	torsogrenaderight.PushBack({ 320,123,32,32 });
+	torsogrenaderight.PushBack({ 288,123,32,32 });
+	torsogrenaderight.PushBack({ 256,123,32,32 });
+	torsogrenaderight.PushBack({ 224,123,32,32 });
+	torsogrenaderight.speed = 0.4f;
+	torsogrenaderight.loop = false;
+
+	torsogrenadeleft.PushBack({ 195,369,32,32 });
+	torsogrenadeleft.PushBack({ 227,369,32,32 });
+	torsogrenadeleft.PushBack({ 259,369,32,32 });
+	torsogrenadeleft.PushBack({ 291,369,32,32 });
+	torsogrenadeleft.PushBack({ 323,369,32,32 });
+	torsogrenadeleft.PushBack({ 291,369,32,32 });
+	torsogrenadeleft.PushBack({ 259,369,32,32 });
+	torsogrenadeleft.PushBack({ 227,369,32,32 });
+	torsogrenadeleft.speed = 0.4f;
+	torsogrenadeleft.loop = false;
+
+	torsogrenadeul.PushBack({ 195,430,32,32 });
+	torsogrenadeul.PushBack({ 227,430,32,32 });
+	torsogrenadeul.PushBack({ 259,430,32,32 });
+	torsogrenadeul.PushBack({ 291,430,32,32 });
+	torsogrenadeul.PushBack({ 323,430,32,32 });
+	torsogrenadeul.PushBack({ 291,430,32,32 });
+	torsogrenadeul.PushBack({ 259,430,32,32 });
+	torsogrenadeul.PushBack({ 237,430,32,32 });
+	torsogrenadeul.speed = 0.4f;
+	torsogrenadeul.loop = false;
+
+	torsogrenadeur.PushBack({ 189,62,32,32 });
+	torsogrenadeur.PushBack({ 221,62,32,32 });
+	torsogrenadeur.PushBack({ 253,62,32,32 });
+	torsogrenadeur.PushBack({ 285,62,32,32 });
+	torsogrenadeur.PushBack({ 317,62,32,32 });
+	torsogrenadeur.PushBack({ 285,62,32,32 });
+	torsogrenadeur.PushBack({ 253,62,32,32 });
+	torsogrenadeur.PushBack({ 221,62,32,32 });
+	torsogrenadeur.speed = 0.4f;
+	torsogrenadeur.loop = false;
+
+	torsogrenadedr.PushBack({ 191,181,32,32 });
+	torsogrenadedr.PushBack({ 223,181,32,32 });
+	torsogrenadedr.PushBack({ 255,181,32,32 });
+	torsogrenadedr.PushBack({ 287,181,32,32 });
+	torsogrenadedr.PushBack({ 319,181,32,32 });
+	torsogrenadedr.PushBack({ 287,181,32,32 });
+	torsogrenadedr.PushBack({ 255,181,32,32 });
+	torsogrenadedr.PushBack({ 223,181,32,32 });
+	torsogrenadedr.speed =  0.4f;
+	torsogrenadedr.loop = false;
+
+	torsogrenadedl.PushBack({ 191,306,32,32 });
+	torsogrenadedl.PushBack({ 223,306,32,32 });
+	torsogrenadedl.PushBack({ 255,306,32,32 });
+	torsogrenadedl.PushBack({ 287,306,32,32 });
+	torsogrenadedl.PushBack({ 319,306,32,32 });
+	torsogrenadedl.PushBack({ 287,306,32,32 });
+	torsogrenadedl.PushBack({ 255,306,32,32 });
+	torsogrenadedl.PushBack({ 223,306,32,32 });
+	torsogrenadedl.speed = 0.4f;
+	torsogrenadedl.loop = false;
+
 	//animation water
 	water.PushBack({ 363, 23, 32, 32 });
 	water.PushBack({ 396, 23, 32, 32 });
@@ -296,7 +386,7 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 
 ModulePlayer::~ModulePlayer()
 {
-
+	
 }
 
 bool ModulePlayer::Start()
@@ -323,6 +413,7 @@ bool ModulePlayer::Start()
 	currentAnimationlegs = &legsup;
 	currentAnimationtorso = &torsoup;
 	currentdeathanim = &iddledeathanim;
+	currentAnimationtorsogrenade = &torsoiddleAnim;
 	weapon = &normalweapon_up;
 	faceu = true;
 	faced = false;
@@ -333,6 +424,8 @@ bool ModulePlayer::Start()
 	facedr = false;
 	facedl = false;
 	waterP = false;
+
+	grenadeanimcounter = 10;
 
 	//add collider player
 	collider = App->collisions->AddCollider({ position.x, position.y, 32, 64 }, Collider::Type::PLAYER, this);
@@ -348,6 +441,76 @@ bool ModulePlayer::Start()
 
 	return ret;
 
+}
+
+void ModulePlayer::throwgrenade() {
+	
+	uint grenade = App->audio->LoadFx("Assets/gwar-137.wav");
+	torsogrenadeup.Reset();
+	torsogrenadedown.Reset();
+	torsogrenaderight.Reset();
+	torsogrenadeleft.Reset();
+	torsogrenadeul.Reset();
+	torsogrenadeur.Reset();
+	torsogrenadedl.Reset();
+	torsogrenadedr.Reset();
+	if (faceu == true) {
+		currentAnimationtorsogrenade = &torsogrenadeup;
+		App->particles->grenade.speed.y = -2;
+		App->particles->grenade.speed.x = 0;
+		App->particles->AddParticle(App->particles->grenade, position.x + 5, position.y + 4, Collider::Type::NONE);
+		App->audio->PlayFx(grenade, 0);
+	}
+	else if (faced == true) {
+		currentAnimationtorsogrenade = &torsogrenadedown;
+		App->particles->grenade.speed.y = 2;
+		App->particles->grenade.speed.x = 0;
+		App->particles->AddParticle(App->particles->grenade, position.x + 20, position.y + 17, Collider::Type::NONE);
+		App->audio->PlayFx(grenade, 0);
+	}
+	else if (facer == true) {
+		currentAnimationtorsogrenade = &torsogrenaderight;
+		App->particles->grenade.speed.x = 2;
+		App->particles->grenade.speed.y = 0;
+		App->particles->AddParticle(App->particles->grenade, position.x + 15, position.y + 14, Collider::Type::NONE);
+		App->audio->PlayFx(grenade, 0);
+	}
+	else if (facel == true) {
+		currentAnimationtorsogrenade = &torsogrenadeleft;
+		App->particles->grenade.speed.x = -2;
+		App->particles->grenade.speed.y = 0;
+		App->particles->AddParticle(App->particles->grenade, position.x , position.y + 21, Collider::Type::NONE);
+		App->audio->PlayFx(grenade, 0);
+	}
+	else if (faceur == true) {
+		currentAnimationtorsogrenade = &torsogrenadeur;
+		App->particles->grenade.speed.y = -2;
+		App->particles->grenade.speed.x = 2;
+		App->particles->AddParticle(App->particles->grenade, position.x + 5, position.y + 10, Collider::Type::NONE);
+		App->audio->PlayFx(grenade, 0);
+	}
+	else if (faceul == true) {
+		currentAnimationtorsogrenade = &torsogrenadeul;
+		App->particles->grenade.speed.y = -2;
+		App->particles->grenade.speed.x = -2;
+		App->particles->AddParticle(App->particles->grenade, position.x + 6, position.y + 15, Collider::Type::NONE);
+		App->audio->PlayFx(grenade, 0);
+	}
+	else if (facedr == true) {
+		currentAnimationtorsogrenade = &torsogrenadedr;
+		App->particles->grenade.speed.y = 2;
+		App->particles->grenade.speed.x = 2;
+		App->particles->AddParticle(App->particles->grenade, position.x + 18, position.y + 20, Collider::Type::NONE);
+		App->audio->PlayFx(grenade, 0);
+	}
+	else if (facedl == true) {
+		currentAnimationtorsogrenade = &torsogrenadedl;
+		App->particles->grenade.speed.y = 2;
+		App->particles->grenade.speed.x = -2;
+		App->particles->AddParticle(App->particles->grenade, position.x + 6, position.y + 22, Collider::Type::NONE);
+		App->audio->PlayFx(grenade, 0);
+	}
+	
 }
 
 Update_Status ModulePlayer::Update()
@@ -786,7 +949,6 @@ Update_Status ModulePlayer::Update()
 			//look up
 			if (App->input->keys[SDL_SCANCODE_UP] == KEY_DOWN)
 			{
-				//App->particles->AddParticle(App->particles->normal_up_shot, position.x +20, position.y+20, Collider::Type::PLAYER_SHOT);
 				currentAnimationtorso = &torsoup;
 				weapon = &normalweapon_up;
 				faceu = true;
@@ -903,7 +1065,7 @@ Update_Status ModulePlayer::Update()
 
 			if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_DOWN)
 			{
-				uint shoot = App->audio->LoadFx("Assets/gwar-137.wav");
+				uint shoot = App->audio->LoadFx("Assets/gwar-142.wav");
 				if (faceu == true) {
 					App->particles->AddParticle(App->particles->normal_up_shot, position.x + 22, position.y + 4, Collider::Type::PLAYER_SHOT);
 					App->audio->PlayFx(shoot, 0);
@@ -1059,7 +1221,7 @@ Update_Status ModulePlayer::Update()
 			//shots
 			if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_DOWN)
 			{
-				uint shootheavy = App->audio->LoadFx("Assets/gwar-137.wav");
+				uint shootheavy = App->audio->LoadFx("Assets/gwar-142.wav");
 				if (faceu == true) {
 					App->particles->AddParticle(App->particles->normal_up_shot, position.x + 22, position.y + 4, Collider::Type::PLAYER_SHOT);
 					App->audio->PlayFx(shootheavy, 0);
@@ -1523,7 +1685,6 @@ Update_Status ModulePlayer::Update()
 			//look up
 			if (App->input->keys[SDL_SCANCODE_UP] == KEY_DOWN)
 			{
-				//App->particles->AddParticle(App->particles->normal_up_shot, position.x +20, position.y+20, Collider::Type::PLAYER_SHOT);
 				currentAnimationtorso = &torsoup;
 				weapon = &normalweapon_up;
 				faceu = true;
@@ -1640,7 +1801,7 @@ Update_Status ModulePlayer::Update()
 
 			if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_DOWN)
 			{
-				uint shoot = App->audio->LoadFx("Assets/gwar-137.wav");
+				uint shoot = App->audio->LoadFx("Assets/gwar-142.wav");
 				if (faceu == true) {
 					App->particles->AddParticle(App->particles->normal_up_shot, position.x + 22, position.y + 4, Collider::Type::PLAYER_SHOT);
 					App->audio->PlayFx(shoot, 0);
@@ -1674,6 +1835,8 @@ Update_Status ModulePlayer::Update()
 					App->audio->PlayFx(shoot, 0);
 				}
 			}
+
+
 		}
 		else if (heavyweapon == true && normalweapon == false) {
 			//look up
@@ -1796,7 +1959,7 @@ Update_Status ModulePlayer::Update()
 			//shots
 			if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_DOWN)
 			{
-				uint shootheavy = App->audio->LoadFx("Assets/gwar-137.wav");
+				uint shootheavy = App->audio->LoadFx("Assets/gwar-142.wav");
 				if (faceu == true) {
 					App->particles->AddParticle(App->particles->normal_up_shot, position.x + 22, position.y + 4, Collider::Type::PLAYER_SHOT);
 					App->audio->PlayFx(shootheavy, 0);
@@ -1833,6 +1996,15 @@ Update_Status ModulePlayer::Update()
 		}
 	}
 	
+	//throw greandes
+	if (App->input->keys[SDL_SCANCODE_LALT] == KEY_DOWN) {
+		if (isgrenade == false && granades >0) {
+			granades--;
+			grenadeanimcounter = 0;
+			isgrenade = true;
+			throwgrenade();
+		}
+	}
 
 	//instawin
 	if (App->input->keys[SDL_SCANCODE_F1] == KEY_DOWN) {
@@ -1871,6 +2043,9 @@ Update_Status ModulePlayer::Update()
 	if (lives == 0) {
 		dead = true;
 	}
+	if (isgrenade == true) {
+		++grenadeanimcounter;
+	}
 	
 	//set collider position
 	collider->SetPos(position.x, position.y);
@@ -1880,7 +2055,7 @@ Update_Status ModulePlayer::Update()
 	currentAnimationtorso->Update();
 	currentdeathanim->Update();
 	weapon->Update();
-	 
+	currentAnimationtorsogrenade->Update();
 	return Update_Status::UPDATE_CONTINUE;
 }
 
@@ -1912,9 +2087,16 @@ Update_Status ModulePlayer::PostUpdate()
 			App->render->Blit(weapon_texture, position.x + 7, position.y + 22, &rect3);
 		}
 
-		//render torso
-		SDL_Rect rect1 = currentAnimationtorso->GetCurrentFrame();
-		App->render->Blit(texture, position.x, position.y, &rect1);
+		if (grenadeanimcounter <10  ) {
+			SDL_Rect rect4 = currentAnimationtorsogrenade->GetCurrentFrame();
+			App->render->Blit(texture, position.x, position.y, &rect4);
+		}
+		else {
+			//render torso
+			SDL_Rect rect1 = currentAnimationtorso->GetCurrentFrame();
+			App->render->Blit(texture, position.x, position.y, &rect1);
+		}
+		
 
 		if (facedl == true) {
 			App->render->Blit(weapon_texture, position.x, position.y + 22, &rect3);

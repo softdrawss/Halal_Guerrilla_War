@@ -52,6 +52,10 @@ public:
 
 	// A flag for the particle removal. Important! We do not delete objects instantly
 	bool pendingToDelete = false;
+
+	bool hasExplosion;
+	bool isexplosion = false;
+	int explosioncounter;
 };
 
 #endif //__PARTICLE_H__

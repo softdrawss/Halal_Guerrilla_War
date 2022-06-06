@@ -134,10 +134,10 @@ bool SceneCutscene::Start() {
 Update_Status SceneCutscene::Update() {
 
 	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN || duration >= SCENE_DURATION) {
-		App->fade->FadeToBlack(this, (Module*)App->scene, 200);
+		App->fade->FadeToBlack(this, (Module*)App->scene, 50);
 	}
 
-	if (App->input->keys[SDL_SCANCODE_ESCAPE] == Key_State::KEY_REPEAT) {
+	if (App->input->keys[SDL_SCANCODE_ESCAPE] == Key_State::KEY_DOWN) {
 		return Update_Status::UPDATE_STOP;
 	}
 

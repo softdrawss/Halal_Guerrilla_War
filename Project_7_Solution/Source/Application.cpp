@@ -32,8 +32,8 @@ Application::Application()
 	modules[5] = sceneCutscene = new SceneCutscene(false);	//CutScene starts disabled
 	modules[6] = scene = new ModuleScene(false);		//Gameplay scene starts disabled
 	modules[7] = player = new ModulePlayer(false);	//Player starts disabled
-	modules[8] = particles = new ModuleParticles(false);	//Particles start disabled
-	modules[9] = enemies = new ModuleEnemies(false);	//Enemies start disabled
+	modules[8] = enemies = new ModuleEnemies(false);	//Enemies start disabled
+	modules[9] = particles = new ModuleParticles(false);	//Particles start disabled
 	modules[10] = powerUps = new ModulePowerUp(false); //PowerUps start disabled
 
 	modules[11] = collisions = new ModuleCollisions(false);
