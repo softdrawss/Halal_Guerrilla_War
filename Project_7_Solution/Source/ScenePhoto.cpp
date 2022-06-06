@@ -40,7 +40,7 @@ bool ScenePhoto::Start()
 Update_Status ScenePhoto::Update()
 {
 	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN) {
-		App->fade->FadeToBlack(this, (Module*)App->sceneCutscene, 20);
+		App->fade->FadeToBlack(this, (Module*)App->sceneCutscene, 100);
 	}
 
 	return Update_Status::UPDATE_CONTINUE;
