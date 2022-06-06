@@ -1,5 +1,6 @@
 #include "Application.h"
 #include "ModuleController.h"
+#include "ModulePlayer.h"
 #include "ModuleInput.h"
 #include "SDL/include/SDL.h"
 #include "SDL_mixer/include/SDL_mixer.h"
@@ -43,6 +44,8 @@ Update_Status ModuleController::PreUpdate()
 					//Assign values of the aixis to Controller_Player1_LAxisX...
 					Controller_player1_LAxisX = SDL_GameControllerGetAxis(Controller_player1, SDL_CONTROLLER_AXIS_LEFTX);
 					Controller_player1_LAxisY = SDL_GameControllerGetAxis(Controller_player1, SDL_CONTROLLER_AXIS_LEFTY);
+					Controller_player1_RAxisX = SDL_GameControllerGetAxis(Controller_player1, SDL_CONTROLLER_AXIS_RIGHTX);
+					Controller_player1_RAxisY = SDL_GameControllerGetAxis(Controller_player1, SDL_CONTROLLER_AXIS_RIGHTY);
 
 					//Assign the boolean value to the  bools defined  
 					controller_player1_A_pressed = SDL_GameControllerGetButton(Controller_player1, SDL_CONTROLLER_BUTTON_A);
@@ -115,6 +118,28 @@ Update_Status ModuleController::PreUpdate()
 		App->input->keys[SDL_SCANCODE_S] = Key_State::KEY_REPEAT;
 	}
 
+	//Check player 1 Left Axis X & Y
+	if (Controller_player1_RAxisX > 6400)
+	{
+		
+		App->input->keys[SDL_SCANCODE_RIGHT] = Key_State::KEY_REPEAT;
+	}
+	else if (Controller_player1_RAxisX < -DEATHZONE)
+	{
+		App->input->keys[SDL_SCANCODE_LEFT] = Key_State::KEY_REPEAT;
+	}
+
+	if (Controller_player1_RAxisY < -DEATHZONE)
+	{
+
+		App->input->keys[SDL_SCANCODE_UP] = Key_State::KEY_REPEAT;
+	}
+	else if (Controller_player1_RAxisY > DEATHZONE)
+	{
+
+		App->input->keys[SDL_SCANCODE_DOWN] = Key_State::KEY_REPEAT;
+	}
+
 
 	//Check controller player 1 buttons
 	if (controller_player1_A_pressed == true && App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_IDLE)
@@ -154,6 +179,8 @@ Update_Status ModuleController::PreUpdate()
 	{
 		App->input->keys[SDL_SCANCODE_LALT] = Key_State::KEY_REPEAT;
 	}
+	
+	
 	//WE WONT USE THIS
 	//Check player 2 axes
 	if (Controller_player2_LAxisX > DEATHZONE)

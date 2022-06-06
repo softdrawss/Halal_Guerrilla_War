@@ -40,7 +40,8 @@ public:
     //values for the Joysticks Axes
     int Controller_player1_LAxisX = 0;
     int Controller_player1_LAxisY = 0;
-
+    int Controller_player1_RAxisX = 0;
+    int Controller_player1_RAxisY = 0;
     //=========================================
 
     //GAME CONTROLLER 2

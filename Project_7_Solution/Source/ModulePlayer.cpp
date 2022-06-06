@@ -3,6 +3,7 @@
 #include "Application.h"
 #include "ModuleTextures.h"
 #include "ModuleInput.h"
+#include "ModuleController.h"
 #include "ModuleRender.h"
 #include "ModuleParticles.h"
 #include "ModuleAudio.h"
@@ -576,22 +577,22 @@ Update_Status ModulePlayer::Update()
 			position.x -= speed;
 			position.y -= speed;
 		}
-		else if (faceu == true && App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT) {
+		else if ((faceu == true && App->input->keys[SDL_SCANCODE_W] == KEY_REPEAT) ) {
 			currentAnimationtorso = &torsoup;
 			currentAnimationlegs = &legsup;
 			position.y -= speed;
 		}
-		else if (faceu == true && App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT) {
+		else if ((faceu == true && App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT) ) {
 			currentAnimationlegs = &legsup;
 			currentAnimationtorso = &torsoup;
 			position.y += speed;
 		}
-		else if (faceu == true && App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT) {
+		else if ((faceu == true && App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT) ) {
 			currentAnimationlegs = &legsright;
 			currentAnimationtorso = &torsoup;
 			position.x += speed;
 		}
-		else if (faceu == true && App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT) {
+		else if (faceu == true && App->input->keys[SDL_SCANCODE_A] == KEY_REPEAT ) {
 			currentAnimationlegs = &legsleft;
 			currentAnimationtorso = &torsoup;
 			position.x -= speed;
@@ -970,7 +971,7 @@ Update_Status ModulePlayer::Update()
 
 		if (normalweapon == true && heavyweapon == false) {
 			//look up
-			if (App->input->keys[SDL_SCANCODE_UP] == KEY_DOWN)
+			if (App->input->keys[SDL_SCANCODE_UP] == KEY_DOWN || App->controller->Controller_player1_RAxisY < -DEATHZONE)
 			{
 				currentAnimationtorso = &torsoup;
 				weapon = &normalweapon_up;
@@ -985,7 +986,7 @@ Update_Status ModulePlayer::Update()
 			}
 
 			//look down
-			if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_DOWN)
+			if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_DOWN || App->controller->Controller_player1_RAxisY > DEATHZONE)
 			{
 				currentAnimationtorso = &torsodown;
 				weapon = &normalweapon_down;
@@ -1000,7 +1001,7 @@ Update_Status ModulePlayer::Update()
 			}
 
 			//look right
-			if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_DOWN)
+			if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_DOWN || App->controller->Controller_player1_RAxisX > DEATHZONE)
 			{
 				currentAnimationtorso = &torsoright;
 				weapon = &normalweapon_right;
@@ -1015,7 +1016,7 @@ Update_Status ModulePlayer::Update()
 			}
 
 			//look left
-			if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_DOWN)
+			if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_DOWN || App->controller->Controller_player1_RAxisX < -DEATHZONE)
 			{
 				currentAnimationtorso = &torsoleft;
 				weapon = &normalweapon_left;
@@ -1029,7 +1030,7 @@ Update_Status ModulePlayer::Update()
 				facedl = false;
 			}
 			//look upright
-			if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_UP] == KEY_DOWN)
+			if ((App->input->keys[SDL_SCANCODE_RIGHT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_UP] == KEY_DOWN) || (App->controller->Controller_player1_RAxisX > DEATHZONE && App->controller->Controller_player1_RAxisY < -DEATHZONE))
 			{
 				currentAnimationtorso = &torsoupright;
 				weapon = &normalweapon_upright;
@@ -1043,7 +1044,7 @@ Update_Status ModulePlayer::Update()
 				facedl = false;
 			}
 			//look upleft
-			if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_UP] == KEY_DOWN)
+			if ((App->input->keys[SDL_SCANCODE_LEFT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_UP] == KEY_DOWN) || (App->controller->Controller_player1_RAxisX < -DEATHZONE && App->controller->Controller_player1_RAxisY < -DEATHZONE))
 			{
 				currentAnimationtorso = &torsoupleft;
 				weapon = &normalweapon_upleft;
@@ -1057,7 +1058,7 @@ Update_Status ModulePlayer::Update()
 				facedl = false;
 			}
 			//look downright
-			if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_DOWN] == KEY_DOWN)
+			if ((App->input->keys[SDL_SCANCODE_RIGHT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_DOWN] == KEY_DOWN) || (App->controller->Controller_player1_RAxisX > DEATHZONE && App->controller->Controller_player1_RAxisY > DEATHZONE))
 			{
 				currentAnimationtorso = &torsodownright;
 				weapon = &normalweapon_downright;
@@ -1071,7 +1072,7 @@ Update_Status ModulePlayer::Update()
 				facedl = false;
 			}
 			//look downleft
-			if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_DOWN] == KEY_DOWN)
+			if ((App->input->keys[SDL_SCANCODE_LEFT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_DOWN] == KEY_DOWN) || (App->controller->Controller_player1_RAxisX < -DEATHZONE && App->controller->Controller_player1_RAxisY <DEATHZONE))
 			{
 				currentAnimationtorso = &torsodownleft;
 				weapon = &normalweapon_downleft;
@@ -1125,7 +1126,7 @@ Update_Status ModulePlayer::Update()
 		}
 		else if (heavyweapon == true && normalweapon == false) {
 			//look up
-			if (App->input->keys[SDL_SCANCODE_UP] == KEY_DOWN)
+			if (App->input->keys[SDL_SCANCODE_UP] == KEY_DOWN || App->controller->Controller_player1_RAxisY < -DEATHZONE)
 			{
 				//App->particles->AddParticle(App->particles->normal_up_shot, position.x +20, position.y+20, Collider::Type::PLAYER_SHOT);
 				currentAnimationtorso = &torsoup;
@@ -1141,7 +1142,7 @@ Update_Status ModulePlayer::Update()
 			}
 
 			//look down
-			if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_DOWN)
+			if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_DOWN || App->controller->Controller_player1_RAxisY > DEATHZONE)
 			{
 				currentAnimationtorso = &torsodown;
 				weapon = &heavyweapon_down;
@@ -1156,7 +1157,7 @@ Update_Status ModulePlayer::Update()
 			}
 
 			//look right
-			if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_DOWN)
+			if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_DOWN || App->controller->Controller_player1_RAxisX > DEATHZONE)
 			{
 				currentAnimationtorso = &torsoright;
 				weapon = &heavyweapon_right;
@@ -1171,7 +1172,7 @@ Update_Status ModulePlayer::Update()
 			}
 
 			//look left
-			if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_DOWN)
+			if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_DOWN || App->controller->Controller_player1_RAxisX < -DEATHZONE)
 			{
 				currentAnimationtorso = &torsoleft;
 				weapon = &heavyweapon_left;
@@ -1185,7 +1186,7 @@ Update_Status ModulePlayer::Update()
 				facedl = false;
 			}
 			//look upright
-			if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_UP] == KEY_DOWN)
+			if ((App->input->keys[SDL_SCANCODE_RIGHT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_UP] == KEY_DOWN) || (App->controller->Controller_player1_RAxisX > DEATHZONE && App->controller->Controller_player1_RAxisY < -DEATHZONE))
 			{
 				currentAnimationtorso = &torsoupright;
 				weapon = &heavyweapon_upright;
@@ -1199,7 +1200,7 @@ Update_Status ModulePlayer::Update()
 				facedl = false;
 			}
 			//look upleft
-			if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_UP] == KEY_DOWN)
+			if ((App->input->keys[SDL_SCANCODE_LEFT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_UP] == KEY_DOWN) || (App->controller->Controller_player1_RAxisX < -DEATHZONE && App->controller->Controller_player1_RAxisY < -DEATHZONE))
 			{
 				currentAnimationtorso = &torsoupleft;
 				weapon = &heavyweapon_upleft;
@@ -1213,7 +1214,7 @@ Update_Status ModulePlayer::Update()
 				facedl = false;
 			}
 			//look downright
-			if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_DOWN] == KEY_DOWN)
+			if ((App->input->keys[SDL_SCANCODE_RIGHT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_DOWN] == KEY_DOWN) || (App->controller->Controller_player1_RAxisX > DEATHZONE && App->controller->Controller_player1_RAxisY > DEATHZONE))
 			{
 				currentAnimationtorso = &torsodownright;
 				weapon = &heavyweapon_downright;
@@ -1227,7 +1228,7 @@ Update_Status ModulePlayer::Update()
 				facedl = false;
 			}
 			//look downleft
-			if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_DOWN] == KEY_DOWN)
+			if ((App->input->keys[SDL_SCANCODE_LEFT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_DOWN] == KEY_DOWN) || (App->controller->Controller_player1_RAxisX < -DEATHZONE && App->controller->Controller_player1_RAxisY <DEATHZONE))
 			{
 				currentAnimationtorso = &torsodownleft;
 				weapon = &heavyweapon_downleft;
@@ -1705,7 +1706,7 @@ Update_Status ModulePlayer::Update()
 
 		if (normalweapon == true && heavyweapon == false) {
 			//look up
-			if (App->input->keys[SDL_SCANCODE_UP] == KEY_DOWN)
+			if (App->input->keys[SDL_SCANCODE_UP] == KEY_DOWN || App->controller->Controller_player1_RAxisY < -DEATHZONE)
 			{
 				currentAnimationtorso = &torsoup;
 				weapon = &normalweapon_up;
@@ -1720,7 +1721,7 @@ Update_Status ModulePlayer::Update()
 			}
 
 			//look down
-			if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_DOWN)
+			if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_DOWN || App->controller->Controller_player1_RAxisY > DEATHZONE)
 			{
 				currentAnimationtorso = &torsodown;
 				weapon = &normalweapon_down;
@@ -1735,7 +1736,7 @@ Update_Status ModulePlayer::Update()
 			}
 
 			//look right
-			if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_DOWN)
+			if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_DOWN || App->controller->Controller_player1_RAxisX > DEATHZONE)
 			{
 				currentAnimationtorso = &torsoright;
 				weapon = &normalweapon_right;
@@ -1750,7 +1751,7 @@ Update_Status ModulePlayer::Update()
 			}
 
 			//look left
-			if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_DOWN)
+			if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_DOWN || App->controller->Controller_player1_RAxisX < -DEATHZONE)
 			{
 				currentAnimationtorso = &torsoleft;
 				weapon = &normalweapon_left;
@@ -1764,7 +1765,7 @@ Update_Status ModulePlayer::Update()
 				facedl = false;
 			}
 			//look upright
-			if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_UP] == KEY_DOWN)
+			if ((App->input->keys[SDL_SCANCODE_RIGHT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_UP] == KEY_DOWN) || (App->controller->Controller_player1_RAxisX > DEATHZONE && App->controller->Controller_player1_RAxisY < -DEATHZONE))
 			{
 				currentAnimationtorso = &torsoupright;
 				weapon = &normalweapon_upright;
@@ -1778,7 +1779,7 @@ Update_Status ModulePlayer::Update()
 				facedl = false;
 			}
 			//look upleft
-			if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_UP] == KEY_DOWN)
+			if ((App->input->keys[SDL_SCANCODE_LEFT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_UP] == KEY_DOWN) || (App->controller->Controller_player1_RAxisX < -DEATHZONE && App->controller->Controller_player1_RAxisY < -DEATHZONE))
 			{
 				currentAnimationtorso = &torsoupleft;
 				weapon = &normalweapon_upleft;
@@ -1792,7 +1793,7 @@ Update_Status ModulePlayer::Update()
 				facedl = false;
 			}
 			//look downright
-			if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_DOWN] == KEY_DOWN)
+			if ((App->input->keys[SDL_SCANCODE_RIGHT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_DOWN] == KEY_DOWN) || (App->controller->Controller_player1_RAxisX > DEATHZONE && App->controller->Controller_player1_RAxisY > DEATHZONE))
 			{
 				currentAnimationtorso = &torsodownright;
 				weapon = &normalweapon_downright;
@@ -1806,7 +1807,7 @@ Update_Status ModulePlayer::Update()
 				facedl = false;
 			}
 			//look downleft
-			if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_DOWN] == KEY_DOWN)
+			if ((App->input->keys[SDL_SCANCODE_LEFT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_DOWN] == KEY_DOWN) || (App->controller->Controller_player1_RAxisX < -DEATHZONE && App->controller->Controller_player1_RAxisY < DEATHZONE))
 			{
 				currentAnimationtorso = &torsodownleft;
 				weapon = &normalweapon_downleft;
@@ -1862,7 +1863,7 @@ Update_Status ModulePlayer::Update()
 		}
 		else if (heavyweapon == true && normalweapon == false) {
 			//look up
-			if (App->input->keys[SDL_SCANCODE_UP] == KEY_DOWN)
+			if (App->input->keys[SDL_SCANCODE_UP] == KEY_DOWN || App->controller->Controller_player1_RAxisY < -DEATHZONE)
 			{
 				//App->particles->AddParticle(App->particles->normal_up_shot, position.x +20, position.y+20, Collider::Type::PLAYER_SHOT);
 				currentAnimationtorso = &torsoup;
@@ -1878,7 +1879,7 @@ Update_Status ModulePlayer::Update()
 			}
 
 			//look down
-			if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_DOWN)
+			if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_DOWN || App->controller->Controller_player1_RAxisY > DEATHZONE)
 			{
 				currentAnimationtorso = &torsodown;
 				weapon = &heavyweapon_down;
@@ -1893,7 +1894,7 @@ Update_Status ModulePlayer::Update()
 			}
 
 			//look right
-			if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_DOWN)
+			if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_DOWN || App->controller->Controller_player1_RAxisX > DEATHZONE)
 			{
 				currentAnimationtorso = &torsoright;
 				weapon = &heavyweapon_right;
@@ -1908,7 +1909,7 @@ Update_Status ModulePlayer::Update()
 			}
 
 			//look left
-			if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_DOWN)
+			if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_DOWN || App->controller->Controller_player1_RAxisX < -DEATHZONE)
 			{
 				currentAnimationtorso = &torsoleft;
 				weapon = &heavyweapon_left;
@@ -1922,7 +1923,7 @@ Update_Status ModulePlayer::Update()
 				facedl = false;
 			}
 			//look upright
-			if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_UP] == KEY_DOWN)
+			if ((App->input->keys[SDL_SCANCODE_RIGHT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_UP] == KEY_DOWN) || (App->controller->Controller_player1_RAxisX > DEATHZONE && App->controller->Controller_player1_RAxisY < -DEATHZONE))
 			{
 				currentAnimationtorso = &torsoupright;
 				weapon = &heavyweapon_upright;
@@ -1936,7 +1937,7 @@ Update_Status ModulePlayer::Update()
 				facedl = false;
 			}
 			//look upleft
-			if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_UP] == KEY_DOWN)
+			if ((App->input->keys[SDL_SCANCODE_LEFT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_UP] == KEY_DOWN) || (App->controller->Controller_player1_RAxisX < -DEATHZONE && App->controller->Controller_player1_RAxisY < -DEATHZONE))
 			{
 				currentAnimationtorso = &torsoupleft;
 				weapon = &heavyweapon_upleft;
@@ -1950,7 +1951,7 @@ Update_Status ModulePlayer::Update()
 				facedl = false;
 			}
 			//look downright
-			if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_DOWN] == KEY_DOWN)
+			if ((App->input->keys[SDL_SCANCODE_RIGHT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_DOWN] == KEY_DOWN) || (App->controller->Controller_player1_RAxisX > DEATHZONE && App->controller->Controller_player1_RAxisY > DEATHZONE))
 			{
 				currentAnimationtorso = &torsodownright;
 				weapon = &heavyweapon_downright;
@@ -1964,7 +1965,7 @@ Update_Status ModulePlayer::Update()
 				facedl = false;
 			}
 			//look downleft
-			if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_DOWN] == KEY_DOWN)
+			if ((App->input->keys[SDL_SCANCODE_LEFT] == KEY_DOWN && App->input->keys[SDL_SCANCODE_DOWN] == KEY_DOWN) || (App->controller->Controller_player1_RAxisX < -DEATHZONE && App->controller->Controller_player1_RAxisY < DEATHZONE))
 			{
 				currentAnimationtorso = &torsodownleft;
 				weapon = &heavyweapon_downleft;
