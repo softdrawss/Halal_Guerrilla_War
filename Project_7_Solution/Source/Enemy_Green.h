@@ -26,7 +26,7 @@ private:
 	Path path, pathup, pathdown;
 
 
-	bool reachendpath;
+
 	int waitforshoot;
 	bool jajabool;
 

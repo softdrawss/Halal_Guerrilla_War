@@ -147,7 +147,10 @@ bool ModuleScene::Start()
 
 
 	//prisoners
-	App->powerUps->AddPowerUp(PowerUp_Type::PRISONER, 220, 0);
+	//App->powerUps->AddPowerUp(PowerUp_Type::PRISONER, 220, 0);
+	
+	//App->enemies->AddEnemy(Enemy_Type::BOSS, 220, 0, 0);
+
 
 	//Enable the necessary modules
 	App->collisions->Enable();

@@ -28,7 +28,7 @@ ModuleParticles::ModuleParticles(bool startEnabled) : Module(startEnabled)
 		LOG("Loading particles");
 		texture = App->textures->Load("Assets/Guerrilla War Bullets Spritesheet.png");
 		textureExplosion = App->textures->Load("Assets/Guerrilla War Explosions Spritesheet.png");
-
+		missiletexture = App->textures->Load("Assets/Guerrilla War Boss Spritesheet.png");
 
 		//horitzontal right shot
 		normal_hr_shot.anim.PushBack({ 67, 183, 9, 3 });
@@ -133,10 +133,87 @@ ModuleParticles::ModuleParticles(bool startEnabled) : Module(startEnabled)
 		enemybullet.anim.PushBack({ 198,66,4,5 });
 		enemybullet.anim.PushBack({ 214,66,4,5 });
 		enemybullet.anim.loop = true;
-		enemybullet.lifetime = 80.0f;
+		enemybullet.lifetime = 80;
 		enemybullet.anim.speed = 0.2f;
 		enemybullet.hasExplosion = false;
 
+		//sprites for the missiles of the boss
+
+		missileup.anim.PushBack({ 130,160,12,16 });
+		missileup.anim.PushBack({ 148,160,8,16 });
+		missileup.anim.loop = true;
+		missileup.lifetime = 180;
+		missileup.anim.speed = 0.2f;
+		missileup.hasExplosion = true;
+		missileup.ismissile = true;
+		missileup.speed.y = -2;
+
+		missiledown.anim.PushBack({ 20,160,12,16 });
+		missiledown.anim.PushBack({ 2,160,8,16 });
+		missiledown.anim.loop = true;
+		missiledown.lifetime = 60;
+		missiledown.anim.speed = 0.2f;
+		missiledown.hasExplosion = true;
+		missiledown.ismissile = true;
+		missiledown.speed.y = 2;
+
+		missileleft.anim.PushBack({ 192,162,16,12 });
+		missileleft.anim.PushBack({ 208,164,16,8 });
+		missileleft.anim.loop = true;
+		missileleft.lifetime = 60;
+		missileleft.anim.speed = 0.2f;
+		missileleft.hasExplosion = true;
+		missileleft.ismissile = true;
+		missileleft.speed.x = -2;
+
+		missileright.anim.PushBack({ 64,162,18,12 });
+		missileright.anim.PushBack({ 83,164,14,8 });
+		missileright.anim.loop = true;
+		missileright.lifetime = 60;
+		missileright.anim.speed = 0.2f;
+		missileright.hasExplosion = true;
+		missileright.ismissile = true;
+		missileright.speed.x = 2;
+
+		missileur.anim.PushBack({ 96,160,15,16 });
+		missileur.anim.PushBack({ 113,160,15,15 });
+		missileur.anim.loop = true;
+		missileur.lifetime = 180;
+		missileur.anim.speed = 0.2f;
+		missileur.hasExplosion = true;
+		missileur.ismissile = true;
+		missileur.speed.y = -1;
+		missileur.speed.x = 1;
+
+		missileul.anim.PushBack({ 160,160,15,16 });
+		missileul.anim.PushBack({ 176,160,14,15 });
+		missileul.anim.loop = true;
+		missileul.lifetime = 180;
+		missileul.anim.speed = 0.2f;
+		missileul.hasExplosion = true;
+		missileul.ismissile = true;
+		missileul.speed.y = -1;
+		missileul.speed.x = -1;
+
+		missiledr.anim.PushBack({ 33,160,15,16 });
+		missiledr.anim.PushBack({ 50,161,14,15 });
+		missiledr.anim.loop = true;
+		missiledr.lifetime = 60;
+		missiledr.anim.speed = 0.2f;
+		missiledr.hasExplosion = true;
+		missiledr.ismissile = true;
+		missiledr.speed.y = 1;
+		missiledr.speed.x = 1;
+
+		missiledl.anim.PushBack({ 224,161,16,15 });
+		missiledl.anim.PushBack({ 240,161,16,15 });
+		missiledl.anim.loop = true;
+		missiledl.lifetime = 60;
+		missiledl.anim.speed = 0.2f;
+		missiledl.hasExplosion = true;
+		missiledl.ismissile = true;
+		missiledl.speed.y = 1;
+		missiledl.speed.x = -1;
 
 		return true;
 	}
@@ -224,6 +301,9 @@ ModuleParticles::ModuleParticles(bool startEnabled) : Module(startEnabled)
 			{
 				if (particle->isexplosion == true) {
 					App->render->Blit(textureExplosion, particle->position.x-25, particle->position.y-25, &(particle->anim.GetCurrentFrame()));
+				}
+				else if (particle->ismissile == true) {
+					App->render->Blit(missiletexture, particle->position.x, particle->position.y, &(particle->anim.GetCurrentFrame()));
 				}
 				else {
 					App->render->Blit(texture, particle->position.x, particle->position.y, &(particle->anim.GetCurrentFrame()));

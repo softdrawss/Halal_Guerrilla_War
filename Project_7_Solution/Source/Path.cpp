@@ -44,4 +44,6 @@ void Path::Reset()
 {
 	currentStepFrame = 0;
 	currentStep = 0;
+	relativePosition.x = 0.0f;
+	relativePosition.y = 0.0f;
 }
