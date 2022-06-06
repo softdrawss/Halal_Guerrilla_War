@@ -109,7 +109,6 @@ void Enemy_Green::Update()
 		godownshootgoup();
 	}
 
-	App->particles->Update();
 	// Call to the base class. It must be called at the end
 	// It will update the collider depending on the position
 	Enemy::Update();

@@ -100,102 +100,102 @@ Update_Status ModuleRender::Update() {
 	}
 	//camera limits
 
-	//if (camera.y <= 910) {
-	//	if (camera.x >= 48) {
-	//		camera.x = 48;
-	//	}
+	/*if (camera.y <= 910) {
+		if (camera.x >= 48) {
+			camera.x = 48;
+		}
 
-	//	if (camera.x <= -64) {
-	//		camera.x = -64;
-	//	}
-	//	if (camera.y <= 50) {
-	//		camera.y = 50;
-	//	}
+		if (camera.x <= -64) {
+			camera.x = -64;
+		}
+		if (camera.y <= 50) {
+			camera.y = 50;
+		}
 
-	//	
-	//}
-	//if (camera.y <= 1710 && camera.y > 910) {
-	//	if (camera.y > 1705 && camera.x <= 48 && camera.x >= 10) {
-	//		camera.y = 1705;
-	//	}
-	//	if (camera.x >= 48) {
-	//		camera.x = 48;
-	//	}
-	//	if (camera.x <= -326) {
-	//		camera.x = -326;
-	//	}
-	//}
+		
+	}
+	if (camera.y <= 1710 && camera.y > 910) {
+		if (camera.y > 1705 && camera.x <= 48 && camera.x >= 10) {
+			camera.y = 1705;
+		}
+		if (camera.x >= 48) {
+			camera.x = 48;
+		}
+		if (camera.x <= -326) {
+			camera.x = -326;
+		}
+	}
 
-	//if (camera.y <= 1900 && camera.y > 1710) {
-	//	if (camera.x >= -16) {
-	//		camera.x = -16;
-	//	}
-	//	if (camera.x <= -326) {
-	//		camera.x = -326;
-	//	}
-	//}
+	if (camera.y <= 1900 && camera.y > 1710) {
+		if (camera.x >= -16) {
+			camera.x = -16;
+		}
+		if (camera.x <= -326) {
+			camera.x = -326;
+		}
+	}
 
-	//if (camera.y <= 2250 && camera.y > 1900) {
-	//	if (camera.x >= -16) {
-	//		camera.x = -16;
-	//	}
-	//	if (camera.x <= -616) {
-	//		camera.x = -616;
-	//	}
-	//}
-	//if (camera.y <= 2380 && camera.y > 2250) {
-	//	if (camera.x >= -232) {
-	//		camera.x = -232;
-	//	}
-	//	if (camera.x <= -616) {
-	//		camera.x = -616;
-	//	}
-	//}
+	if (camera.y <= 2250 && camera.y > 1900) {
+		if (camera.x >= -16) {
+			camera.x = -16;
+		}
+		if (camera.x <= -616) {
+			camera.x = -616;
+		}
+	}
+	if (camera.y <= 2380 && camera.y > 2250) {
+		if (camera.x >= -232) {
+			camera.x = -232;
+		}
+		if (camera.x <= -616) {
+			camera.x = -616;
+		}
+	}
 
-	//if (camera.y <= 4440 && camera.y > 2380) {
-	//	if (camera.x >= -504) {
-	//		camera.x = -504;
-	//	}
-	//	if (camera.x <= -616) {
-	//		camera.x = -616;
-	//	}
-	//}
+	if (camera.y <= 4440 && camera.y > 2380) {
+		if (camera.x >= -504) {
+			camera.x = -504;
+		}
+		if (camera.x <= -616) {
+			camera.x = -616;
+		}
+	}
 
-	//if (camera.y <= 4640 && camera.y > 4440) {
-	//	if (camera.x >= -504) {
-	//		camera.x = -504;
-	//	}
-	//	if (camera.x <= -986) {
-	//		camera.x = -986;
-	//	}
-	//}
+	if (camera.y <= 4640 && camera.y > 4440) {
+		if (camera.x >= -504) {
+			camera.x = -504;
+		}
+		if (camera.x <= -986) {
+			camera.x = -986;
+		}
+	}
 
-	//if (camera.y <= 5270 && camera.y > 4640) {
-	//	if (camera.x >= -648) {
-	//		camera.x = -648;
-	//	}
-	//	if (camera.x <= -986) {
-	//		camera.x = -986;
-	//	}
-	//}
+	if (camera.y <= 5270 && camera.y > 4640) {
+		if (camera.x >= -648) {
+			camera.x = -648;
+		}
+		if (camera.x <= -986) {
+			camera.x = -986;
+		}
+	}
 
-	//if (camera.y <= 5560 && camera.y > 5270) {
-	//	if (camera.x >= -648) {
-	//		camera.x = -648;
-	//	}
-	//	if (camera.x <= -1112) {
-	//		camera.x = -1112;
-	//	}
-	//}
+	if (camera.y <= 5560 && camera.y > 5270) {
+		if (camera.x >= -648) {
+			camera.x = -648;
+		}
+		if (camera.x <= -1112) {
+			camera.x = -1112;
+		}
+	}
 
-	//if (camera.y <= 8080 && camera.y > 5560) {
-	//	if (camera.x >= -1048) {
-	//		camera.x = -1048;
-	//	}
-	//	if (camera.x <= -1112) {
-	//		camera.x = -1112;
-	//	}
-	//}
+	if (camera.y <= 8080 && camera.y > 5560) {
+		if (camera.x >= -1048) {
+			camera.x = -1048;
+		}
+		if (camera.x <= -1112) {
+			camera.x = -1112;
+		}
+	}*/
 
 	//free movement with jikl
 
