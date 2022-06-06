@@ -52,7 +52,7 @@ Update_Status ScenePhoto::PostUpdate()
 	// Draw everything --------------------------------------
 	sprintf_s(App->sceneIntro->creditsText, 10, "%d", App->sceneIntro->credits);
 
-	App->render->Blit(bgTexture, 0, 30, NULL);
+	App->render->Blit(bgTexture, -50, 30, NULL);
 	App->fonts->BlitText(315, 475, introFont, "CREDIT ");
 	App->fonts->BlitText(370, 475, introFont, App->sceneIntro->creditsText);
 	return Update_Status::UPDATE_CONTINUE;
