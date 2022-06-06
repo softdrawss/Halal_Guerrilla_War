@@ -56,6 +56,7 @@ private:
 	// Particles spritesheet loaded into an SDL Texture
 	SDL_Texture* texture = nullptr;
 	SDL_Texture* textureExplosion = nullptr;
+	SDL_Texture* missiletexture = nullptr;
 
 	// An array to store and handle all the particles
 	Particle* particles[MAX_ACTIVE_PARTICLES] = { nullptr };
@@ -70,6 +71,9 @@ public:
 	Particle upgraded_shot;
 	//enemy bullets
 	Particle enemybullet;
+
+	//boss missiles
+	Particle missileup, missiledown, missileleft, missileright, missileur, missileul, missiledr, missiledl;
 	//enemy bombs
 	Particle bomb_up, bomb_down, bomb_left, bomb_right, bomb_ul, bomb_ur, bomb_dl, bomb_dr;
 	Particle boss_up, boss_down, boss_left, boss_right, boss_ul, boss_ur, boss_dl, boss_dr;

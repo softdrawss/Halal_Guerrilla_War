@@ -77,6 +77,8 @@ public:
 
 	bool ismoving;
 
+	bool reachendpath;
+
 	//booleans for dead enemiies
 	bool dead;
 	int deathcounter;
@@ -88,6 +90,7 @@ protected:
 	Animation* greenlegscurrentAnim = nullptr;
 	Animation* greentorsocurrentAnim = nullptr;
 	Animation* currentdeathanim = nullptr;
+	Animation* bosscurrentanim = nullptr;
 
 
 	// The enemy's collider

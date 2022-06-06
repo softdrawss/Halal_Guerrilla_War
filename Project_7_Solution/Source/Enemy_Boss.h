@@ -15,14 +15,22 @@ public:
 	// Position will be updated depending on the speed defined at each step
 	void Update() override;
 
+	void movedownupshoot();
+
+	void OnCollision(Collider* collider)override;
+
+	void firemissiles();
+
 private:
 	// A set of steps that define the position in the screen
 	// And an animation for each step
-	Path path;
+	Path pathup, pathdown, pathleft, pathright;
 
 	// This enemy has one sprite and one frame
 	// We are keeping it an animation for consistency with other enemies
-	Animation fly;
+	Animation fly, deathanim;
+	int notmovingcounter;
+	int hitpoints;
 };
 
 #endif // __ENEMY_BOSS_H__ 

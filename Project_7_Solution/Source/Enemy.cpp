@@ -67,6 +67,10 @@ void Enemy::Update()
 		currentdeathanim->Update();
 	}
 
+	if (bosscurrentanim != nullptr) {
+		bosscurrentanim->Update();
+	}
+
 	if (collider != nullptr)
 		collider->SetPos(position.x, position.y);
 
@@ -260,13 +264,15 @@ void Enemy::Draw()
 	if (currentdeathanim != nullptr && dead == true) {
 		App->render->Blit(texture, position.x, position.y, &(currentdeathanim->GetCurrentFrame()));
 	}
+
+	if (bosscurrentanim!= nullptr && dead == false) {
+		App->render->Blit(texture, position.x, position.y, &(bosscurrentanim->GetCurrentFrame()));
+	}
 		
 }
 
 void Enemy::OnCollision(Collider* collider)
 {
-	//should be only when collision type = player shot
-	//if ((collider->Intersects(c2->rect) == true)
 	int destroyedFx = App->audio->LoadFx("Assets/gwar-198.wav");
 	App->audio->PlayFx(destroyedFx, 0);
 	
