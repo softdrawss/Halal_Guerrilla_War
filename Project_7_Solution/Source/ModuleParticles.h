@@ -55,7 +55,7 @@ public:
 private:
 	// Particles spritesheet loaded into an SDL Texture
 	SDL_Texture* texture = nullptr;
-	SDL_Texture* textureEnemy = nullptr;
+	SDL_Texture* textureExplosion = nullptr;
 
 	// An array to store and handle all the particles
 	Particle* particles[MAX_ACTIVE_PARTICLES] = { nullptr };
@@ -66,7 +66,7 @@ public:
 
 	//Template particle for player shots
 	Particle normal_hr_shot, normal_hl_shot, normal_up_shot, normal_down_shot, normal_dr_shot, normal_dl_shot, normal_ul_shot, normal_ur_shot;
-	Particle grenade_up, grenade_down, grenade_right, grenade_left, grenade_ur, grenade_ul, grenade_dr, grenade_dl;
+	Particle grenade;
 	Particle upgraded_shot;
 	//enemy bullets
 	Particle enemybullet;
@@ -76,5 +76,6 @@ public:
 
 	//death animatiosn for player and enemy
 	Particle playerdeath, enemygreendeath;
+
 };
 #endif // !__MODULEPARTICLES_H__

@@ -148,7 +148,7 @@ Update_Status SceneCutscene::Update() {
 	/*int planeAudio = App->audio->LoadFx("Assets/gwar-130.wav");
 	App->audio->PlayFx(planeAudio, 0);*/
 
-	if (App->input->keys[SDL_SCANCODE_ESCAPE] == Key_State::KEY_REPEAT) {
+	if (App->input->keys[SDL_SCANCODE_ESCAPE] == Key_State::KEY_DOWN) {
 		return Update_Status::UPDATE_STOP;
 	}
 

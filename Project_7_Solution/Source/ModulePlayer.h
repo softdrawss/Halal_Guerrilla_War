@@ -32,6 +32,8 @@ public:
 	// Collision callback, called when the player intersects with another collider
 	void OnCollision(Collider* c1, Collider* c2) override;
 
+	void throwgrenade();
+
 
 public:
 	// Position of the player in the map
@@ -48,6 +50,7 @@ public:
 	// The pointer to the current player animation
 	// It will be switched depending on the player's movement direction
 	Animation* currentAnimationtorso = nullptr;
+	Animation* currentAnimationtorsogrenade = nullptr;
 	Animation* currentAnimationlegs = nullptr;
 	Animation* weapon = nullptr;
 	Animation* currentdeathanim = nullptr;
@@ -57,6 +60,7 @@ public:
 	Animation torsoup, torsodown, torsoright, torsoleft, torsoupright, torsoupleft, torsodownright, torsodownleft;
 	Animation legsup, legsdown, legsleft, legsright, legsupright, legsupleft, legsdownright, legsdownleft;
 	Animation torsoiddleAnim, legsiddleAnim, wateriddleAnim;
+	Animation torsogrenadeup, torsogrenadedown, torsogrenaderight, torsogrenadeleft, torsogrenadeur, torsogrenadeul, torsogrenadedr, torsogrenadedl;
 	Animation weapon_up, weapon_down, weapon_right, weapon_left, weapon_upright, weapon_upleft, weapon_downright, weapon_downleft;
 	Animation weapon_up_shot, weapon_down_shot, weapon_right_shot, weapon_left_shot, weapon_upright_shot, weapon_upleft_shot, weapon_downright_shot, weapon_downleft_shot;
 
@@ -101,6 +105,10 @@ public:
 	char granadesText[10] = { "\0" };
 	char bulletsText[10] = { "\0" };
 	char creditsText[10] = { "\0" };
+
+	//greande logic
+	bool isgrenade;
+	int grenadeanimcounter;
 };
 
 #endif //!__MODULE_PLAYER_H__

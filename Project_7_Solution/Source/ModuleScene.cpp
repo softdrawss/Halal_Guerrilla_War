@@ -112,10 +112,10 @@ bool ModuleScene::Start()
 	App->collisions->AddCollider({ 960, -3845, 135,110 }, Collider::Type::WALL);
 
 	//destroyable wall, warsacks, tanktraps and etc
-	App->collisions->AddCollider({ 110, -205, 36,25 }, Collider::Type::DESTROYABLE_WALL);
-	App->collisions->AddCollider({ 146, -205, 36,25 }, Collider::Type::DESTROYABLE_WALL);
-	App->collisions->AddCollider({ 250, -205, 36,25 }, Collider::Type::DESTROYABLE_WALL);
-	App->collisions->AddCollider({ 286, -205, 36,25 }, Collider::Type::DESTROYABLE_WALL);
+	//App->collisions->AddCollider({ 110, -205, 36,25 }, Collider::Type::DESTROYABLE_WALL);
+	//App->collisions->AddCollider({ 146, -205, 36,25 }, Collider::Type::DESTROYABLE_WALL);
+	//App->collisions->AddCollider({ 250, -205, 36,25 }, Collider::Type::DESTROYABLE_WALL);
+	//App->collisions->AddCollider({ 286, -205, 36,25 }, Collider::Type::DESTROYABLE_WALL);
 
 	//prisoners
 	
@@ -137,8 +137,8 @@ bool ModuleScene::Start()
 	//// Enemies
 	//App->enemies->AddEnemy(Enemy_Type::BOMB, 398, -2290, 0);
 	//App->enemies->AddEnemy(Enemy_Type::BOMB, 500, -2290, 0); 
-	//App->enemies->AddEnemy(Enemy_Type::RED, 220, -520, 0);
-	//App->enemies->AddEnemy(Enemy_Type::RED, 220, 0, 0);
+	//App->enemies->AddEnemy(Enemy_Type::RED, 220, 20, 0);
+	App->enemies->AddEnemy(Enemy_Type::RED, 220, 0, 0);
 
 
 	//App->enemies->AddEnemy(Enemy_Type::GREEN, 240, 0,1);
