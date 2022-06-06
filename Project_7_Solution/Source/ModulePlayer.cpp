@@ -542,10 +542,10 @@ Update_Status ModulePlayer::Update()
 		position.y *= 3;
 	}
 
-	if (waterP == false && App->input->num_controllers > 0) {
+	if (waterP == false) {
 
-		position.x += App->input->reduce_val(App->input->controllers[0].j1_x, 3000, 2)+speed;
-		position.y += App->input->reduce_val(App->input->controllers[0].j1_y, 3000, 2)+speed;
+		//position.x += App->input->reduce_val(App->input->controllers[0].j1_x, 3000, 2)+speed;
+		//position.y += App->input->reduce_val(App->input->controllers[0].j1_y, 3000, 2)+speed;
 		
 		//up	
 		if (faceu == true && App->input->keys[SDL_SCANCODE_S] == KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == KEY_REPEAT)
@@ -1597,7 +1597,6 @@ Update_Status ModulePlayer::Update()
 			currentAnimationlegs = &water;
 			position.x -= speed;
 		}
-
 
 		//downright
 		else if (facedr == true && App->input->keys[SDL_SCANCODE_W] && App->input->keys[SDL_SCANCODE_A])

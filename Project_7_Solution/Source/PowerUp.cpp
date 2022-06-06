@@ -13,8 +13,6 @@
 PowerUp::PowerUp(int x, int y) : position(x, y)
 {
 	spawnPos = position;
-
-
 }
 
 PowerUp::~PowerUp()

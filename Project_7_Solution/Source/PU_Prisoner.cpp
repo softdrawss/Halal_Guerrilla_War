@@ -28,8 +28,7 @@ PU_Prisoner::PU_Prisoner(int x, int y) : PowerUp(x, y)
 
 void PU_Prisoner::Update()
 {
-	
-	App->particles->Update();
+	currentAnim = &help;
 
 	// Call to the base class. It must be called at the end
 	// It will update the collider depending on the position

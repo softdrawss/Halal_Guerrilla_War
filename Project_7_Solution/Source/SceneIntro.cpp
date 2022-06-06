@@ -48,7 +48,7 @@ Update_Status SceneIntro::Update()
 	}
 
 	if (App->input->keys[SDL_SCANCODE_RETURN] == Key_State::KEY_DOWN && credits>0) {
-		App->fade->FadeToBlack(this, (Module*)App->scenePhoto, 200);
+		App->fade->FadeToBlack(this, (Module*)App->scenePhoto, 20);
 		
 		
 		credits--;

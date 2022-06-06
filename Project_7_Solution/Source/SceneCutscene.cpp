@@ -143,7 +143,7 @@ bool SceneCutscene::Start() {
 Update_Status SceneCutscene::Update() {
 
 	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN || duration >= SCENE_DURATION) {
-		App->fade->FadeToBlack(this, (Module*)App->sceneText, 200);
+		App->fade->FadeToBlack(this, (Module*)App->sceneText, 20);
 	}
 	/*int planeAudio = App->audio->LoadFx("Assets/gwar-130.wav");
 	App->audio->PlayFx(planeAudio, 0);*/

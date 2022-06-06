@@ -233,8 +233,11 @@ void ModuleCollisions::DebugDraw()
 		case Collider::Type::WATER: //orange?
 			App->render->DrawQuad(colliders[i]->rect, 255, 255, 0, alpha);
 			break;
-		case Collider::Type::EXPLOSION: //orange?
+		case Collider::Type::EXPLOSION:
 			App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, alpha);
+			break;
+		case Collider::Type::PRISONER:
+			App->render->DrawQuad(colliders[i]->rect, 0, 255, 0, alpha);
 			break;
 		}
 	}
