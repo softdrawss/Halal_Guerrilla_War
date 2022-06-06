@@ -87,6 +87,7 @@
     <ClInclude Include="ModuleCollisions.h" />
     <ClInclude Include="ModuleEnemies.h" />
     <ClInclude Include="ModuleFonts.h" />
+    <ClInclude Include="ModuleController.h" />
     <ClInclude Include="ModuleParticles.h" />
     <ClInclude Include="ModulePowerUp.h" />
     <ClInclude Include="ModuleScene.h" />
@@ -125,6 +126,7 @@
     <ClCompile Include="ModuleEnemies.cpp" />
     <ClCompile Include="ModuleFadeToBlack.cpp" />
     <ClCompile Include="ModuleFonts.cpp" />
+    <ClCompile Include="ModuleController.cpp" />
     <ClCompile Include="ModuleParticles.cpp" />
     <ClCompile Include="ModulePowerUp.cpp" />
     <ClCompile Include="ModuleScene.cpp" />

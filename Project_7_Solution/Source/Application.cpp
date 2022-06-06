@@ -3,6 +3,7 @@
 #include "Module.h"
 #include "ModuleWindow.h"
 #include "ModuleInput.h"
+#include "ModuleController.h"
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
 #include "ModulePlayer.h"
@@ -28,25 +29,26 @@ Application::Application()
 
 	modules[0] = window = new ModuleWindow(true);
 	modules[1] = input = new ModuleInput(true);
-	modules[2] = textures = new ModuleTextures(true);
-	modules[3] = audio = new ModuleAudio(true);
+	modules[2] = controller = new ModuleController(true);
+	modules[3] = textures = new ModuleTextures(true);
+	modules[4] = audio = new ModuleAudio(true);
 
-	modules[4] = sceneIntro = new SceneIntro(true);
-	modules[5] = scenePhoto = new ScenePhoto(false);
-	modules[6] = sceneCutscene = new SceneCutscene(false);	//CutScene starts disabled
-	modules[7] = sceneText = new SceneText(false);
-	modules[8] = scene = new ModuleScene(false);		//Gameplay scene starts disabled
-	modules[9] = player = new ModulePlayer(false);	//Player starts disabled
-  modules[10] = enemies = new ModuleEnemies(false);	//Enemies start disabled
-	modules[11] = particles = new ModuleParticles(false);	//Particles start disabled
-	modules[12] = powerUps = new ModulePowerUp(false); //PowerUps start disabled
+	modules[5] = sceneIntro = new SceneIntro(true);
+	modules[6] = scenePhoto = new ScenePhoto(false);
+	modules[7] = sceneCutscene = new SceneCutscene(false);	//CutScene starts disabled
+	modules[8] = sceneText = new SceneText(false);
+	modules[9] = scene = new ModuleScene(false);		//Gameplay scene starts disabled
+	modules[10] = player = new ModulePlayer(false);	//Player starts disabled
+	modules[11] = enemies = new ModuleEnemies(false);	//Enemies start disabled
+	modules[12] = particles = new ModuleParticles(false);	//Particles start disabled
+	modules[13] = powerUps = new ModulePowerUp(false); //PowerUps start disabled
 
-	modules[13] = collisions = new ModuleCollisions(false);
-	modules[14] = fade = new ModuleFadeToBlack(true);
-	modules[15] = fonts = new ModuleFonts(true);
+	modules[14] = collisions = new ModuleCollisions(false);
+	modules[15] = fade = new ModuleFadeToBlack(true);
+	modules[16] = fonts = new ModuleFonts(true);
 
-	modules[16] = sceneWin = new SceneWin(false);
-	modules[17] = render = new ModuleRender(true);
+	modules[17] = sceneWin = new SceneWin(false);
+	modules[18] = render = new ModuleRender(true);
 }
 
 Application::~Application()

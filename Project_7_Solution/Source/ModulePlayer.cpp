@@ -524,23 +524,23 @@ Update_Status ModulePlayer::Update()
 	currentAnimationlegs = &legsiddleAnim;
 	currentAnimationtorso = &torsoiddleAnim;
 
-	// GAMEPAD: Fire with any button for now to check they all work
-	bool button_press = false;
-	for (int i = 0; i < SDL_CONTROLLER_BUTTON_MAX; ++i)
-		if (App->input->controllers[0].buttons[i] == KEY_DOWN)
-		{
-			button_press = true; break;
-		}
+	//// GAMEPAD: Fire with any button for now to check they all work
+	//bool button_press = false;
+	//for (int i = 0; i < SDL_CONTROLLER_BUTTON_MAX; ++i)
+	//	if (App->input->controllers[0].buttons[i] == KEY_DOWN)
+	//	{
+	//		button_press = true; break;
+	//	}
 
-	// GAMEPAD: Triggers Count as axis, have specific values
-	if (App->input->controllers[0].LT > SDL_MAX_SINT16 / 2) {
-		position.x *= 2;
-		position.y *= 2;
-	}
-	if (App->input->controllers[0].RT > SDL_MAX_SINT16 / 2) {
-		position.x *= 3;
-		position.y *= 3;
-	}
+	//// GAMEPAD: Triggers Count as axis, have specific values
+	//if (App->input->controllers[0].LT > SDL_MAX_SINT16 / 2) {
+	//	position.x *= 2;
+	//	position.y *= 2;
+	//}
+	//if (App->input->controllers[0].RT > SDL_MAX_SINT16 / 2) {
+	//	position.x *= 3;
+	//	position.y *= 3;
+	//}
 
 	if (waterP == false) {
 
@@ -1086,7 +1086,7 @@ Update_Status ModulePlayer::Update()
 			}
 			//shots
 
-			if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_DOWN || button_press)
+			if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_DOWN)
 			{
 				uint shoot = App->audio->LoadFx("Assets/gwar-142.wav");
 				if (faceu == true) {
@@ -1979,7 +1979,7 @@ Update_Status ModulePlayer::Update()
 			}
 
 			//shots
-			if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_DOWN || button_press)
+			if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_DOWN)
 			{
 				uint shootheavy = App->audio->LoadFx("Assets/gwar-142.wav");
 				if (faceu == true) {

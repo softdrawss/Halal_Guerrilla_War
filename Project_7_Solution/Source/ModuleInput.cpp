@@ -20,11 +20,6 @@ bool ModuleInput::Init()
 		LOG("SDL_EVENTS could not initialize! SDL_Error: %s\n", SDL_GetError());
 		ret = false;
 	}
-	if (SDL_Init(SDL_INIT_GAMECONTROLLER) != 0) {
-		SDL_Log("Unable to initialize SDL controllers: %s", SDL_GetError());
-		return false;
-	}
-
 	return ret;
 }
 
@@ -48,35 +43,7 @@ Update_Status ModuleInput::PreUpdate()
 			keys[i] = (keys[i] == KEY_REPEAT || keys[i] == KEY_DOWN) ? KEY_UP : KEY_IDLE;
 	}
 
-	//Initialize Controller
-	num_controllers = SDL_NumJoysticks();
-	for (int i = 0; i < num_controllers; ++i)
-		if (SDL_IsGameController(i))
-			sdl_controllers[i] = SDL_GameControllerOpen(i);
-	// Here we don't really have access to the controller
-	// SDL_GameController* is obfuscated, it is to know they are there.
-	// We will pass data to our own array of controllers
-
-
-	// Parse Controller button stats
-	SDL_GameControllerUpdate();
-	for (int i = 0; i < num_controllers; ++i)
-	{
-		for (int j = 0; j < SDL_CONTROLLER_BUTTON_MAX; ++j)
-		{
-			if (SDL_GameControllerGetButton(sdl_controllers[i], (SDL_GameControllerButton)j))
-				controllers[i].buttons[j] = (controllers[i].buttons[j] == KEY_IDLE) ? KEY_DOWN : KEY_REPEAT;
-			else
-				controllers[i].buttons[j] = (controllers[i].buttons[j] == KEY_REPEAT || controllers[i].buttons[j] == KEY_DOWN) ? KEY_UP : KEY_IDLE;
-		}
-
-		controllers[i].j1_x = SDL_GameControllerGetAxis(sdl_controllers[i], SDL_CONTROLLER_AXIS_LEFTX);
-		controllers[i].j1_y = SDL_GameControllerGetAxis(sdl_controllers[i], SDL_CONTROLLER_AXIS_LEFTY);
-		controllers[i].j2_x = SDL_GameControllerGetAxis(sdl_controllers[i], SDL_CONTROLLER_AXIS_RIGHTX);
-		controllers[i].j2_y = SDL_GameControllerGetAxis(sdl_controllers[i], SDL_CONTROLLER_AXIS_RIGHTY);
-		controllers[i].RT = SDL_GameControllerGetAxis(sdl_controllers[i], SDL_CONTROLLER_AXIS_TRIGGERRIGHT);
-		controllers[i].LT = SDL_GameControllerGetAxis(sdl_controllers[i], SDL_CONTROLLER_AXIS_TRIGGERLEFT);
-	}
+	
 	return Update_Status::UPDATE_CONTINUE;
 }
 
@@ -86,12 +53,4 @@ bool ModuleInput::CleanUp()
 
 	SDL_QuitSubSystem(SDL_INIT_EVENTS);
 	return true;
-}
-
-float ModuleInput::reduce_val(float v1, float min, float clamp_to) {
-	float sign = v1 / fabs(v1);
-	float reduced = v1 - ((fabs(v1) > min) ? sign * min : v1);
-	float to_1 = reduced / (float)(SDL_MAX_SINT16);
-	float reclamped = to_1 * clamp_to;
-	return reclamped;
 }

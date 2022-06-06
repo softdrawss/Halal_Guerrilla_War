@@ -42,9 +42,10 @@ bool SceneIntro::Start()
 Update_Status SceneIntro::Update()
 {
 	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN) {
-		credits++;
+		credits = 1;
 		int audioCredit = App->audio->LoadFx("Assets/gwar-191.wav");
 		App->audio->PlayFx(audioCredit);
+
 	}
 
 	if (App->input->keys[SDL_SCANCODE_RETURN] == Key_State::KEY_DOWN && credits>0) {
