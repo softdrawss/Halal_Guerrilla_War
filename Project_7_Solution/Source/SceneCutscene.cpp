@@ -247,7 +247,7 @@ Update_Status SceneCutscene::Update() {
 
 // Update: draw background
 Update_Status SceneCutscene::PostUpdate() {
-	App->render->Blit(bgTexture, 0, SCREEN_HEIGHT - 2050, NULL);
+	App->render->Blit(bgTexture, 5, SCREEN_HEIGHT - 2120, NULL);
 
 	for (int i = 0; i < MAX_ASSETS_TITLE; ++i) {
 		SDL_Rect rect = assetsAnim[i].GetCurrentFrame();

@@ -10,7 +10,7 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleEnemies.h"
 #include "ModuleFonts.h"
-
+#include "ModulePowerUp.h"
 #include <stdio.h>
 #include "SDL/include/SDL_scancode.h"
 
@@ -2327,6 +2327,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		case(Collider::Type::PRISONER):
 			if (collider->Intersects(c2->rect) == true) {
 				granades = MAX_GRANADES;
+				
 			}
 		
 		}

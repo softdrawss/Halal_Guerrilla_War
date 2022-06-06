@@ -3,7 +3,6 @@
 
 #include "p2Point.h"
 #include "Animation.h"
-#include "Collider.h"
 
 struct SDL_Texture;
 struct Collider;

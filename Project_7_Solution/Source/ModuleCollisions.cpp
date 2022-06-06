@@ -35,7 +35,7 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::PLAYER][Collider::Type::WATER] = true;
 	matrix[Collider::Type::PLAYER][Collider::Type::DESTROYABLE_WALL] = false;
 	matrix[Collider::Type::PLAYER][Collider::Type::EXPLOSION] = false;
-	matrix[Collider::Type::PLAYER][Collider::Type::PRISONER] = false;
+	matrix[Collider::Type::PLAYER][Collider::Type::PRISONER] = true;
 	//matrix[Collider::Type::PLAYER][Collider::Type::PRISONER] = true;
 
 	matrix[Collider::Type::ENEMY][Collider::Type::WALL] = false;

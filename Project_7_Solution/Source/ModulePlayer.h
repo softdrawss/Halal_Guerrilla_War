@@ -87,6 +87,7 @@ public:
 	//booleans for the powerups
 	bool normalweapon;
 	bool heavyweapon;
+	
 
 	// lives of the player
 	int lives = 0;

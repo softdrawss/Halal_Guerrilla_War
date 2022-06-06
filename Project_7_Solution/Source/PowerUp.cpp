@@ -46,12 +46,12 @@ void PowerUp::Update()
 
 void PowerUp::Draw()
 {
-	if (prisonercurrentAnim != nullptr && dead == false) {
+	if (prisonercurrentAnim != nullptr) {
 		App->render->Blit(texture, position.x, position.y, &(prisonercurrentAnim->GetCurrentFrame()));
 	}
 
 
-	if (weaponcurrentAnim != nullptr && dead == true) {
+	if (weaponcurrentAnim != nullptr) {
 		App->render->Blit(texture, position.x, position.y, &(weaponcurrentAnim->GetCurrentFrame()));
 	}
 
@@ -65,8 +65,7 @@ void PowerUp::OnCollision(Collider* collider)
 	//App->audio->PlayFx(destroyedFx, 0);
 
 	SetToDelete();
-	//App->player->score += 100;
-}
+	}
 
 void PowerUp::SetToDelete()
 {
