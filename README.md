@@ -2,9 +2,9 @@
 
 #Download links
 
-### Zip https://github.com/softdrawss/Halal_Guerrilla_War/README.md/Halal_Guerrilla_War-Guerrilla_War_v1.0
+### Zip [https://github.com/softdrawss/Halal_Guerrilla_War/README.md/Halal_Guerrilla_War-Guerrilla_War_v1.0](https://github.com/softdrawss/Halal_Guerrilla_War/releases/tag/Guerrilla_War_v1.0)
 
-### tar.gz https://github.com/softdrawss/Halal_Guerrilla_War/README.md/Halal_Guerrilla_War-Guerrilla_War_v1.0.tar
+
 
 ## Team photo
 ![hals](https://user-images.githubusercontent.com/99959289/172249033-3367adc8-8e60-4851-8355-a232e31400b5.jpg)
