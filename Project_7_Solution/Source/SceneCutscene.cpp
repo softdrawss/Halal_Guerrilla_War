@@ -258,6 +258,18 @@ Update_Status SceneCutscene::PostUpdate() {
 
 	SDL_Rect titleREC = titleAnim.GetCurrentFrame();
 
+	// Highscore of the level (if you kill all the enemies and save the prisoners)
+	App->fonts->BlitText(130, 75, introFont, "HI");
+	App->fonts->BlitText(250, 75, introFont, "30000");
+
+	// Player 1 --> Available
+	App->fonts->BlitText(83, 85, introFont, "1 UP");
+	App->fonts->BlitText(75, 95, introFont, App->player->scoreText);
+
+	// Player 2 --> Not available
+	App->fonts->BlitText(290, 85, introFont, "2 UP");
+	App->fonts->BlitText(330, 95, introFont, "0");
+
 	App->render->Blit(titleImage, title.x, title.y, &titleREC, NULL, false);
 	App->fonts->BlitText(315, 475, introFont, "CREDIT ");
 	App->fonts->BlitText(370, 475, introFont, App->sceneIntro->creditsText);

@@ -1897,6 +1897,8 @@ Update_Status ModulePlayer::Update()
 	//if winner
 	if (winner = true) {
 		
+		//App->fade->FadeToBlack((Module*)App->scene, (Module*)App->sceneIntro, 60);
+
 	}
 
 	//set collider position
