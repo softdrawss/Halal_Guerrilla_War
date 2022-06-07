@@ -43,6 +43,7 @@ void Enemy_Boss::Update()
 
 		if (deathcounter >= 200) {
 			SetToDelete();
+			App->player->winner = true;
 		}
 		if (deathcounter >= 5) {
 			App->particles->AddParticle(App->particles->explosion, position.x + 16, position.y + 128, Collider::Type::NONE);

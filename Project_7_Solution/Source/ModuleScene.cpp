@@ -266,7 +266,7 @@ bool ModuleScene::Start()
 	App->enemies->AddEnemy(Enemy_Type::BOSS, 800, -4000, 0);
 
 
-
+	App->powerUps->AddPowerUp(PowerUp_Type::PRISONER, 220, 0);
 
 
 
