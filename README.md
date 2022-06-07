@@ -1,4 +1,9 @@
 # Halal Games
+
+#Download link
+
+### Zip [https://github.com/softdrawss/Halal_Guerrilla_War/README.md/Halal_Guerrilla_War-Guerrilla_War_v1.0](https://github.com/softdrawss/Halal_Guerrilla_War/releases/tag/Guerrilla_War_v1.0)
+
 ## Team photo
 ![hals](https://user-images.githubusercontent.com/99959289/172249033-3367adc8-8e60-4851-8355-a232e31400b5.jpg)
 
@@ -24,16 +29,27 @@ Guerrilla War, released in Japan as Guevara, is an overhead run and gun game pro
 
 ## How to play the game:
 
+### KEYBOARD
 To move the player, use the WASD controls.
 
 To change the direction of the player, use the four arrows in order to look at the diagonals press to arrows at the same time.
 
 To move the camera freely you can use IJKL and to see the colliders you can press F1.
 
-Insert coin/Shoot: SPACE
 Start game: RETURN
+Insert coin/Shoot: SPACE
 Win instantly: F1
 Die instantly: F2
+Granades: ALT
+Escape: ESC
+
+### CONTROLLER
+Move: Left Joystick
+Change Direction: Right Joystick
+Start game: Start
+Insert coin/Shoot: A
+Granades: B
+Escape: X
 
 ## Video of our Guerrilla War:
 
