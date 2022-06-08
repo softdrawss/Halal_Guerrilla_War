@@ -141,10 +141,10 @@ bool ModuleScene::Start()
 
 	//prisoners
 	App->powerUps->AddPowerUp(PowerUp_Type::PRISONER, 110, -718);
-	App->powerUps->AddPowerUp(PowerUp_Type::PRISONER, 340, -1600);
-	App->powerUps->AddPowerUp(PowerUp_Type::PRISONER, 340, -1650);
+	App->powerUps->AddPowerUp(PowerUp_Type::PRISONER, 300, -1630);
+	App->powerUps->AddPowerUp(PowerUp_Type::PRISONER, 300, -1700);
 	App->powerUps->AddPowerUp(PowerUp_Type::PRISONER, 430, -2486);
-	App->powerUps->AddPowerUp(PowerUp_Type::PRISONER, 990, -3425);
+	App->powerUps->AddPowerUp(PowerUp_Type::PRISONER, 690, -3425);
 
 	// Water
 	App->collisions->AddCollider({ 200, 305, 100,900 }, Collider::Type::WATER);
