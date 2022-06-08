@@ -109,7 +109,6 @@ bool ModuleScene::Start()
 	App->collisions->AddCollider({ 605, -1690, 210,30 }, Collider::Type::WALL);
 	App->collisions->AddCollider({ 575, -1740, 240,20 }, Collider::Type::WALL);
 
-
 	App->collisions->AddCollider({ 800, -1835, 10,145 }, Collider::Type::WALL);
 
 	App->collisions->AddCollider({ 660, -2185, 190,350 }, Collider::Type::WALL);
@@ -127,7 +126,6 @@ bool ModuleScene::Start()
 	App->collisions->AddCollider({ 970, -2870, 100,40 }, Collider::Type::WALL);
 	App->collisions->AddCollider({ 745, -2755, 135,20 }, Collider::Type::WALL);
 
-
 	App->collisions->AddCollider({ 960, -3425, 90,40 }, Collider::Type::WALL);
 	App->collisions->AddCollider({ 930, -3735, 135,310 }, Collider::Type::WALL);
 	App->collisions->AddCollider({ 920, -3595, 40,35 }, Collider::Type::WALL);
@@ -142,7 +140,11 @@ bool ModuleScene::Start()
 	//App->collisions->AddCollider({ 286, -205, 36,25 }, Collider::Type::DESTROYABLE_WALL);
 
 	//prisoners
-	
+	App->powerUps->AddPowerUp(PowerUp_Type::PRISONER, 110, -718);
+	App->powerUps->AddPowerUp(PowerUp_Type::PRISONER, 340, -1600);
+	App->powerUps->AddPowerUp(PowerUp_Type::PRISONER, 340, -1650);
+	App->powerUps->AddPowerUp(PowerUp_Type::PRISONER, 430, -2486);
+	App->powerUps->AddPowerUp(PowerUp_Type::PRISONER, 990, -3425);
 
 	// Water
 	App->collisions->AddCollider({ 200, 305, 100,900 }, Collider::Type::WATER);
@@ -286,15 +288,11 @@ bool ModuleScene::Start()
 
 	App->enemies->AddEnemy(Enemy_Type::GREEN, 780, -3700, 1);
 	App->enemies->AddEnemy(Enemy_Type::GREEN, 820, -3700, 1);
-
+	
 	App->enemies->AddEnemy(Enemy_Type::BOSS, 800, -4000, 0);
 
 
-	App->powerUps->AddPowerUp(PowerUp_Type::PRISONER, 110,-718);
-	App->powerUps->AddPowerUp(PowerUp_Type::PRISONER, 340, -1600);
-	App->powerUps->AddPowerUp(PowerUp_Type::PRISONER, 340, -1650);
-	App->powerUps->AddPowerUp(PowerUp_Type::PRISONER, 430, -2486);
-	App->powerUps->AddPowerUp(PowerUp_Type::PRISONER, 990, -3425);
+	
 
 	//Enable the necessary modules
 	App->collisions->Enable();

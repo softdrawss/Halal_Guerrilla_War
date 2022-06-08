@@ -2308,6 +2308,9 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			if (collider->Intersects(c2->rect) == true) {
 				granades = MAX_GRANADES;
 				score += 1000;
+				int happy = App->audio->LoadFx("Assets/gwar-181.wav");
+				App->audio->PlayFx(happy, 2);
+
 			}
 		
 		}

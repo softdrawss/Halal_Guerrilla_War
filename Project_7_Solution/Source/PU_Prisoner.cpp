@@ -22,6 +22,10 @@ PU_Prisoner::PU_Prisoner(int x, int y) : PowerUp(x, y)
 	saved.PushBack({ 3, 74, 30, 57 });
 	saved.PushBack({ 34, 74, 30, 57 });
 	saved.PushBack({ 65, 74, 30, 57 });
+	saved.PushBack({ 3, 74, 30, 57 });
+	saved.PushBack({ 34, 74, 30, 57 });
+	saved.PushBack({ 65, 74, 30, 57 });
+
 	saved.loop = false;
 	saved.speed = 0.05f;
 
@@ -44,9 +48,9 @@ void PU_Prisoner::Update()
 	
 
 	if (dead == true) {
-		if (deathcounter >= 70) {
-			SetToDelete();
-		}
+		SetToDelete();
+		
+		currentDeathAnim = &saved;
 		++deathcounter;
 	}
 	// Call to the base class. It must be called at the end
@@ -57,18 +61,17 @@ void PU_Prisoner::Update()
 void PU_Prisoner::OnCollision(Collider* c1, Collider* c2) {
 	if (c1 == collider && dead == false)
 	{
-		switch (c2->type) {
-		case (Collider::Type::PLAYER):
-			currentDeathAnim = &saved;
-			App->player->score += 1000;
-			happy = App->audio->LoadFx("Assets/gwar-181.wav");
-			App->audio->PlayFx(happy, 0);
-			dead = true;
-		case (Collider::Type::ENEMY_SHOT):
-			currentAnim = &death;
-			App->player->score -= 500;
-			sad = App->audio->LoadFx("Assets/gwar-199.wav");
-			dead = true;
+
+		if (c1 == collider && dead == false)
+		{
+
+			switch (c2->type) {
+			case (Collider::Type::PLAYER):
+				happy = App->audio->LoadFx("Assets/gwar-181.wav");
+				App->audio->PlayFx(happy, 0);
+				App->player->score += 1000;
+				dead = true;
+			}
 		}
 		/*dead = true;
 		int destroyedFx = App->audio->LoadFx("Assets/gwar-198.wav");

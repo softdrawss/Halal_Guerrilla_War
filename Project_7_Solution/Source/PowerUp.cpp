@@ -53,11 +53,13 @@ void PowerUp::Draw()
 		App->render->Blit(texture, position.x, position.y, &(prisonercurrentAnim->GetCurrentFrame()));
 	}
 
-
 	if (weaponcurrentAnim != nullptr) {
 		App->render->Blit(texture, position.x, position.y, &(weaponcurrentAnim->GetCurrentFrame()));
 	}
-
+	
+	if (currentDeathAnim != nullptr && dead == true) {
+		App->render->Blit(texture, position.x, position.y, &(currentDeathAnim->GetCurrentFrame()));
+	}
 }
 
 void PowerUp::OnCollision(Collider* collider)
@@ -66,9 +68,8 @@ void PowerUp::OnCollision(Collider* collider)
 	//if ((collider->Intersects(c2->rect) == true)
 	//int destroyedFx = App->audio->LoadFx("Assets/gwar-198.wav");
 	//App->audio->PlayFx(destroyedFx, 0);
-
 	SetToDelete();
-	}
+}
 
 void PowerUp::SetToDelete()
 {
