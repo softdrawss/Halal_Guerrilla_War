@@ -37,6 +37,9 @@ void PowerUp::Update()
 		weaponcurrentAnim->Update();
 	}
 
+	if (currentDeathAnim != nullptr) {
+		currentDeathAnim->Update();
+	}
 
 	if (collider != nullptr)
 		collider->SetPos(position.x, position.y);

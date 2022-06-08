@@ -2328,7 +2328,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		case(Collider::Type::PRISONER):
 			if (collider->Intersects(c2->rect) == true) {
 				granades = MAX_GRANADES;
-				
+				score += 1000;
 			}
 		
 		}

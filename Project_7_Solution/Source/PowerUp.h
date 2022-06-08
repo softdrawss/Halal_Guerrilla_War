@@ -48,13 +48,14 @@ public:
 	bool pendingToDelete = false;
 
 	//booleans for dead enemiies
-	bool dead;
+	bool dead = false;
 	int deathcounter;
 
 protected:
 	// A ptr to the current animation
 	Animation* prisonercurrentAnim = nullptr;
 	Animation* weaponcurrentAnim = nullptr;
+	Animation* currentDeathAnim = nullptr;
 
 	// The powerup's collider
 	Collider* collider = nullptr;

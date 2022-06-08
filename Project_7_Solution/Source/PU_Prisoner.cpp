@@ -41,7 +41,7 @@ PU_Prisoner::PU_Prisoner(int x, int y) : PowerUp(x, y)
 
 void PU_Prisoner::Update()
 {
-	position = spawnPos;
+	
 
 	if (dead == true) {
 		if (deathcounter >= 70) {
@@ -59,13 +59,13 @@ void PU_Prisoner::OnCollision(Collider* c1, Collider* c2) {
 	{
 		switch (c2->type) {
 		case (Collider::Type::PLAYER):
-			prisonercurrentAnim = &saved;
+			currentDeathAnim = &saved;
 			App->player->score += 1000;
 			happy = App->audio->LoadFx("Assets/gwar-181.wav");
 			App->audio->PlayFx(happy, 0);
 			dead = true;
 		case (Collider::Type::ENEMY_SHOT):
-			prisonercurrentAnim = &death;
+			currentAnim = &death;
 			App->player->score -= 500;
 			sad = App->audio->LoadFx("Assets/gwar-199.wav");
 			dead = true;
