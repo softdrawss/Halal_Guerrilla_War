@@ -29,6 +29,13 @@ public:
 
 	bool CleanUp();
 
+
+	struct
+	{
+		int x, y;
+		bool left, right, middle;
+	} mouse;
+
 public:
 	
 	// The scene sprite sheet loaded into an SDL_Texture
