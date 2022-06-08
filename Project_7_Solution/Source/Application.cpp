@@ -33,11 +33,11 @@ Application::Application()
 	modules[3] = textures = new ModuleTextures(true);
 	modules[4] = audio = new ModuleAudio(true);
 
-	modules[5] = sceneIntro = new SceneIntro(false);
+	modules[5] = sceneIntro = new SceneIntro(true);
 	modules[6] = scenePhoto = new ScenePhoto(false);
 	modules[7] = sceneCutscene = new SceneCutscene(false);	//CutScene starts disabled
 	modules[8] = sceneText = new SceneText(false);
-	modules[9] = scene = new ModuleScene(true);		//Gameplay scene starts disabled
+	modules[9] = scene = new ModuleScene(false);		//Gameplay scene starts disabled
 	modules[10] = player = new ModulePlayer(false);	//Player starts disabled
 	modules[11] = enemies = new ModuleEnemies(false);	//Enemies start disabled
 	modules[12] = particles = new ModuleParticles(false);	//Particles start disabled

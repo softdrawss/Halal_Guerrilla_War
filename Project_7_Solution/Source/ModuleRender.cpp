@@ -6,6 +6,8 @@
 #include "ModuleTextures.h"
 #include "ModuleInput.h"
 #include "ModulePlayer.h"
+#include "ModuleScene.h"
+
 
 #include "SDL/include/SDL_render.h"
 
@@ -100,96 +102,98 @@ Update_Status ModuleRender::Update() {
 	}
 	//camera limits
 
-	if (camera.y >= -882) {
-		if (camera.x >= 110) {
-			camera.x = 110;
+	if (App->scene->IsEnabled() == true) {
+		if (camera.y >= -882) {
+			if (camera.x >= 110) {
+				camera.x = 110;
+			}
+			if (camera.x <= -28) {
+				camera.x = -28;
+			}
+			if (camera.y >= 570 - camera.h) {
+				camera.y = 570 - camera.h;
+			}
 		}
-		if (camera.x <= -28) {
-			camera.x = -28;
+		else if (camera.y >= -1090 && camera.y < -882) {
+			if (camera.x >= 110) {
+				camera.x = 110;
+			}
+			if (camera.x <= 15) {
+				camera.x = 15;
+			}
 		}
-		if (camera.y >= 570 - camera.h) {
-			camera.y = 570- camera.h;
+		else if (camera.y >= -1154 && camera.y < -1090) {
+			if (camera.x >= 230) {
+				camera.x = 230;
+			}
+			if (camera.x <= 5) {
+				camera.x = 5;
+			}
 		}
-	} 
-	else if (camera.y >= -1090 && camera.y < -882) {
-		if (camera.x >= 110) {
-			camera.x = 110;
-		}
-		if (camera.x <= 15) {
-			camera.x = 15;
-		}
-	}
-	else if (camera.y >= -1154 && camera.y < -1090) {
-		if (camera.x >= 230) {
-			camera.x = 230;
-		}
-		if (camera.x <= 5) {
-			camera.x = 5;
-		}
-	}
-	else if (camera.y >= -1230 && camera.y < -1154) {
-		if (camera.x >= 230) {
-			camera.x = 230;
-		}
+		else if (camera.y >= -1230 && camera.y < -1154) {
+			if (camera.x >= 230) {
+				camera.x = 230;
+			}
 
-		if (camera.x <= 130) {
-			camera.x = 130;
+			if (camera.x <= 130) {
+				camera.x = 130;
+			}
 		}
-	}
-	else if (camera.y >= -1582 && camera.y < -1230) {
-		if (camera.x >= 230) {
-			camera.x = 230;
-		}
+		else if (camera.y >= -1582 && camera.y < -1230) {
+			if (camera.x >= 230) {
+				camera.x = 230;
+			}
 
-		if (camera.x <= 260) {
-			camera.x = 260;
+			if (camera.x <= 260) {
+				camera.x = 260;
+			}
 		}
-	}
-	else if (camera.y >= -2354 && camera.y < -1582) {
-		if (camera.x >= 410) {
-			camera.x = 410;
-		}
+		else if (camera.y >= -2354 && camera.y < -1582) {
+			if (camera.x >= 410) {
+				camera.x = 410;
+			}
 
-		if (camera.x <= 260) {
-			camera.x = 260;
+			if (camera.x <= 260) {
+				camera.x = 260;
+			}
+		}
+		else if (camera.y >= -2814 && camera.y < -2354) {
+			if (camera.x >= 410) {
+				camera.x = 410;
+			}
+			if (camera.x <= 330) {
+				camera.x = 330;
+			}
+		}
+		else if (camera.y >= -2846 && camera.y < -2814) {
+			if (camera.x >= 410) {
+				camera.x = 410;
+			}
+			if (camera.x <= 530) {
+				camera.x = 530;
+			}
+		}
+		else if (camera.y >= -3270 && camera.y < -2846) {
+			if (camera.x >= 570) {
+				camera.x = 570;
+			}
+			if (camera.x <= 530) {
+				camera.x = 530;
+			}
+		}
+		else if (camera.y >= -4082 && camera.y < -3270) {
+			if (camera.x >= 630) {
+				camera.x = 630;
+			}
+			if (camera.x <= 530) {
+				camera.x = 530;
+			}
+		}
+		if (camera.y <= -4082) {
+			camera.y = -4082;
 		}
 	}
-	else if (camera.y >= -2814 && camera.y < -2354) {
-		if (camera.x >= 410) {
-			camera.x = 410;
-		}
-		if (camera.x <= 330) {
-			camera.x = 330;
-		}
-	}
-	else if (camera.y >= -2846 && camera.y < -2814) {
-		if (camera.x >= 410) {
-			camera.x = 410;
-		}
-		if (camera.x <= 530) {
-			camera.x = 530;
-		}
-	}
-	else if (camera.y >= -3270 && camera.y < -2846) {
-		if (camera.x >= 570) {
-			camera.x = 570;
-		}
-		if (camera.x <= 530) {
-			camera.x = 530;
-		}
-	}
-	else if (camera.y >= -4082 && camera.y < -3270) {
-		if (camera.x >= 630) {
-			camera.x = 630;
-		}
-		if (camera.x <= 530) {
-			camera.x = 530;
-		}
-	}
-	if (camera.y <= -4082) {
-		camera.y = -4082;
-	}
-
+	
 	//free movement with jikl
 
 	if (App->input->keys[SDL_SCANCODE_L] == KEY_REPEAT) {
