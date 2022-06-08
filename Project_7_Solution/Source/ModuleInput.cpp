@@ -20,6 +20,7 @@ bool ModuleInput::Init()
 		LOG("SDL_EVENTS could not initialize! SDL_Error: %s\n", SDL_GetError());
 		ret = false;
 	}
+
 	return ret;
 }
 
@@ -31,7 +32,6 @@ Update_Status ModuleInput::PreUpdate()
 	{
 		if (event.type == SDL_QUIT)	return Update_Status::UPDATE_STOP;
 	}
-
 	//Read all keyboard data and update our custom array
 	SDL_PumpEvents();
 	const Uint8* keyboard = SDL_GetKeyboardState(NULL);
@@ -42,6 +42,8 @@ Update_Status ModuleInput::PreUpdate()
 		else
 			keys[i] = (keys[i] == KEY_REPEAT || keys[i] == KEY_DOWN) ? KEY_UP : KEY_IDLE;
 	}
+
+
 
 	
 	return Update_Status::UPDATE_CONTINUE;

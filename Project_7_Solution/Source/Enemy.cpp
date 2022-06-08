@@ -205,7 +205,7 @@ void Enemy::Attack() {
 			else if (downright == true) {
 				App->particles->enemybullet.speed.y = +1;
 				App->particles->enemybullet.speed.x = +1;
-				App->particles->AddParticle(App->particles->enemybullet, position.x+15, position.y+30, Collider::Type::ENEMY_SHOT);
+				App->particles->AddParticle(App->particles->enemybullet, position.x+20, position.y+30, Collider::Type::ENEMY_SHOT);
 			}
 			else if (downleft == true) {
 				App->particles->enemybullet.speed.y = +2;

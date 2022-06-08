@@ -133,7 +133,7 @@ ModuleParticles::ModuleParticles(bool startEnabled) : Module(startEnabled)
 		enemybullet.anim.PushBack({ 198,66,4,5 });
 		enemybullet.anim.PushBack({ 214,66,4,5 });
 		enemybullet.anim.loop = true;
-		enemybullet.lifetime = 80;
+		enemybullet.lifetime = 60;
 		enemybullet.anim.speed = 0.2f;
 		enemybullet.hasExplosion = false;
 
@@ -332,15 +332,12 @@ ModuleParticles::ModuleParticles(bool startEnabled) : Module(startEnabled)
 				//Adding the particle's collider
 				if (colliderType != Collider::Type::NONE) {
 					if (newParticle->isexplosion == true) {
-						newParticle->collider = App->collisions->AddCollider({x-10,y-5,30,30}, colliderType);
+						newParticle->collider = App->collisions->AddCollider({0,0,30,30}, colliderType);
 					}
 					else {
 						newParticle->collider = App->collisions->AddCollider(newParticle->anim.GetCurrentFrame(), colliderType, this);
 					}
 				}
-					
-					
-
 				particles[i] = newParticle;
 				break;
 			}

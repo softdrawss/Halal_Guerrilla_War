@@ -8,6 +8,7 @@
 #include "ModuleEnemies.h"
 #include "ModuleParticles.h"
 #include "ModulePowerUp.h"
+#include "ModuleInput.h"
 
 ModuleScene::ModuleScene(bool startEnabled) : Module(startEnabled)
 {
@@ -60,11 +61,22 @@ bool ModuleScene::Start()
 	App->collisions->AddCollider({ 250, -1660, 10,195 }, Collider::Type::WALL);
 	App->collisions->AddCollider({ 355, -1585, 70,35 }, Collider::Type::WALL);
 	App->collisions->AddCollider({ 250, -1690, 175,30 }, Collider::Type::WALL);
+	App->collisions->AddCollider({ 250, -1740, 205,20 }, Collider::Type::WALL);
+	App->collisions->AddCollider({ 250, -1835, 10,145 }, Collider::Type::WALL);
+
+
+
+
 	App->collisions->AddCollider({ 250, -2185, 70,350 }, Collider::Type::WALL);
 	App->collisions->AddCollider({ 410, -1920, 20,30 }, Collider::Type::WALL);
 	App->collisions->AddCollider({ 410, -2060, 20,30 }, Collider::Type::WALL);
 	App->collisions->AddCollider({ 410, -2130, 20,30 }, Collider::Type::WALL);
 	App->collisions->AddCollider({ 250, -2290, 105,35 }, Collider::Type::WALL);
+	App->collisions->AddCollider({ 250, -2235, 210,50}, Collider::Type::WALL);
+
+
+
+
 	App->collisions->AddCollider({ 250, -2360, 175,70 }, Collider::Type::WALL);
 	App->collisions->AddCollider({ 250, -2440, 135,80 }, Collider::Type::WALL);
 	App->collisions->AddCollider({ 250, -2480, 175,40 }, Collider::Type::WALL);
@@ -95,21 +107,33 @@ bool ModuleScene::Start()
 	App->collisions->AddCollider({ 790, -1660, 40,195 }, Collider::Type::WALL);
 	App->collisions->AddCollider({ 605, -1585, 70,35 }, Collider::Type::WALL);
 	App->collisions->AddCollider({ 605, -1690, 210,30 }, Collider::Type::WALL);
+	App->collisions->AddCollider({ 575, -1740, 240,20 }, Collider::Type::WALL);
+
+
+	App->collisions->AddCollider({ 800, -1835, 10,145 }, Collider::Type::WALL);
+
 	App->collisions->AddCollider({ 660, -2185, 190,350 }, Collider::Type::WALL);
 	App->collisions->AddCollider({ 550, -1920, 20,30 }, Collider::Type::WALL);
 	App->collisions->AddCollider({ 550, -2060, 20,30 }, Collider::Type::WALL);
 	App->collisions->AddCollider({ 550, -2130, 20,30 }, Collider::Type::WALL);
-	App->collisions->AddCollider({ 710, -2290, 210,35 }, Collider::Type::WALL);
+	App->collisions->AddCollider({ 710, -2290, 315,35 }, Collider::Type::WALL);
+	App->collisions->AddCollider({ 540, -2235, 210,50 }, Collider::Type::WALL);
+
 	App->collisions->AddCollider({ 700, -2380, 280,90 }, Collider::Type::WALL);
 	App->collisions->AddCollider({ 770, -2420, 200,40 }, Collider::Type::WALL);
 	App->collisions->AddCollider({ 880, -2460, 60,40 }, Collider::Type::WALL);
 	App->collisions->AddCollider({ 900, -2790, 60,330 }, Collider::Type::WALL);
 	App->collisions->AddCollider({ 930, -2830, 100,40 }, Collider::Type::WALL);
 	App->collisions->AddCollider({ 970, -2870, 100,40 }, Collider::Type::WALL);
+	App->collisions->AddCollider({ 745, -2755, 135,20 }, Collider::Type::WALL);
+
+
 	App->collisions->AddCollider({ 960, -3425, 90,40 }, Collider::Type::WALL);
 	App->collisions->AddCollider({ 930, -3735, 135,310 }, Collider::Type::WALL);
 	App->collisions->AddCollider({ 920, -3595, 40,35 }, Collider::Type::WALL);
 	App->collisions->AddCollider({ 960, -3845, 135,110 }, Collider::Type::WALL);
+
+	App->collisions->AddCollider({ 710, -3495, 175,20 }, Collider::Type::WALL);
 
 	//destroyable wall, warsacks, tanktraps and etc
 	//App->collisions->AddCollider({ 110, -205, 36,25 }, Collider::Type::DESTROYABLE_WALL);
@@ -266,31 +290,11 @@ bool ModuleScene::Start()
 	App->enemies->AddEnemy(Enemy_Type::BOSS, 800, -4000, 0);
 
 
-	App->powerUps->AddPowerUp(PowerUp_Type::PRISONER, 220, 0);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	//App->enemies->AddEnemy(Enemy_Type::GREEN, 240, 0,1);
-
-	//App->enemies->AddEnemy(Enemy_Type::GREEN, 180, 200, 0);
-
-
-	//prisoners
-	//App->powerUps->AddPowerUp(PowerUp_Type::PRISONER, 220, 0);
-	
-	//App->enemies->AddEnemy(Enemy_Type::BOSS, 220, 0, 0);
-
+	App->powerUps->AddPowerUp(PowerUp_Type::PRISONER, 110,-718);
+	App->powerUps->AddPowerUp(PowerUp_Type::PRISONER, 340, -1600);
+	App->powerUps->AddPowerUp(PowerUp_Type::PRISONER, 340, -1650);
+	App->powerUps->AddPowerUp(PowerUp_Type::PRISONER, 430, -2486);
+	App->powerUps->AddPowerUp(PowerUp_Type::PRISONER, 990, -3425);
 
 	//Enable the necessary modules
 	App->collisions->Enable();
@@ -303,16 +307,28 @@ bool ModuleScene::Start()
 
 Update_Status ModuleScene::Update()
 {
-	if (App->player->position.y <= 290) {
-		//App->audio->PlayMusic("Assets/gwar-107.wav", 1.0f);
-		//Mix_Pause(-1);
-		//App->audio->CleanUp();
-		//App->audio->Init();
-		//App->audio->PlayMusic("Assets/gwar-104.wav", 1.0f);
-		//uint boss = App->audio->LoadFx("Assets/gwar-104.wav");
-		//App->audio->PlayFx(boss, -1);
-		//App->audio->PlayFx(boss, -1);
+	if (App->input->keys[SDL_SCANCODE_F3] == KEY_DOWN) {
+		App->enemies->AddEnemy(Enemy_Type::RED, App->player->position.x, App->player-> position.y -150, 0);
 	}
+	if (App->input->keys[SDL_SCANCODE_F4] == KEY_DOWN) {
+		App->enemies->AddEnemy(Enemy_Type::GREEN, App->player->position.x, App->player->position.y - 150, 0);
+	}
+	if (App->input->keys[SDL_SCANCODE_F5] == KEY_DOWN) {
+		App->enemies->AddEnemy(Enemy_Type::GREEN, App->player->position.x+60, App->player->position.y - 150, 1);
+	}
+	if (App->input->keys[SDL_SCANCODE_F6] == KEY_DOWN) {
+		App->enemies->AddEnemy(Enemy_Type::BOSS, App->player->position.x, App->player->position.y - 300, 1);
+	}
+	if (App->input->keys[SDL_SCANCODE_F7] == KEY_DOWN) {
+		App->powerUps->AddPowerUp(PowerUp_Type::PRISONER, App->player->position.x, App->player->position.y - 150);
+	}
+	if (App->input->keys[SDL_SCANCODE_F8] == KEY_DOWN) {
+		App->player->collider->type = Collider::Type::NONE;
+	}
+	if (App->input->keys[SDL_SCANCODE_F9] == KEY_DOWN) {
+		App->player->collider->type = Collider::Type::PLAYER;
+	}
+
 	return Update_Status::UPDATE_CONTINUE;
 }
 
